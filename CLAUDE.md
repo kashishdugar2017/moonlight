@@ -40,9 +40,16 @@ Changing safety text or the grounding rule needs Kashish's explicit approval.
 
 ## Data and network
 - Open Targets Platform GraphQL: https://api.platform.opentargets.org/api/v4/graphql
-- Gemini API at generativelanguage.googleapis.com. The key is attached to
-  requests by the environment. Never ask for it, print it, log request
-  headers, or write any key to a file.
+- Gemini API at generativelanguage.googleapis.com, called over REST with the
+  requests library. Do not add a Gemini SDK.
+  - In agent sessions the environment adds the key to each request. Send no
+    key header yourself.
+  - In the deployed app the key comes from the environment variable
+    GEMINI_API_KEY. If that variable is set, send it as the x-goog-api-key
+    header. If it is not set, send no key header.
+  - Never ask for the key, print it, log request headers, or write any key
+    to a file.
+  - Check the model name against the API's model list. Never assume it.
 - These are the only two outside data sources. Do not use any other.
 - Check field names against live responses or files in fixtures/. Never
   assume a field name from memory.
@@ -52,12 +59,15 @@ Changing safety text or the grounding rule needs Kashish's explicit approval.
   files the ticket names. Open a pull request. Never merge it yourself.
 - Tests first: turn the ticket's EXAMPLE into a test, show it failing, then
   write the code.
-- Tests use saved responses in fixtures/ so they run offline.
+- Tests use saved JSON responses in fixtures/ and must never touch the
+  network. Each module makes its HTTP calls through one small function, and
+  tests replace that function using unittest.mock.patch.
 - Never edit, skip or delete a test to make it pass. If a test looks wrong,
   stop and say so.
 - If something in the ticket does not match the repo or the data, stop and ask.
-- Stack: Python 3, requests, pytest. Streamlit for the page. Keep
-  dependencies few and list them in requirements.txt.
+- Stack: Python 3, requests, pytest. Streamlit for the page. Open Targets
+  queries are plain POST requests with a JSON body holding "query" and
+  "variables". Keep dependencies few and list them in requirements.txt.
 
 ## End every session with a report
 1. What changed (files).
