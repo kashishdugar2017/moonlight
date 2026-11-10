@@ -1,0 +1,962 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000204217",
+      "approvedSymbol": "BMPR2",
+      "approvedName": "bone morphogenetic protein receptor type 2",
+      "drugAndClinicalCandidates": {
+        "count": 2,
+        "rows": [
+          {
+            "id": "8b5df8cfc4f9bb5927443ae2f2a267a6659801bdfb08cee2158c4d3488df55d8",
+            "maxClinicalStage": "PHASE_4",
+            "drug": {
+              "id": "CHEMBL2109171",
+              "name": "DIBOTERMIN ALFA",
+              "drugType": "Protein",
+              "maximumClinicalStage": "APPROVAL",
+              "description": "Protein drug with a maximum clinical stage of Approval (across all indications), with 3 approved and 1 investigational indication.",
+              "parentMolecule": null,
+              "mechanismsOfAction": {
+                "uniqueActionTypes": [
+                  "AGONIST"
+                ],
+                "uniqueTargetTypes": [
+                  "single protein"
+                ],
+                "rows": [
+                  {
+                    "mechanismOfAction": "Bone morphogenetic protein receptor type-1A agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Bone morphogenetic protein receptor type-1A",
+                    "targets": [
+                      {
+                        "id": "ENSG00000107779",
+                        "approvedSymbol": "BMPR1A"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      },
+                      {
+                        "source": "EMA",
+                        "ids": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ],
+                        "urls": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Activin receptor type-2B agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Activin receptor type-2B",
+                    "targets": [
+                      {
+                        "id": "ENSG00000114739",
+                        "approvedSymbol": "ACVR2B"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      },
+                      {
+                        "source": "EMA",
+                        "ids": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ],
+                        "urls": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Bone morphogenetic protein receptor type-2 agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Bone morphogenetic protein receptor type-2",
+                    "targets": [
+                      {
+                        "id": "ENSG00000204217",
+                        "approvedSymbol": "BMPR2"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      },
+                      {
+                        "source": "EMA",
+                        "ids": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ],
+                        "urls": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Bone morphogenetic protein receptor type-1B agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Bone morphogenetic protein receptor type-1B",
+                    "targets": [
+                      {
+                        "id": "ENSG00000138696",
+                        "approvedSymbol": "BMPR1B"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      },
+                      {
+                        "source": "EMA",
+                        "ids": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ],
+                        "urls": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Activin receptor type-2A agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Activin receptor type-2A",
+                    "targets": [
+                      {
+                        "id": "ENSG00000121989",
+                        "approvedSymbol": "ACVR2A"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      },
+                      {
+                        "source": "EMA",
+                        "ids": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ],
+                        "urls": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Activin receptor type-1 agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Activin receptor type-1",
+                    "targets": [
+                      {
+                        "id": "ENSG00000115170",
+                        "approvedSymbol": "ACVR1"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      },
+                      {
+                        "source": "EMA",
+                        "ids": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ],
+                        "urls": [
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf",
+                          "https://www.ema.europa.eu/en/documents/product-information/inductos-epar-product-information_en.pdf"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "indications": {
+                "count": 4,
+                "rows": [
+                  {
+                    "id": "09ec431cd5afb93d9e40a3b684c6999b80da60f920dd8a046ea64eed0d2e0a77",
+                    "maxClinicalStage": "UNKNOWN",
+                    "disease": {
+                      "id": "MONDO_0005298",
+                      "name": "osteoporosis"
+                    }
+                  },
+                  {
+                    "id": "14b21e6c0c861597dcb0fb1c8a3bfbddcc81039c991fa38bd867d860ebc94ed4",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "EFO_0022932",
+                      "name": "spinal fusion"
+                    }
+                  },
+                  {
+                    "id": "52143125aebb0fb47a573c8e1c90d6bc1481a200067aab651f9b640f3c203bea",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0005320",
+                      "name": "tibia fracture"
+                    }
+                  },
+                  {
+                    "id": "85434894e30acb8556b8c0b769c922db05bbbce1ee81fd5b6a8bd6f06287bf66",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0005381",
+                      "name": "bone disorder"
+                    }
+                  }
+                ]
+              }
+            },
+            "diseases": [
+              {
+                "diseaseFromSource": "open diaphyseal tibia fractures",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "lumbar fusion procedure",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "fracture fixation, internal",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "spinal fusion",
+                "disease": {
+                  "id": "EFO_0022932",
+                  "name": "spinal fusion"
+                }
+              },
+              {
+                "diseaseFromSource": "tibial fractures",
+                "disease": {
+                  "id": "MONDO_0005320",
+                  "name": "tibia fracture"
+                }
+              },
+              {
+                "diseaseFromSource": "bone disease",
+                "disease": {
+                  "id": "MONDO_0005381",
+                  "name": "bone disorder"
+                }
+              },
+              {
+                "diseaseFromSource": "diaphyseal tibial fracture",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "fracture of the proximal femur",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "proximal humeral fracture",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "osteoporotic fractures of the hip",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "low bone mass",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "periodontally accelerated osteogenic orthodontics",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "distal radius fracture",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "dental implant instability",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "furcation defect",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "tooth extraction defect",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "alveolar bone loss",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "osteoporosis",
+                "disease": {
+                  "id": "MONDO_0005298",
+                  "name": "osteoporosis"
+                }
+              }
+            ],
+            "clinicalReports": [
+              {
+                "id": "nct00161616",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_4",
+                "phaseFromSource": "PHASE4",
+                "trialPhase": "PHASE4",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00161616"
+              },
+              {
+                "id": "nct03527966",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_4",
+                "phaseFromSource": "PHASE4",
+                "trialPhase": "PHASE4",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT03527966"
+              },
+              {
+                "id": "emea/h/c/000408",
+                "type": "INDICATION",
+                "source": "EMA Human Drugs",
+                "provider": "EMA",
+                "origin": "REGULATORY_AGENCY",
+                "clinicalStage": "APPROVAL",
+                "phaseFromSource": "authorised",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": 2002,
+                "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/inductos"
+              },
+              {
+                "id": "m05bc01",
+                "type": "INDICATION",
+                "source": "ATC",
+                "provider": "ChEMBL",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "APPROVAL",
+                "phaseFromSource": "APPROVAL",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://www.whocc.no/atc_ddd_index/?code=M05BC01"
+              },
+              {
+                "id": "nct00387686",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2_3",
+                "phaseFromSource": "PHASE2/PHASE3",
+                "trialPhase": "PHASE2/PHASE3",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00387686"
+              },
+              {
+                "id": "nct00384358",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00384358"
+              },
+              {
+                "id": "nct00384852",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00384852"
+              },
+              {
+                "id": "nct00752557",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00752557"
+              },
+              {
+                "id": "nct03396900",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT03396900"
+              },
+              {
+                "id": "nct00161629",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00161629"
+              },
+              {
+                "id": "nct05719181",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "UNKNOWN",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT05719181"
+              },
+              {
+                "id": "nct04372420",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "UNKNOWN",
+                "phaseFromSource": null,
+                "trialPhase": null,
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT04372420"
+              },
+              {
+                "id": "nct05717478",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "UNKNOWN",
+                "phaseFromSource": null,
+                "trialPhase": null,
+                "trialOverallStatus": "UNKNOWN",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT05717478"
+              },
+              {
+                "id": "nct05911477",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "UNKNOWN",
+                "phaseFromSource": null,
+                "trialPhase": null,
+                "trialOverallStatus": "UNKNOWN",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT05911477"
+              }
+            ]
+          },
+          {
+            "id": "efad4df3aa1830662f6433e6e8787f056fac1efb93f62af5384d31f0b01a0d05",
+            "maxClinicalStage": "WITHDRAWAL",
+            "drug": {
+              "id": "CHEMBL2108594",
+              "name": "EPTOTERMIN ALFA",
+              "drugType": "Protein",
+              "maximumClinicalStage": "APPROVAL",
+              "description": "Protein drug with a maximum clinical stage of Approval (across all indications), with 3 approved and 2 investigational indications.",
+              "parentMolecule": null,
+              "mechanismsOfAction": {
+                "uniqueActionTypes": [
+                  "AGONIST"
+                ],
+                "uniqueTargetTypes": [
+                  "single protein"
+                ],
+                "rows": [
+                  {
+                    "mechanismOfAction": "Bone morphogenetic protein receptor type-1A agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Bone morphogenetic protein receptor type-1A",
+                    "targets": [
+                      {
+                        "id": "ENSG00000107779",
+                        "approvedSymbol": "BMPR1A"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Bone morphogenetic protein receptor type-2 agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Bone morphogenetic protein receptor type-2",
+                    "targets": [
+                      {
+                        "id": "ENSG00000204217",
+                        "approvedSymbol": "BMPR2"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Bone morphogenetic protein receptor type-1B agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Bone morphogenetic protein receptor type-1B",
+                    "targets": [
+                      {
+                        "id": "ENSG00000138696",
+                        "approvedSymbol": "BMPR1B"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Activin receptor type-1 agonist",
+                    "actionType": "AGONIST",
+                    "targetName": "Activin receptor type-1",
+                    "targets": [
+                      {
+                        "id": "ENSG00000115170",
+                        "approvedSymbol": "ACVR1"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "31979268",
+                          "31979268",
+                          "31979268",
+                          "31979268"
+                        ],
+                        "urls": [
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/",
+                          "https://pubmed.ncbi.nlm.nih.gov/31979268/"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "indications": {
+                "count": 5,
+                "rows": [
+                  {
+                    "id": "234df159f87b85368d603f73bf3fc0713415426bface1f2307a15b87c2ef8703",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_0005178",
+                      "name": "osteoarthritis"
+                    }
+                  },
+                  {
+                    "id": "6ad12b14602aa15b1c8390e64b7e46fc22fe5b3760ca1c076eda983a89a76d1d",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0008475",
+                      "name": "spondylolisthesis"
+                    }
+                  },
+                  {
+                    "id": "ce4e4c41c5dfc2cc36324f3d1ef757ff2b78bcec5db137e05977ea2764f0c4fe",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0005320",
+                      "name": "tibia fracture"
+                    }
+                  },
+                  {
+                    "id": "d4a13e90b1627a18d78394613b5f0fd9b6e4f87ab557fb56c3d144269132c594",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0005381",
+                      "name": "bone disorder"
+                    }
+                  },
+                  {
+                    "id": "f1d1a98fdc4c016e471c67a9eb1f89ff77c053b5cf524ea76b4d1ba0411b47cb",
+                    "maxClinicalStage": "PHASE_1",
+                    "disease": {
+                      "id": "MONDO_0005416",
+                      "name": "osteoarthritis, knee"
+                    }
+                  }
+                ]
+              }
+            },
+            "diseases": [
+              {
+                "diseaseFromSource": "tibial fractures",
+                "disease": {
+                  "id": "MONDO_0005320",
+                  "name": "tibia fracture"
+                }
+              },
+              {
+                "diseaseFromSource": "spondylolisthesis",
+                "disease": {
+                  "id": "MONDO_0008475",
+                  "name": "spondylolisthesis"
+                }
+              },
+              {
+                "diseaseFromSource": "bone disease",
+                "disease": {
+                  "id": "MONDO_0005381",
+                  "name": "bone disorder"
+                }
+              },
+              {
+                "diseaseFromSource": "osteoarthritis",
+                "disease": {
+                  "id": "MONDO_0005178",
+                  "name": "osteoarthritis"
+                }
+              },
+              {
+                "diseaseFromSource": "osteoarthritis of the knee",
+                "disease": {
+                  "id": "MONDO_0005416",
+                  "name": "osteoarthritis, knee"
+                }
+              },
+              {
+                "diseaseFromSource": "necrosis of the femoral head",
+                "disease": null
+              }
+            ],
+            "clinicalReports": [
+              {
+                "id": "emea/h/c/000293",
+                "type": "INDICATION",
+                "source": "EMA Human Drugs",
+                "provider": "EMA",
+                "origin": "REGULATORY_AGENCY",
+                "clinicalStage": "WITHDRAWAL",
+                "phaseFromSource": "withdrawn",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": 2001,
+                "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/osigraft"
+              },
+              {
+                "id": "emea/h/c/000819",
+                "type": "INDICATION",
+                "source": "EMA Human Drugs",
+                "provider": "EMA",
+                "origin": "REGULATORY_AGENCY",
+                "clinicalStage": "WITHDRAWAL",
+                "phaseFromSource": "withdrawn",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": 2009,
+                "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/opgenra"
+              },
+              {
+                "id": "m05bc02",
+                "type": "INDICATION",
+                "source": "ATC",
+                "provider": "ChEMBL",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "APPROVAL",
+                "phaseFromSource": "APPROVAL",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://www.whocc.no/atc_ddd_index/?code=M05BC02"
+              },
+              {
+                "id": "nct01111045",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01111045"
+              },
+              {
+                "id": "nct00456157",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00456157"
+              },
+              {
+                "id": "nct01133613",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01133613"
+              },
+              {
+                "id": "nct02655120",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "UNKNOWN",
+                "phaseFromSource": null,
+                "trialPhase": null,
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT02655120"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

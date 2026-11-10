@@ -1,0 +1,4515 @@
+{
+  "data": {
+    "meta": {
+      "name": "Open Targets GraphQL & REST API Beta",
+      "apiVersion": {
+        "x": "26",
+        "y": "9",
+        "z": "0"
+      },
+      "dataVersion": {
+        "year": "26",
+        "month": "09",
+        "iteration": null
+      }
+    },
+    "Query": {
+      "name": "Query",
+      "kind": "OBJECT",
+      "description": "Root query type providing access to all entities and search functionality in the Open Targets Platform. Supports retrieval of targets, diseases, drugs, variants, studies, credible sets, and their associations. Includes full-text search, mapping, and filtering capabilities.",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "meta",
+          "description": "Open Targets API metadata, including version and configuration information",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Meta",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "target",
+          "description": "Retrieve a target (gene/protein) by target identifier (e.g. ENSG00000139618)",
+          "args": [
+            {
+              "name": "ensemblId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Target",
+            "ofType": null
+          }
+        },
+        {
+          "name": "targets",
+          "description": "Retrieve multiple targets by target identifiers",
+          "args": [
+            {
+              "name": "ensemblIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Target",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "disease",
+          "description": "Retrieve a disease or phenotype by identifier (e.g. EFO_0000400)",
+          "args": [
+            {
+              "name": "efoId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Disease",
+            "ofType": null
+          }
+        },
+        {
+          "name": "diseases",
+          "description": "Retrieve multiple diseases by disease or phenotype identifiers",
+          "args": [
+            {
+              "name": "efoIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "drug",
+          "description": "Retrieve a drug or clinical candidate by identifier (e.g. CHEMBL112)",
+          "args": [
+            {
+              "name": "chemblId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Drug",
+            "ofType": null
+          }
+        },
+        {
+          "name": "drugs",
+          "description": "Retrieve multiple drugs or clinical candidates by identifiers",
+          "args": [
+            {
+              "name": "chemblIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Drug",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "search",
+          "description": "Full-text, multi-entity search across all types of entities (targets, diseases, drugs, variants or studies)",
+          "args": [
+            {
+              "name": "queryString",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "entityNames",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "SearchResults",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "facets",
+          "description": "Search sets of targets or diseases used to facet associations",
+          "args": [
+            {
+              "name": "queryString",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "entityNames",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "category",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "SearchFacetsResults",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "mapIds",
+          "description": "Map free-text terms to canonical IDs used as primary identifiers in the Platform (targets, diseases, drugs, variants or studies). For example, mapping 'diabetes' to EFO_0000400 or 'BRCA1' to ENSG00000139618",
+          "args": [
+            {
+              "name": "queryTerms",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "entityNames",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "MappingResults",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "associationDatasources",
+          "description": "List of available evidence datasources and their datatypes",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "EvidenceSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "interactionResources",
+          "description": "List of molecular interaction resources and their versions",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "InteractionResources",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "geneOntologyTerms",
+          "description": "Fetch Gene Ontology terms by GO identifiers",
+          "args": [
+            {
+              "name": "goIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "GeneOntologyTerm",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "variant",
+          "description": "Retrieve a variant by identifier in the format of CHROM_POS_REF_ALT for SNPs and short indels (e.g. 19_44908684_T_C)",
+          "args": [
+            {
+              "name": "variantId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Variant",
+            "ofType": null
+          }
+        },
+        {
+          "name": "study",
+          "description": "Retrieve a GWAS or molecular QTL study by ID (e.g. GCST004131)",
+          "args": [
+            {
+              "name": "studyId",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Study",
+            "ofType": null
+          }
+        },
+        {
+          "name": "studies",
+          "description": "List GWAS or molecular QTL studies filtered by ID(s) and/or disease(s); supports ontology expansion",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            },
+            {
+              "name": "studyId",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "diseaseIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "enableIndirect",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Studies",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "credibleSet",
+          "description": "Retrieve a 95% credible set (study-locus) by identifier",
+          "args": [
+            {
+              "name": "studyLocusId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "CredibleSet",
+            "ofType": null
+          }
+        },
+        {
+          "name": "credibleSets",
+          "description": "List credible sets filtered by study-locus IDs, study IDs, variant IDs, study types or regions",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            },
+            {
+              "name": "studyLocusIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "studyIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "variantIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "studyTypes",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "StudyTypeEnum",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "regions",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "CredibleSets",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "clinicalReport",
+          "description": "",
+          "args": [
+            {
+              "name": "clinicalReportId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "ClinicalReport",
+            "ofType": null
+          }
+        },
+        {
+          "name": "clinicalReports",
+          "description": "",
+          "args": [
+            {
+              "name": "clinicalReportsIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalReport",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Pagination": {
+      "name": "Pagination",
+      "kind": "INPUT_OBJECT",
+      "description": "Pagination settings for controlling result set size and page navigation. Uses zero-based indexing to specify which page of results to retrieve.",
+      "enumValues": null,
+      "inputFields": [
+        {
+          "name": "index",
+          "description": "Zero-based page index",
+          "defaultValue": null,
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "size",
+          "description": "Number of items per page [Default: 25, Max: 3000]",
+          "defaultValue": null,
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          }
+        }
+      ],
+      "fields": null
+    },
+    "Disease": {
+      "name": "Disease",
+      "kind": "OBJECT",
+      "description": "Core annotation for diseases or phenotypes. A disease or phenotype in the Platform is understood as any disease, phenotype, biological process or measurement that might have any type of causality relationship with a human target. The EMBL-EBI Experimental Factor Ontology (EFO) (slim version) is used as scaffold for the disease or phenotype entity.",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "descendants",
+          "description": "Descendant disease nodes in the EFO ontology below this term",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "directLocationIds",
+          "description": "EFO terms for direct anatomical locations",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "indirectLocationIds",
+          "description": "EFO terms for indirect anatomical locations (propagated)",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "obsoleteTerms",
+          "description": "Obsoleted ontology terms replaced by this term",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ancestors",
+          "description": "Ancestor disease nodes in the EFO ontology up to the top-level therapeutic area",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "isTherapeuticArea",
+          "description": null,
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "id",
+          "description": "Open Targets disease identifier [bioregistry:efo]",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "dbXRefs",
+          "description": "Cross-references to external disease ontologies",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "description",
+          "description": "Short description of the disease or phenotype",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "synonyms",
+          "description": "Synonymous disease or phenotype labels",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "DiseaseSynonyms",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "name",
+          "description": "Preferred disease or phenotype label",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "therapeuticAreas",
+          "description": "Ancestor therapeutic area nodes the disease or phenotype term belongs in the EFO ontology",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "parents",
+          "description": "Immediate parent disease nodes in the ontology",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "children",
+          "description": "Direct child disease nodes in the ontology",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "directLocations",
+          "description": "Diseases mapped to direct anatomical locations",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "indirectLocations",
+          "description": "Diseases mapped via indirect (propagated) anatomical locations",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "similarEntities",
+          "description": "Semantically similar diseases based on a PubMed word embedding model",
+          "args": [
+            {
+              "name": "additionalIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "entityNames",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "threshold",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            {
+              "name": "size",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Similarity",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "literatureOcurrences",
+          "description": "Publications that mention this disease, alone or alongside other entities",
+          "args": [
+            {
+              "name": "additionalIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "startYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "startMonth",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endMonth",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "cursor",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Publications",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "phenotypes",
+          "description": "Human Phenotype Ontology (HPO) annotations linked to this disease as clinical signs or symptoms",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "DiseaseHPOs",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "evidences",
+          "description": "Target–disease evidence items supporting associations for this disease",
+          "args": [
+            {
+              "name": "ensemblIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "enableIndirect",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
+              "name": "datasourceIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "size",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "cursor",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Evidences",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "otarProjects",
+          "description": "Open Targets (OTAR) projects linked to this disease. Data only available in Partner Platform Preview (PPP)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "OtarProject",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "associatedTargets",
+          "description": "Target–disease associations computed on the fly with configurable datasource weights and filters",
+          "args": [
+            {
+              "name": "Bs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "enableIndirect",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
+              "name": "datasources",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DatasourceSettingsInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "facetFilters",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "BFilter",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "orderByScore",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "AssociatedTargets",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "resolvedAncestors",
+          "description": "All ancestor diseases in the ontology from this term up to the top-level therapeutic area",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Disease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "drugAndClinicalCandidates",
+          "description": "Clinical indications for this disease as reported by clinical trial records.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "clinicalIndicationsFromDiseaseImp",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "associationTimeSeries",
+          "description": "Association time series",
+          "args": [
+            {
+              "name": "ensemblId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "isDirect",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "aggregationTypes",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "AggregationTypeEnum",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "startYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "AssociationTimeSeriesResults",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "DiseaseSynonyms": {
+      "name": "DiseaseSynonyms",
+      "kind": "OBJECT",
+      "description": "Synonymous disease labels grouped by relationship type",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "terms",
+          "description": "List of synonymous disease labels for this relationship type",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "relation",
+          "description": "Type of synonym relationship (e.g., exact, related, narrow)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedTargets": {
+      "name": "AssociatedTargets",
+      "kind": "OBJECT",
+      "description": "Target-disease associations computed on-the-fly using configurable datasource weights and evidence filters. Returns associations with aggregated scores and evidence counts supporting the target-disease relationship.",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "count",
+          "description": "Total number of target-disease associations matching the query filters",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "datasources",
+          "description": "List of datasource settings with weights and propagation rules used to compute the associations",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DatasourceSettings",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "rows",
+          "description": "List of associated targets with their association scores and evidence breakdowns",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AssociatedTarget",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AssociatedTarget": {
+      "name": "AssociatedTarget",
+      "kind": "OBJECT",
+      "description": "Associated target entity",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "datasourceScores",
+          "description": "Association scores computed for every datasource (e.g., IMPC, ChEMBL, Gene2Phenotype)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ScoredComponent",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "novelty",
+          "description": "A measure of how novel the target–disease association is, calculated based on the accumulation of evidence over time",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "Float",
+            "ofType": null
+          }
+        },
+        {
+          "name": "score",
+          "description": "Overall association score aggregated across all evidence types. A higher score indicates a stronger association between the target and the disease. Scores are normalized to a range of 0-1.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "datatypeScores",
+          "description": "Association scores computed for every datatype (e.g., Genetic associations, Somatic, Literature)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ScoredComponent",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "target",
+          "description": "Associated target entity",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Target",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "ScoredComponent": {
+      "name": "ScoredComponent",
+      "kind": "OBJECT",
+      "description": "Scored component used in association scoring",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "id",
+          "description": "Component identifier (e.g., datatype or datasource name)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "score",
+          "description": "Association score for the component. Scores are normalized to a range of 0-1. The higher the score, the stronger the association.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "Target": {
+      "name": "Target",
+      "kind": "OBJECT",
+      "description": "Core annotation for drug targets (gene/proteins). Targets are defined based on EMBL-EBI Ensembl database and uses the Ensembl gene ID as the  primary identifier. An Ensembl gene ID is considered potential drug target if included in the canonical assembly or if present alternative assemblies but encoding for a reviewed protein product according to the UniProt database.",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "pathways",
+          "description": "Pathway annotations for the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ReactomePathway",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "approvedSymbol",
+          "description": "Approved gene symbol of the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "chemicalProbes",
+          "description": "Chemical probes with high selectivity and specificity for the target.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ChemicalProbe",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "tractability",
+          "description": "Tractability information for the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Tractability",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "nameSynonyms",
+          "description": "List of name-based synonyms for the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "dbXrefs",
+          "description": "Database cross-references for the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "IdAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "approvedName",
+          "description": "Approved full name of the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "obsoleteSymbols",
+          "description": "List of obsolete symbols previously used for the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "functionDescriptions",
+          "description": "Functional descriptions of the target gene sourced from UniProt",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "genomicLocation",
+          "description": "Genomic location information of the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "GenomicLocation",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "subcellularLocations",
+          "description": "List of subcellular locations where the target protein is found",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LocationAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "geneticConstraint",
+          "description": "Constraint scores for the target gene from GnomAD based on loss-of-function intolerance.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Constraint",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "homologues",
+          "description": "Homologues of the target gene in other species",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Homologue",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "transcriptIds",
+          "description": "List of Ensembl transcript identifiers associated with the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "canonicalTranscript",
+          "description": "The Ensembl canonical transcript of the target gene",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "CanonicalTranscript",
+            "ofType": null
+          }
+        },
+        {
+          "name": "targetClass",
+          "description": "Target classification categories from ChEMBL",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "TargetClass",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "obsoleteNames",
+          "description": "List of obsolete names previously used for the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "id",
+          "description": "Unique identifier for the target [bioregistry:ensembl]",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "biotype",
+          "description": "Biotype classification of the target gene, indicating if the gene is protein coding",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "symbolSynonyms",
+          "description": "List of symbol-based synonyms for the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "proteinIds",
+          "description": "Protein identifiers associated with the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "IdAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "geneOntology",
+          "description": "List of Gene Ontology (GO) annotations related to the target",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GeneOntology",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "safetyLiabilities",
+          "description": "Known target safety effects and target safety risk information",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "SafetyLiability",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "transcripts",
+          "description": "List of transcripts associated with the target including protein and structure annotations",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Transcript",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "alternativeGenes",
+          "description": "List of alternative Ensembl gene identifiers mapped to non-canonical chromosomes",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "hallmarks",
+          "description": "Hallmarks related to the target gene sourced from COSMIC",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Hallmarks",
+            "ofType": null
+          }
+        },
+        {
+          "name": "synonyms",
+          "description": "List of synonyms for the target gene",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "credibleSets",
+          "description": "95% credible sets for GWAS and molQTL studies. Credible sets include all variants in the credible set as well as the fine-mapping method and statistics used to estimate the credible set.",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "CredibleSets",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "similarEntities",
+          "description": "Return similar labels using a model Word2CVec trained with PubMed",
+          "args": [
+            {
+              "name": "additionalIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "entityNames",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "threshold",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            {
+              "name": "size",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Similarity",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "literatureOcurrences",
+          "description": "Return the list of publications that mention the main entity, alone or in combination with other entities",
+          "args": [
+            {
+              "name": "additionalIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "startYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "startMonth",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endMonth",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "cursor",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Publications",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "evidences",
+          "description": "Target-disease evidence from all data sources supporting associations between this target and diseases or phenotypes. Evidence entries are reported and scored according to confidence in the association.",
+          "args": [
+            {
+              "name": "efoIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "datasourceIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "size",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "cursor",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Evidences",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "interactions",
+          "description": "Molecular interactions reporting experimental or functional interactions between this target and other molecules. Interactions are integrated from multiple databases capturing physical interactions (e.g., IntAct), directional interactions (e.g., Signor), pathway relationships (e.g., Reactome), or functional interactions (e.g., STRINGdb).",
+          "args": [
+            {
+              "name": "scoreThreshold",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            {
+              "name": "sourceDatabase",
+              "defaultValue": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "InteractionSourceEnum",
+                "ofType": null
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Interactions",
+            "ofType": null
+          }
+        },
+        {
+          "name": "mousePhenotypes",
+          "description": "Mouse phenotype information linking this human target to observed phenotypes in mouse models. Provides data on phenotypes observed when the target gene is modified in mouse models.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "MousePhenotype",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "baselineExpression",
+          "description": "Baseline expression",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "BaselineExpression",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "associatedDiseases",
+          "description": "Target-disease associations calculated on-the-fly using configurable data source weights and evidence filters. Returns associations with aggregated scores and evidence counts supporting the target-disease relationship.",
+          "args": [
+            {
+              "name": "Bs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "enableIndirect",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
+              "name": "datasources",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DatasourceSettingsInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "includeMeasurements",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
+              "name": "facetFilters",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "BFilter",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "orderByScore",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "AssociatedDiseases",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "prioritisation",
+          "description": "Target-specific properties used to prioritise targets for further investigation. Prioritisation factors cover several areas around clinical precedence, tractability, do-ability, and safety of the target. Values range from -1 (unfavourable/deprioritised) to 1 (favourable/prioritised).",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "TargetPrioritisation",
+            "ofType": null
+          }
+        },
+        {
+          "name": "isEssential",
+          "description": "Flag indicating whether this target is essential based on CRISPR screening data from cancer cell line models. Essential genes are those that show dependency when knocked out in cellular models.",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "Boolean",
+            "ofType": null
+          }
+        },
+        {
+          "name": "depMapEssentiality",
+          "description": "Essentiality measurements extracted from DepMap, stratified by tissue or anatomical units. Gene essentiality is assessed based on dependencies exhibited when knocking out genes in cancer cellular models using CRISPR screenings from the Cancer Dependency Map (DepMap) Project. Gene effects below -1 can be considered dependencies.",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "DepMapEssentiality",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "pharmacogenomics",
+          "description": "Pharmacogenomics data linking genetic variants affecting this target to drug responses. Data is integrated from sources including ClinPGx and describes how genetic variants influence individual drug responses when targeting this gene product.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Pharmacogenomics",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "proteinCodingCoordinates",
+          "description": "Protein coding coordinates linking variants affecting this target to their amino acid-level consequences in protein products. Describes variant consequences at the protein level including amino acid changes and their positions for this target.",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "ProteinCodingCoordinates",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "drugAndClinicalCandidates",
+          "description": "",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "clinicalTargets",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "associationTimeSeries",
+          "description": "Association time series",
+          "args": [
+            {
+              "name": "efoId",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "isDirect",
+              "defaultValue": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "name": "aggregationTypes",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "AggregationTypeEnum",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "startYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "AssociationTimeSeriesResults",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "clinicalTargets": {
+      "name": "clinicalTargets",
+      "kind": "OBJECT",
+      "description": "",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "count",
+          "description": "Total number of clinical targets results matching the query filters",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "rows",
+          "description": "List of clinical clinical targets results between drug-target pairs",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalTargetFromTarget",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClinicalTargetFromTarget": {
+      "name": "ClinicalTargetFromTarget",
+      "kind": "OBJECT",
+      "description": null,
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "id",
+          "description": "Hash between drugId and targetId.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "maxClinicalStage",
+          "description": null,
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "drug",
+          "description": "Drug or clinical candidate entity",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Drug",
+            "ofType": null
+          }
+        },
+        {
+          "name": "clinicalReports",
+          "description": "Reports related with the drug in question and sorted by clinical status.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalReport",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "diseases",
+          "description": "Diseases associated with the clinical reports linked to the drug in question.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalDiseaseListItem",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "clinicalIndicationsFromDiseaseImp": {
+      "name": "clinicalIndicationsFromDiseaseImp",
+      "kind": "OBJECT",
+      "description": "",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "count",
+          "description": "Total number of indications results matching the query filters",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "rows",
+          "description": "List of clinical indications results between drug-disease pairs",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalIndicationFromDisease",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClinicalIndicationFromDisease": {
+      "name": "ClinicalIndicationFromDisease",
+      "kind": "OBJECT",
+      "description": null,
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "id",
+          "description": "Hash of drugId, diseaseId.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "maxClinicalStage",
+          "description": "Maximum Clinical Development Status for the association.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "drug",
+          "description": "",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Drug",
+            "ofType": null
+          }
+        },
+        {
+          "name": "clinicalReports",
+          "description": "",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalReport",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "clinicalIndicationsFromDrugImp": {
+      "name": "clinicalIndicationsFromDrugImp",
+      "kind": "OBJECT",
+      "description": "",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "count",
+          "description": "Total number of indications results matching the query filters",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "rows",
+          "description": "List of clinical indications results between drug-disease pairs",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalIndicationFromDrug",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClinicalIndicationFromDrug": {
+      "name": "ClinicalIndicationFromDrug",
+      "kind": "OBJECT",
+      "description": null,
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "id",
+          "description": "Hash of drugId, diseaseId.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "maxClinicalStage",
+          "description": "Maximum Clinical Development Status for the association.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "disease",
+          "description": "",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Disease",
+            "ofType": null
+          }
+        },
+        {
+          "name": "clinicalReports",
+          "description": "",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalReport",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClinicalDiseaseListItem": {
+      "name": "ClinicalDiseaseListItem",
+      "kind": "OBJECT",
+      "description": null,
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "diseaseFromSource",
+          "description": "Disease label in the report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "disease",
+          "description": "Disease in the report",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Disease",
+            "ofType": null
+          }
+        }
+      ]
+    },
+    "ClinRepDrugListItem": {
+      "name": "ClinRepDrugListItem",
+      "kind": "OBJECT",
+      "description": null,
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "drugFromSource",
+          "description": "Drug label in the report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "drug",
+          "description": "Drug in the report",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Drug",
+            "ofType": null
+          }
+        }
+      ]
+    },
+    "ClinicalReport": {
+      "name": "ClinicalReport",
+      "kind": "OBJECT",
+      "description": null,
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "id",
+          "description": "Report ID",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "origin",
+          "description": "Nature of the record the report originates from (e.g. CLINICAL_TRIAL, DRUG_LABEL, REGULATORY_AGENCY, CURATED_RESOURCE).",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "trialStartDate",
+          "description": "Start date of the trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialStudyType",
+          "description": "Type of clinical study (e.g. Interventional, Observational)",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "provider",
+          "description": "Resource or organisation that distributes the data fetched from the primary source (e.g. AACT, ChEMBL, EMA, PMDA, TTD).",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "title",
+          "description": "Title of the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "url",
+          "description": "URL linking to the source record",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialDescription",
+          "description": "Description of the trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "clinicalStage",
+          "description": "Harmonised clinical stage",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "trialWhyStopped",
+          "description": "Free-text reason for early stoppage of the trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialPrimaryPurpose",
+          "description": "Purpose for the intervention of the clinical trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialStopReasonCategories",
+          "description": "Assigned categories based on trialWhyStopped",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "qualityControls",
+          "description": "Flags related to report concerns",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "trialOfficialTitle",
+          "description": "Official title of the clinical trial as registered",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialSponsor",
+          "description": "Information on the entity or individual initiating the study.",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "TrialSponsor",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialNumberOfArms",
+          "description": "Number of arms in the trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          }
+        },
+        {
+          "name": "year",
+          "description": "The year to which the clinical report refers.",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "Int",
+            "ofType": null
+          }
+        },
+        {
+          "name": "countries",
+          "description": "List of countries where the clinical report was conducted/reported",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "type",
+          "description": "Type of clinical report. List of possible values: INDICATION, SAFETY.",
+          "args": [],
+          "type": {
+            "kind": "ENUM",
+            "name": "ClinicalReportType",
+            "ofType": null
+          }
+        },
+        {
+          "name": "phaseFromSource",
+          "description": "Clinical phase reported at source",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "source",
+          "description": "Source of the clinical report (e.g., AACT)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "trialLiterature",
+          "description": "List of PMIDs linked to the trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "TrialLiterature",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "drugs",
+          "description": "List of drugs mentioned in the report",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinRepDrugListItem",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "trialOverallStatus",
+          "description": "Overall status of the trial associated with the clinical report",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "trialPhase",
+          "description": "Phase of the clinical trial",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "diseases",
+          "description": "Diseases associated with the clinical report.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalDiseaseListItem",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "sideEffects",
+          "description": "Side effects associated with the clinical report.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ClinicalDiseaseListItem",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClinicalReportType": {
+      "name": "ClinicalReportType",
+      "kind": "ENUM",
+      "description": "Kind of clinical evidence the report describes.",
+      "enumValues": [
+        {
+          "name": "INDICATION",
+          "description": "Clinical evidence informing about a drug/disease claim."
+        },
+        {
+          "name": "SAFETY",
+          "description": "Clinical evidence informing about a drug's safety event"
+        }
+      ],
+      "inputFields": null,
+      "fields": null
+    },
+    "Drug": {
+      "name": "Drug",
+      "kind": "OBJECT",
+      "description": "Core annotation for drug or clinical candidate molecules. A drug in the platform is understood as any bioactive molecule with drug-like properties included in the EMBL-EBI ChEMBL database. All ChEMBL molecules fullfilling any of the next criteria are included in the database: a) Molecules with a known indication. b) Molecules with a known mechanism of action c) ChEMBL molecules included in the DrugBank database d) Molecules that are acknowledged as chemical probes",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "id",
+          "description": "Drug or clinical candidate molecule identifier",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "maximumClinicalStage",
+          "description": "Highest clinical stage reached by the drug or clinical candidate molecule",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "crossReferences",
+          "description": "Cross-reference information for this molecule from external databases",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "DrugReferences",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "tradeNames",
+          "description": "List of brand names for the drug, each with its source",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DrugLabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "molblock",
+          "description": "Molblock",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "description",
+          "description": "Summary of the drug's clinical development",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "drugType",
+          "description": "Classification of the molecule's therapeutic category or chemical class (e.g. Antibody)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "synonyms",
+          "description": "List of alternative names for the drug, each with its source (e.g. ChEMBL, or AACT for names mined from clinical trials)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DrugLabelAndSource",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "name",
+          "description": "Generic name of the drug molecule",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "parentMolecule",
+          "description": "Parent molecule for derivative compounds",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "Drug",
+            "ofType": null
+          }
+        },
+        {
+          "name": "childMolecules",
+          "description": "List of molecules corresponding to derivative compounds",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Drug",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "drugWarnings",
+          "description": "Warnings present on drug as identified by ChEMBL.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DrugWarning",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "similarEntities",
+          "description": "Semantically similar drugs based on a PubMed word embedding model",
+          "args": [
+            {
+              "name": "additionalIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "entityNames",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "threshold",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            {
+              "name": "size",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Similarity",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "literatureOcurrences",
+          "description": "Return the list of publications that mention the main entity, alone or in combination with other entities",
+          "args": [
+            {
+              "name": "additionalIds",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "startYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "startMonth",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endYear",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "endMonth",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "name": "cursor",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "Publications",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "mechanismsOfAction",
+          "description": "Mechanisms of action to produce intended pharmacological effects. Curated from scientific literature and post-marketing package inserts",
+          "args": [],
+          "type": {
+            "kind": "OBJECT",
+            "name": "MechanismsOfAction",
+            "ofType": null
+          }
+        },
+        {
+          "name": "adverseEvents",
+          "description": "Significant adverse events estimated from pharmacovigilance reports deposited in FAERS",
+          "args": [
+            {
+              "name": "page",
+              "defaultValue": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          ],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "AdverseEvents",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "pharmacogenomics",
+          "description": "Pharmacogenomics data linking genetic variants to responses to this drug. Data is integrated from sources including ClinPGx and describes how genetic variants influence individual responses to this drug.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Pharmacogenomics",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "indications",
+          "description": "Clinical indications for this drug as reported by clinical trial records.",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "clinicalIndicationsFromDrugImp",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "MechanismsOfAction": {
+      "name": "MechanismsOfAction",
+      "kind": "OBJECT",
+      "description": "Collection of mechanisms of action for a drug molecule",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "uniqueActionTypes",
+          "description": "Unique list of action types across all mechanisms",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "rows",
+          "description": "List of mechanism of action entries",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "MechanismOfActionRow",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "uniqueTargetTypes",
+          "description": "Unique list of target types across all mechanisms",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "MechanismOfActionRow": {
+      "name": "MechanismOfActionRow",
+      "kind": "OBJECT",
+      "description": "Mechanism of action information for a drug",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "mechanismOfAction",
+          "description": "Description of the mechanism of action",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "references",
+          "description": "Reference information supporting the mechanism of action",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Reference",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "actionType",
+          "description": "Classification of how the drug interacts with its target (e.g., ACTIVATOR, INHIBITOR)",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "targetName",
+          "description": "Name of the target molecule",
+          "args": [],
+          "type": {
+            "kind": "SCALAR",
+            "name": "String",
+            "ofType": null
+          }
+        },
+        {
+          "name": "targets",
+          "description": "List of on-target (genes or proteins) involved in the drug or clinical candidate mechanism of action",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Target",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Reference": {
+      "name": "Reference",
+      "kind": "OBJECT",
+      "description": "Reference information supporting the drug mechanisms of action",
+      "enumValues": null,
+      "inputFields": null,
+      "fields": [
+        {
+          "name": "ids",
+          "description": "List of reference identifiers",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "urls",
+          "description": "List of URLs linking to the reference",
+          "args": [],
+          "type": {
+            "kind": "LIST",
+            "name": null,
+            "ofType": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        },
+        {
+          "name": "source",
+          "description": "Source of the reference (e.g., PubMed, FDA, package inserts)",
+          "args": [],
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    }
+  }
+}

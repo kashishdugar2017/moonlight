@@ -1,0 +1,485 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000139567",
+      "approvedSymbol": "ACVRL1",
+      "approvedName": "activin A receptor like type 1",
+      "drugAndClinicalCandidates": {
+        "count": 2,
+        "rows": [
+          {
+            "id": "3c650714cfea8c93656e2793a3d8feeabdfb26f2240feab356443e56239881b3",
+            "maxClinicalStage": "PHASE_2",
+            "drug": {
+              "id": "CHEMBL2109295",
+              "name": "ASCRINVACUMAB",
+              "drugType": "Antibody",
+              "maximumClinicalStage": "PHASE_2",
+              "description": "Antibody drug with a maximum clinical stage of Phase 2 (across all indications), with 7 investigational indications.",
+              "parentMolecule": null,
+              "mechanismsOfAction": {
+                "uniqueActionTypes": [
+                  "INHIBITOR"
+                ],
+                "uniqueTargetTypes": [
+                  "single protein"
+                ],
+                "rows": [
+                  {
+                    "mechanismOfAction": "Serine/threonine-protein kinase receptor R3 inhibitor",
+                    "actionType": "INHIBITOR",
+                    "targetName": "Activin receptor type-1-like",
+                    "targets": [
+                      {
+                        "id": "ENSG00000139567",
+                        "approvedSymbol": "ACVRL1"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "22493445"
+                        ],
+                        "urls": [
+                          "http://europepmc.org/abstract/MED/22493445"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "indications": {
+                "count": 7,
+                "rows": [
+                  {
+                    "id": "25b290383275eadbcd0c2d6a137cd793dde7a800eaa2abeab9b92ae7414d632e",
+                    "maxClinicalStage": "PHASE_1",
+                    "disease": {
+                      "id": "MONDO_0005575",
+                      "name": "colorectal cancer"
+                    }
+                  },
+                  {
+                    "id": "54586dd7475123d7675c48243e908fb1276ee0816661cf25b6f1c9df59633cb3",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_0007256",
+                      "name": "hepatocellular carcinoma"
+                    }
+                  },
+                  {
+                    "id": "63367cfd02f920c82042a1ea8d712f60e4c6709de02f8974aaef4a26e3f02dc5",
+                    "maxClinicalStage": "PHASE_1_2",
+                    "disease": {
+                      "id": "MONDO_0040679",
+                      "name": "urothelial carcinoma"
+                    }
+                  },
+                  {
+                    "id": "6340ea34c7536e9afc00d89e883ecd9c55ec0974de3e4fced4aa9f741c6bb9a8",
+                    "maxClinicalStage": "PHASE_1_2",
+                    "disease": {
+                      "id": "MONDO_0003219",
+                      "name": "gastroesophageal junction adenocarcinoma"
+                    }
+                  },
+                  {
+                    "id": "786aec31e17ec24b7017f180dc95a2e6f0b70b7b728eba63b1ece8ad8e7db80c",
+                    "maxClinicalStage": "PHASE_1_2",
+                    "disease": {
+                      "id": "MONDO_0005580",
+                      "name": "esophageal squamous cell carcinoma"
+                    }
+                  },
+                  {
+                    "id": "cd85067a690f7a04106f4e705683ad6fffb603935901a9f05748f22100a55867",
+                    "maxClinicalStage": "PHASE_1_2",
+                    "disease": {
+                      "id": "MONDO_0004950",
+                      "name": "gastric carcinoma"
+                    }
+                  },
+                  {
+                    "id": "def717d8011e5daa88413a4453c970ed9b44d4d85cfe7eaaf753cec4e6408361",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_0005112",
+                      "name": "malignant pleural mesothelioma"
+                    }
+                  }
+                ]
+              }
+            },
+            "diseases": [
+              {
+                "diseaseFromSource": "solid tumour/cancer",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "malignant pleural mesothelioma",
+                "disease": {
+                  "id": "MONDO_0005112",
+                  "name": "malignant pleural mesothelioma"
+                }
+              },
+              {
+                "diseaseFromSource": "urothelial cancer",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "hepatocellular carcinoma",
+                "disease": {
+                  "id": "MONDO_0007256",
+                  "name": "hepatocellular carcinoma"
+                }
+              },
+              {
+                "diseaseFromSource": "urothelial carcinoma",
+                "disease": {
+                  "id": "MONDO_0040679",
+                  "name": "urothelial carcinoma"
+                }
+              },
+              {
+                "diseaseFromSource": "gastric carcinoma",
+                "disease": {
+                  "id": "MONDO_0004950",
+                  "name": "gastric carcinoma"
+                }
+              },
+              {
+                "diseaseFromSource": "gastroesophageal junction adenocarcinoma",
+                "disease": {
+                  "id": "MONDO_0003219",
+                  "name": "gastroesophageal junction adenocarcinoma"
+                }
+              },
+              {
+                "diseaseFromSource": "esophageal squamous cell carcinoma",
+                "disease": {
+                  "id": "MONDO_0005580",
+                  "name": "esophageal squamous cell carcinoma"
+                }
+              },
+              {
+                "diseaseFromSource": "solid tumors",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "colorectal cancer",
+                "disease": {
+                  "id": "MONDO_0005575",
+                  "name": "colorectal cancer"
+                }
+              }
+            ],
+            "clinicalReports": [
+              {
+                "id": "d08jbl/solid tumour/cancer",
+                "type": "INDICATION",
+                "source": "TTD",
+                "provider": "TTD",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "phase 2",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://ttd.idrblab.cn/data/drug/details/D08JBL"
+              },
+              {
+                "id": "nct01486368",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01486368"
+              },
+              {
+                "id": "nct01620970",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01620970"
+              },
+              {
+                "id": "nct01911273",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01911273"
+              },
+              {
+                "id": "nct05178043",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "UNKNOWN",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT05178043"
+              },
+              {
+                "id": "nct03893695",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1_2",
+                "phaseFromSource": "PHASE1/PHASE2",
+                "trialPhase": "PHASE1/PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT03893695"
+              },
+              {
+                "id": "nct04984668",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1_2",
+                "phaseFromSource": "PHASE1/PHASE2",
+                "trialPhase": "PHASE1/PHASE2",
+                "trialOverallStatus": "UNKNOWN",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT04984668"
+              },
+              {
+                "id": "nct00557856",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00557856"
+              },
+              {
+                "id": "nct01337050",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01337050"
+              },
+              {
+                "id": "nct02116894",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT02116894"
+              }
+            ]
+          },
+          {
+            "id": "abece6287cda05f5b1d572e79a12745cf55ac968ed36b023890286733e5445d7",
+            "maxClinicalStage": "PHASE_1",
+            "drug": {
+              "id": "CHEMBL5095025",
+              "name": "PANULISIB",
+              "drugType": "Small molecule",
+              "maximumClinicalStage": "PHASE_1",
+              "description": "Small molecule drug with a maximum clinical stage of Phase 1.",
+              "parentMolecule": null,
+              "mechanismsOfAction": {
+                "uniqueActionTypes": [
+                  "INHIBITOR"
+                ],
+                "uniqueTargetTypes": [
+                  "protein complex group",
+                  "single protein"
+                ],
+                "rows": [
+                  {
+                    "mechanismOfAction": "PI3-kinase class I inhibitor",
+                    "actionType": "INHIBITOR",
+                    "targetName": "PI3-kinase class I",
+                    "targets": [
+                      {
+                        "id": "ENSG00000145675",
+                        "approvedSymbol": "PIK3R1"
+                      },
+                      {
+                        "id": "ENSG00000051382",
+                        "approvedSymbol": "PIK3CB"
+                      },
+                      {
+                        "id": "ENSG00000105851",
+                        "approvedSymbol": "PIK3CG"
+                      },
+                      {
+                        "id": "ENSG00000121879",
+                        "approvedSymbol": "PIK3CA"
+                      },
+                      {
+                        "id": "ENSG00000105647",
+                        "approvedSymbol": "PIK3R2"
+                      },
+                      {
+                        "id": "ENSG00000171608",
+                        "approvedSymbol": "PIK3CD"
+                      },
+                      {
+                        "id": "ENSG00000141506",
+                        "approvedSymbol": "PIK3R5"
+                      },
+                      {
+                        "id": "ENSG00000117461",
+                        "approvedSymbol": "PIK3R3"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "25700704",
+                          "25700704",
+                          "25700704"
+                        ],
+                        "urls": [
+                          "http://europepmc.org/abstract/MED/25700704",
+                          "http://europepmc.org/abstract/MED/25700704",
+                          "http://europepmc.org/abstract/MED/25700704"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Serine/threonine-protein kinase mTOR inhibitor",
+                    "actionType": "INHIBITOR",
+                    "targetName": "Serine/threonine-protein kinase mTOR",
+                    "targets": [
+                      {
+                        "id": "ENSG00000198793",
+                        "approvedSymbol": "MTOR"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "25700704",
+                          "25700704",
+                          "25700704"
+                        ],
+                        "urls": [
+                          "http://europepmc.org/abstract/MED/25700704",
+                          "http://europepmc.org/abstract/MED/25700704",
+                          "http://europepmc.org/abstract/MED/25700704"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Serine/threonine-protein kinase receptor R3 inhibitor",
+                    "actionType": "INHIBITOR",
+                    "targetName": "Activin receptor type-1-like",
+                    "targets": [
+                      {
+                        "id": "ENSG00000139567",
+                        "approvedSymbol": "ACVRL1"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "PubMed",
+                        "ids": [
+                          "25700704",
+                          "25700704",
+                          "25700704"
+                        ],
+                        "urls": [
+                          "http://europepmc.org/abstract/MED/25700704",
+                          "http://europepmc.org/abstract/MED/25700704",
+                          "http://europepmc.org/abstract/MED/25700704"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "indications": {
+                "count": 0,
+                "rows": []
+              }
+            },
+            "diseases": [
+              {
+                "diseaseFromSource": "solid tumour/cancer",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "solid tumor",
+                "disease": null
+              }
+            ],
+            "clinicalReports": [
+              {
+                "id": "d0r8id/solid tumour/cancer",
+                "type": "INDICATION",
+                "source": "TTD",
+                "provider": "TTD",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "phase 1",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://ttd.idrblab.cn/data/drug/details/D0R8ID"
+              },
+              {
+                "id": "nct01762410",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "SUSPENDED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01762410"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

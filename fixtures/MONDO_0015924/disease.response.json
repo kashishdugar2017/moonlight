@@ -1,0 +1,150 @@
+{
+  "data": {
+    "disease": {
+      "id": "MONDO_0015924",
+      "name": "pulmonary arterial hypertension",
+      "description": "Pulmonary arterial hypertension (PAH) is a group of diseases characterized by mean pulmonary artery pressure >20 mmHg and elevated pulmonary arterial resistance leading to right heart failure. PAH is progressive and potentially fatal. PAH may be idiopathic and/ or familial, have overt features of venous/capillary involvement (pulmonary veno-occlusive disease, PVOD/pulmonary capillary hemangiomatosis, PCH), induced by drug or toxin (drug-or toxin-induced PAH), or associated with other diseases like congenital heart disease, connective tissue disease, HIV, schistosomiasis, portal hypertension (PAH associated with other disease).",
+      "dbXRefs": [
+        "EFO:0001361",
+        "GARD:0007501",
+        "MEDGEN:425404",
+        "MESH:D000081029",
+        "MedDRA:10064911",
+        "NANDO:1200425",
+        "NANDO:2100103",
+        "NANDO:2200298",
+        "NORD:1634",
+        "Orphanet:182090",
+        "Orphanet:422",
+        "SCTID:11399002",
+        "UMLS:C2973725",
+        "icd11.foundation:1931148955"
+      ],
+      "synonyms": [
+        {
+          "relation": "hasExactSynonym",
+          "terms": [
+            "PAH",
+            "pulmonary arterial hypertension",
+            "Ayerza Arrilaga Syndrome",
+            "Ayerza Syndrome",
+            "Ayerza's Syndrome",
+            "Ayerza-Arrilaga Syndrome",
+            "Ayerzas Syndrome",
+            "HYPERTENSION PULM",
+            "Hypertension, Pulmonary",
+            "PHT - Pulmonary hypertension",
+            "PPH1",
+            "PULM HYPERTENSION",
+            "Pulmonary hypertension, NOS",
+            "Syndrome, Ayerza",
+            "Syndrome, Ayerza-Arrilaga",
+            "pulmonary hypertension",
+            "pulmonary hypertension (disorder)",
+            "pulmonary hypertension, primary, 1"
+          ]
+        },
+        {
+          "relation": "hasRelatedSynonym",
+          "terms": [
+            "PPH",
+            "idiopathic pulmonary hypertension"
+          ]
+        },
+        {
+          "relation": "hasNarrowSynonym",
+          "terms": [
+            "PAH with overt features of venous/capillaries involvement",
+            "PVOD/PCH"
+          ]
+        },
+        {
+          "relation": "hasBroadSynonym",
+          "terms": []
+        }
+      ],
+      "isTherapeuticArea": false,
+      "therapeuticAreas": [
+        {
+          "id": "MONDO_0004995",
+          "name": "cardiovascular disorder"
+        },
+        {
+          "id": "EFO_0000651",
+          "name": "phenotype"
+        }
+      ],
+      "parents": [
+        {
+          "id": "MONDO_0005149",
+          "name": "pulmonary hypertension"
+        }
+      ],
+      "children": [
+        {
+          "id": "MONDO_0001999",
+          "name": "idiopathic pulmonary arterial hypertension"
+        },
+        {
+          "id": "MONDO_0017148",
+          "name": "heritable pulmonary arterial hypertension"
+        },
+        {
+          "id": "MONDO_0017149",
+          "name": "drug- or toxin-induced pulmonary arterial hypertension"
+        },
+        {
+          "id": "MONDO_0018554",
+          "name": "pulmonary veno-occlusive disease and/or pulmonary capillary haemangiomatosis"
+        },
+        {
+          "id": "MONDO_0019944",
+          "name": "Eisenmenger syndrome"
+        },
+        {
+          "id": "EFO_0009193",
+          "name": "Pulmonary arterial hypertension associated with another disease"
+        }
+      ],
+      "ancestors": [
+        "MONDO_0005149",
+        "MONDO_0005044",
+        "MONDO_0000473",
+        "HP_0032263",
+        "MONDO_0005385",
+        "HP_0030972",
+        "MONDO_0004995",
+        "HP_0011025",
+        "HP_0001626",
+        "HP_0000118",
+        "EFO_0000651"
+      ],
+      "descendants": [
+        "MONDO_0001999",
+        "MONDO_0017148",
+        "MONDO_0017149",
+        "MONDO_0018554",
+        "MONDO_0019944",
+        "EFO_0009193",
+        "MONDO_0009329",
+        "MONDO_0009935",
+        "MONDO_0014134",
+        "MONDO_0014135",
+        "MONDO_0014136",
+        "MONDO_0024533",
+        "MONDO_0958334",
+        "MONDO_0979237",
+        "EFO_0009054",
+        "EFO_0009194",
+        "EFO_0009195",
+        "EFO_0009196",
+        "EFO_0009197",
+        "EFO_0009198"
+      ],
+      "obsoleteTerms": [
+        "EFO_0001361",
+        "EFO_0001362"
+      ]
+    }
+  }
+}

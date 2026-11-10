@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000164736",
+      "approvedSymbol": "SOX17",
+      "approvedName": "SRY-box transcription factor 17",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}
