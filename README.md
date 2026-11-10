@@ -1,4 +1,5 @@
 # moonlight
+An AI explorer that finds old medicines that might help new/rare diseases
 
 ## What it does
 - You enter a disease
