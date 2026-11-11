@@ -26,7 +26,8 @@ down to her.
 4. rank.py       rank the remaining paths (plain code, no AI)
 5. explain.py    one path's records -> plain-language text (Gemini), then a grounding check
 6. app.py        Streamlit page: search, ranked list, path map, safety banner
-Shared record types live in moonlight/records.py: Disease, Target, Drug, Path.
+Shared record types live in moonlight/records.py: Disease, Target,
+MedicineForm, Medicine, Path.
 
 ## Kashish's rules for medicines
 - A medicine and its tablet (salt) forms are one item, with all forms
