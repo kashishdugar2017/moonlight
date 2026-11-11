@@ -10,3 +10,5 @@ Format: date, the decision, why.
 - 2026-11-10: Medicines already being tested for the disease go in a separate box, not the main list.
 - 2026-11-10: A medicine and its tablet form are one item, with both forms shown inside. It is easier to understand.
 - 2026-11-11: Medicines already approved for the disease are removed. They are not clues.
+- 2026-11-11: WITHDRAWAL stays at the bottom of the stage ladder. A medicine taken off the shelves does not count as approved.
+- 2026-11-11: If Moonlight meets an action word it does not know, it says "unknown". It never guesses.
