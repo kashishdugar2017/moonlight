@@ -1,0 +1,79 @@
+{
+  "data": {
+    "search": {
+      "total": 126,
+      "hits": [
+        {
+          "id": "MONDO_0015924",
+          "entity": "disease",
+          "name": "pulmonary arterial hypertension",
+          "description": "Pulmonary arterial hypertension (PAH) is a group of diseases characterized by mean pulmonary artery pressure >20 mmHg and elevated pulmonary arterial resistance leading to right heart failure. PAH is progressive and potentially fatal. PAH may be idiopathic and/ or familial, have overt features of venous/capillary involvement (pulmonary veno-occlusive disease, PVOD/pulmonary capillary hemangiomatosis, PCH), induced by drug or toxin (drug-or toxin-induced PAH), or associated with other diseases like congenital heart disease, connective tissue disease, HIV, schistosomiasis, portal hypertension (PAH associated with other disease).",
+          "score": 5875.537
+        },
+        {
+          "id": "MONDO_0017148",
+          "entity": "disease",
+          "name": "heritable pulmonary arterial hypertension",
+          "description": "Heritable pulmonary arterial hypertension (HPAH) is a form of pulmonary arterial hypertension (PAH), occurring due to mutations in PAH predisposing genes or in a familial context. HPAH is characterized by elevated pulmonary arterial resistance leading to right heart failure. HPAH is progressive and potentially fatal.",
+          "score": 1252.6083
+        },
+        {
+          "id": "EFO_0009054",
+          "entity": "disease",
+          "name": "Pulmonary arterial hypertension associated with congenital heart disease",
+          "description": "Pulmonary arterial hypertension associated with congenital heart disease (PAH-CHD) is a form of pulmonary arterial hypertension (PAH, see this term), characterized by elevated pulmonary arterial resistance leading to right heart failure occurring as a common complication of congenital heart malformations (see this term) with left to right cardiac shunts. Eisenmenger syndrome (see this term) is the most advanced form of PAH-CHD and is defined as the complete or partial reversal of an initial left-to-right shunt to a right-to-left shunt, causing cyanosis and limited exercise capacity. PAH-CHD also includes mild to moderate systemic-to-pulmonary shunts with no cyanosis at rest, patients with small defects, and those with residual PAH following corrective cardiac surgery.",
+          "score": 1121.1816
+        },
+        {
+          "id": "MONDO_0001999",
+          "entity": "disease",
+          "name": "idiopathic pulmonary arterial hypertension",
+          "description": "A sporadic form of pulmonary arterial hypertension (PAH) characterized by elevated pulmonary arterial resistance leading to right heart failure. IPAH is progressive and potentially fatal and not associated with an underlying condition or family history of PAH. The etiology is unknown.",
+          "score": 1094.1609
+        },
+        {
+          "id": "EFO_0009197",
+          "entity": "disease",
+          "name": "Pulmonary arterial hypertension associated with portal hypertension",
+          "description": "Pulmonary arterial hypertension associated with portal hypertension (PAH-PH) is a form of pulmonary arterial hypertension (PAH), characterized by an elevated pulmonary arterial resistance leading to right heart failure observed as a complication of portal hypertension.",
+          "score": 1079.2528
+        },
+        {
+          "id": "EFO_0009193",
+          "entity": "disease",
+          "name": "Pulmonary arterial hypertension associated with another disease",
+          "description": "Pulmonary arterial hypertension associated with another disease is a group of conditions that lead to PAH (see this term); connective tissue diseases (lupus erythematosus, systemic sclerosis and mixed connective tissues disease), congenital heart disease (Eisenmenger syndrome), HIV infection, portal hypertension, schistosomiasis and chronic hemolytic anemia (see these terms),which is characterized by elevated pulmonary arterial resistance leading to right heart failure that is progressive and potentially fatal.",
+          "score": 1017.60126
+        },
+        {
+          "id": "EFO_0009196",
+          "entity": "disease",
+          "name": "Pulmonary arterial hypertension associated with connective tissue disease",
+          "description": "Pulmonary arterial hypertension (PAH, see this term) associated with connective tissue disease (PAH-CTD) is a form of pulmonary arterial hypertension (PAH, see this term) characterized by an elevated pulmonary arterial resistance leading to right heart failure observed as a complication of a connective tissue disease.",
+          "score": 927.7824
+        },
+        {
+          "id": "MONDO_0014135",
+          "entity": "disease",
+          "name": "pulmonary hypertension, primary, 3",
+          "description": "Any primary pulmonary hypertension in which the cause of the disease is a mutation in the CAV1 gene.",
+          "score": 716.35095
+        },
+        {
+          "id": "MONDO_0024533",
+          "entity": "disease",
+          "name": "pulmonary hypertension, primary, 1",
+          "description": "Any primary pulmonary hypertension in which the cause of the disease is a mutation in the BMPR2 gene.",
+          "score": 699.995
+        },
+        {
+          "id": "MONDO_0014134",
+          "entity": "disease",
+          "name": "pulmonary hypertension, primary, 2",
+          "description": "Any primary pulmonary hypertension in which the cause of the disease is a mutation in the SMAD9 gene.",
+          "score": 665.36523
+        }
+      ]
+    }
+  }
+}
