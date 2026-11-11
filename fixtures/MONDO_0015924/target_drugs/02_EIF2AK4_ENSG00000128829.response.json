@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000128829",
+      "approvedSymbol": "EIF2AK4",
+      "approvedName": "eukaryotic translation initiation factor 2 alpha kinase 4",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}
