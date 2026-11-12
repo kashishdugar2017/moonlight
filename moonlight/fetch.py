@@ -43,11 +43,14 @@ URL = "https://api.platform.opentargets.org/api/v4/graphql"
 TIMEOUT_SECONDS = 30
 SEARCH_SIZE = 10
 VERSION_CHECK_SECONDS = 3600  # a long-running program reads the version again after this
-# Kashish's decision, 2026-11-12. Open Targets sometimes answers "which
-# medicines act on this protein?" with most of the reports missing. So that
-# question is asked this many times and the answer with the most reports is
-# kept. Only then is it saved.
-TARGET_DRUGS_ASKS = 3
+# Kashish's decision, 2026-11-12. Open Targets sometimes gives a short
+# answer to "which medicines act on this protein?", with reports missing.
+# So that question is asked twice, and a third time only if the first two
+# answers differ. The answer with the most clinical reports is kept, and
+# only then is it saved. The medicines must be the same in every answer.
+# If they are not, Moonlight stops and saves nothing.
+ASKS_AT_FIRST = 2
+ASKS_AT_MOST = 3
 
 VERSION_QUERY = """
 query DataVersion {
@@ -119,6 +122,10 @@ class FetchError(RuntimeError):
     """Open Targets answered, but with an error instead of data."""
 
 
+class AnswersDisagree(FetchError):
+    """Asked the same question again, Open Targets named different medicines."""
+
+
 # One connection to Open Targets, opened once and used for every call.
 _session = requests.Session()
 
@@ -166,29 +173,43 @@ def _is_good(answer: dict) -> bool:
     return not answer.get("errors") and answer.get("data") is not None
 
 
-def _report_count(answer: dict) -> int:
-    """How many trial reports a medicines-for-a-protein answer holds."""
+def _rows(answer: dict) -> List[dict]:
     target = answer["data"].get("target") or {}
-    rows = (target.get("drugAndClinicalCandidates") or {}).get("rows") or []
-    return sum(len(row.get("clinicalReports") or []) for row in rows)
+    return (target.get("drugAndClinicalCandidates") or {}).get("rows") or []
+
+
+def _report_count(answer: dict) -> int:
+    """How many clinical reports a medicines-for-a-protein answer holds."""
+    return sum(len(row.get("clinicalReports") or []) for row in _rows(answer))
+
+
+def _medicine_ids(answer: dict) -> List[str]:
+    """The id of every medicine form in the answer, sorted."""
+    return sorted((row.get("drug") or {}).get("id") or "" for row in _rows(answer))
 
 
 def _send_keeping_the_fullest(body: dict) -> dict:
-    """Ask TARGET_DRUGS_ASKS times. Keep the answer with the most reports.
+    """Ask twice. Ask a third time only if the first two answers differ.
+    Keep the answer with the most clinical reports in total.
 
     If two answers are equally full, the earlier one is kept. An answer
-    that is an error is handed straight back.
+    that is an error is handed straight back. If the answers do not hold
+    the same medicines, AnswersDisagree is raised and nothing is saved.
     """
-    best = _send(body)
-    for _ in range(TARGET_DRUGS_ASKS - 1):
-        if not _is_good(best):
-            return best
+    answers: List[dict] = []
+    while len(answers) < ASKS_AT_MOST:
         answer = _send(body)
         if not _is_good(answer):
             return answer
-        if _report_count(answer) > _report_count(best):
-            best = answer
-    return best
+        answers.append(answer)
+        if _medicine_ids(answer) != _medicine_ids(answers[0]):
+            raise AnswersDisagree(
+                "Open Targets gave different medicines for the same question "
+                f"({body['variables']}). Nothing was saved. Please tell Kashish."
+            )
+        if len(answers) == ASKS_AT_FIRST and answers[0] == answers[1]:
+            break
+    return max(answers, key=_report_count)  # max keeps the earliest of equals
 
 
 def _post_json(body: dict) -> dict:

@@ -45,6 +45,13 @@ def without_reports(answer):
     return thin
 
 
+def without_first_medicine(answer):
+    """The same answer with one medicine missing."""
+    other = json.loads(json.dumps(answer))
+    del other["data"]["target"]["drugAndClinicalCandidates"]["rows"][0]
+    return other
+
+
 class FakeOpenTargets:
     """Stands in for fetch._send. Counts every call it gets."""
 
@@ -52,7 +59,8 @@ class FakeOpenTargets:
         self.version = {"year": year, "month": month, "iteration": iteration}
         self.version_calls = 0
         self.data_calls = []  # the variables of every call that asked for data
-        self.thin_first = set()  # target ids whose first answer has no reports
+        self.thin_asks = {}  # target id -> which asks (1, 2, 3...) have no reports
+        self.other_medicines_asks = {}  # target id -> which asks name other medicines
 
     def __call__(self, body):
         assert set(body) == {"query", "variables"}
@@ -65,8 +73,11 @@ class FakeOpenTargets:
             return load(GOLDEN / "disease_search.response.json")
         if "targetId" in variables:
             answer = saved_target_drugs(variables["targetId"])
-            asked_before = self.data_calls.count(variables) - 1
-            if variables["targetId"] in self.thin_first and not asked_before:
+            target_id = variables["targetId"]
+            ask_number = self.data_calls.count(variables)
+            if ask_number in self.other_medicines_asks.get(target_id, ()):
+                return without_first_medicine(answer)
+            if ask_number in self.thin_asks.get(target_id, ()):
                 return without_reports(answer)
             return answer
         if "size" in variables:
@@ -255,11 +266,25 @@ def test_example_2_a_different_data_version_makes_a_fresh_call():
         assert len(fake.data_calls) == 2  # the new one is saved under 26.12
 
 
-# ---- Kashish's decision, 2026-11-12: ask 3 times, keep the fullest ----
+# ---- Kashish's decision, 2026-11-12: ask again, keep the fullest ----
 
-def test_medicines_for_a_protein_are_asked_3_times_and_the_fullest_is_kept():
+def body_for(target_id):
+    return {"query": fetch.TARGET_DRUGS_QUERY, "variables": {"targetId": target_id}}
+
+
+def test_two_answers_the_same_means_no_third_ask():
     fake = FakeOpenTargets()
-    fake.thin_first.add(PDE5A.id)  # the first answer has no reports at all
+    with use(fake):
+        assert fetch._post_json(body_for(PDE5A.id)) == saved_target_drugs(PDE5A.id)
+        assert fake.calls_for(PDE5A.id) == 2
+        fetch._post_json(body_for(PDE5A.id))  # saved now
+        assert fake.calls_for(PDE5A.id) == 2
+
+
+@pytest.mark.parametrize("thin_asks", [(1,), (2,), (1, 3), (2, 3)])
+def test_two_answers_that_differ_mean_a_third_ask_and_the_fullest_is_kept(thin_asks):
+    fake = FakeOpenTargets()
+    fake.thin_asks[PDE5A.id] = thin_asks
     full = saved_target_drugs(PDE5A.id)
     with use(fake):
         assert fetch._post_json(body_for(PDE5A.id)) == full
@@ -268,15 +293,40 @@ def test_medicines_for_a_protein_are_asked_3_times_and_the_fullest_is_kept():
         assert fake.calls_for(PDE5A.id) == 3
 
 
-def body_for(target_id):
-    return {"query": fetch.TARGET_DRUGS_QUERY, "variables": {"targetId": target_id}}
+def test_fullest_means_the_most_clinical_reports_in_total():
+    full = saved_target_drugs(PDE5A.id)
+    rows = full["data"]["target"]["drugAndClinicalCandidates"]["rows"]
+    assert fetch._report_count(full) == sum(len(row["clinicalReports"]) for row in rows) == 43
+    assert fetch._report_count(without_reports(full)) == 0
 
 
-def test_equally_full_answers_keep_the_first():
+def test_two_short_answers_that_are_the_same_are_kept_as_they_are():
+    # The rule cannot tell: two answers the same means no third ask.
     fake = FakeOpenTargets()
+    fake.thin_asks[PDE5A.id] = (1, 2)
     with use(fake):
-        assert fetch._post_json(body_for(PDE5A.id)) == saved_target_drugs(PDE5A.id)
-    assert fake.calls_for(PDE5A.id) == 3
+        kept = fetch._post_json(body_for(PDE5A.id))
+    assert kept == without_reports(saved_target_drugs(PDE5A.id))
+    assert fake.calls_for(PDE5A.id) == 2
+
+
+@pytest.mark.parametrize("odd_ask, asks", [(2, 2), (3, 3)])
+def test_if_the_medicines_differ_it_stops_and_saves_nothing(odd_ask, asks, tmp_path):
+    fake = FakeOpenTargets()
+    fake.other_medicines_asks[PDE5A.id] = (odd_ask,)
+    fake.thin_asks[PDE5A.id] = (1,)  # so that a third ask happens when it is needed
+    with use(fake):
+        with pytest.raises(fetch.AnswersDisagree) as stopped:
+            fetch.fetch_paths(PAH, PDE5A)
+        assert fake.calls_for(PDE5A.id) == asks
+        assert "Kashish" in str(stopped.value)
+        assert PDE5A.id in str(stopped.value)
+        assert cache.load("open-targets", "26.09", body_for(PDE5A.id)) is None
+    assert not list((tmp_path / "saved").rglob("*.json"))
+
+
+def test_medicines_that_differ_is_a_fetch_error_so_the_runner_says_so():
+    assert issubclass(fetch.AnswersDisagree, fetch.FetchError)
 
 
 def test_other_questions_are_asked_once():
@@ -295,7 +345,7 @@ def test_preload_saves_everything_a_search_for_that_disease_needs():
     with use(fake):
         loaded = engine.preload([PAH.id])
         asked = len(fake.data_calls)
-        assert asked == 2 + 25 * 3  # the disease, its proteins, 25 proteins x 3
+        assert asked == 2 + 25 * 2  # the disease, its proteins, 25 proteins x 2
 
         # A later run, like cli.py after the search: nothing new is asked.
         new_program()
