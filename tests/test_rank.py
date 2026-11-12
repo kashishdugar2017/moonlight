@@ -194,7 +194,8 @@ def test_example_4_the_two_being_studied_in_order(tray):
 def test_rule_text_is_exactly_kashishs_words():
     assert RULE_TEXT == (
         "Ordered by how strongly the proteins are linked to the disease. "
-        "If a medicine acts on more than one protein, the scores are added. "
+        "Pieces of the same machine count once. "
+        "If a medicine acts on different machines, the scores are added. "
         "Ties: more reports first, then alphabetical. "
         "Being first on the list does not mean best."
     )
@@ -202,3 +203,106 @@ def test_rule_text_is_exactly_kashishs_words():
 
 def test_no_paths_gives_no_clues():
     assert rank_clues([]) == []
+
+
+# ---- Ticket 2.8. Pieces of the same machine count once ----
+
+def piece(name, symbol, score, reports, machine=()):
+    """A path whose protein is one piece of a machine. `machine` holds the
+    symbols of the other pieces."""
+    plain = path(name, symbol, score, reports)
+    return Path(
+        medicine=plain.medicine,
+        target=plain.target,
+        disease=plain.disease,
+        action_types=plain.action_types,
+        score=plain.score,
+        sources=plain.sources,
+        same_machine_ids=tuple("ENSG_" + other for other in machine),
+    )
+
+
+def isosorbide():
+    return [
+        piece("Isosorbide Mononitrate", "GUCY1A1", 0.60, 1, ("GUCY1B1", "GUCY1A2")),
+        piece("Isosorbide Mononitrate", "GUCY1B1", 0.58, 1, ("GUCY1A1", "GUCY1A2")),
+        piece("Isosorbide Mononitrate", "GUCY1A2", 0.58, 1, ("GUCY1A1", "GUCY1B1")),
+    ]
+
+
+# Example 1
+def test_2_8_example_1_three_pieces_of_one_machine_count_once():
+    (clue,) = rank_clues(isosorbide())
+    assert clue.total_score == 0.60
+    assert [p.target.symbol for p in clue.paths] == ["GUCY1A1", "GUCY1A2", "GUCY1B1"]
+    assert len(clue.machines) == 1
+    assert [p.target.symbol for p in clue.machines[0]] == ["GUCY1A1", "GUCY1A2", "GUCY1B1"]
+
+
+def test_2_8_example_1_from_the_saved_files():
+    wanted = {"GUCY1A1", "GUCY1B1", "GUCY1A2"}
+    with patch("moonlight.fetch._post_json", side_effect=fake_post_json):
+        targets = [t for t in fetch.fetch_targets(PAH) if t.symbol in wanted]
+        paths = [p for t in targets for p in fetch.fetch_paths(PAH, t)]
+    clues = {c.medicine.name: c for c in rank_clues(sort_paths(paths)[NEW_CLUE])}
+    clue = clues["ISOSORBIDE MONONITRATE"]
+    assert {p.target.symbol for p in clue.paths} == wanted
+    assert len(clue.machines) == 1
+    assert round(clue.total_score, 2) == 0.60
+    assert clue.total_score == max(p.score for p in clue.paths)
+
+
+def test_2_8_one_machine_no_longer_jumps_ahead_of_a_stronger_protein():
+    clues = rank_clues(isosorbide() + [path(*DIBOTERMIN)])
+    assert names(clues) == ["Dibotermin Alfa", "Isosorbide Mononitrate"]
+
+
+def test_2_8_a_machine_is_found_even_if_only_one_piece_names_the_other():
+    clue = Clue(paths=(
+        piece("Madeupamine", "AAA", 0.7, 0, ("BBB",)),
+        piece("Madeupamine", "BBB", 0.6, 0),
+    ))
+    assert clue.total_score == 0.7
+    assert len(clue.machines) == 1
+
+
+def test_2_8_a_partner_the_medicine_has_no_path_to_changes_nothing():
+    # The machine has a piece outside the proteins we looked at.
+    clue = Clue(paths=(piece("Madeupamine", "AAA", 0.7, 0, ("ZZZ",)),))
+    assert clue.total_score == 0.7
+    assert len(clue.machines) == 1
+
+
+# Example 2
+def test_2_8_example_2_two_different_machines_add():
+    clue = Clue(paths=(
+        piece("Madeupamine", "KCNK3", 0.5, 1),
+        piece("Madeupamine", "EDNRA", 0.5, 2),
+    ))
+    assert clue.total_score == 1.0
+    assert len(clue.machines) == 2
+
+
+# Example 3
+def test_2_8_example_3_a_two_piece_machine_and_a_separate_machine():
+    clue = Clue(paths=(
+        piece("Madeupamine", "AAA", 0.7, 0, ("BBB",)),
+        piece("Madeupamine", "BBB", 0.6, 0, ("AAA",)),
+        piece("Madeupamine", "CCC", 0.4, 0),
+    ))
+    assert clue.total_score == pytest.approx(1.1)
+    assert round(clue.total_score, 2) == 1.1
+    assert [[p.target.symbol for p in m] for m in clue.machines] == [["AAA", "BBB"], ["CCC"]]
+
+
+# Example 4 is test_example_4_the_16_new_clues_in_order above. It is not changed.
+
+
+def test_2_8_rule_text_is_exactly_kashishs_new_words():
+    assert RULE_TEXT == (
+        "Ordered by how strongly the proteins are linked to the disease. "
+        "Pieces of the same machine count once. "
+        "If a medicine acts on different machines, the scores are added. "
+        "Ties: more reports first, then alphabetical. "
+        "Being first on the list does not mean best."
+    )
