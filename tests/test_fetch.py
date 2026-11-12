@@ -318,3 +318,11 @@ def test_a_disease_with_no_description_gets_an_empty_one(offline):
 def test_a_disease_open_targets_does_not_know_gives_none(offline):
     offline.side_effect = lambda body: {"data": {"disease": None}}
     assert fetch.fetch_disease("NOT_A_REAL_ID") is None
+
+
+# ---- Ticket 3.5 add-on: ACTIVATOR turns the protein up ----
+
+def test_isosorbide_mononitrate_on_gucy1a1_has_direction_up():
+    path = family(paths_for("GUCY1A1"), "Isosorbide Mononitrate")
+    assert path.action_types == ("ACTIVATOR",)
+    assert path.direction == "up"

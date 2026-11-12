@@ -20,3 +20,4 @@ Format: date, the decision, why.
 - 2026-11-12: The ending is added by the code, not by Gemini, so it is always the same.
 - 2026-11-12: Scores are also shown as points out of 100. A five-year-old does not know decimals.
 - 2026-11-12: Moonlight waits at most 25 seconds for an explanation, and shows a "Please wait" message.
+- 2026-11-12: ACTIVATOR means the medicine turns the protein up. BINDING AGENT stays "unknown", because sticking to a protein does not say which way it turns.

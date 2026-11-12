@@ -61,7 +61,10 @@ KASHISH_EXAMPLE = (
 )
 
 MAX_WORDS = 20
-JARGON = ("inhibitor", "antagonist", "agonist", "blocker", "opener", "modulator")
+JARGON = (
+    "inhibitor", "antagonist", "agonist", "blocker", "opener", "modulator",
+    "activator", "binding agent",
+)
 GETTING_WORDS = (
     "buy", "shop", "pharmacy", "chemist", "order", "online", "price", "dose",
     "prescription",

@@ -772,3 +772,21 @@ def test_35_4_an_answer_that_comes_inside_25_seconds_is_still_used(sevoflurane, 
             patch("moonlight.explain.time.sleep", side_effect=clock.sleep):
         result = explain.explain(sevoflurane, disease)
     assert result.source == "gemini"
+
+
+# ---- Ticket 3.5 add-on: two more jargon words ----
+
+@pytest.mark.parametrize("word", ["activator", "Activator", "activators",
+                                  "binding agent", "Binding Agent", "binding agents"])
+def test_35_activator_and_binding_agent_are_jargon(facts, word):
+    problems = explain.check_explanation(f"This medicine is a strong {word}.", facts)
+    # Capital letters also trip the grounding rule (4), so only Rule 3 is asked about.
+    assert 3 in rules_broken(problems)
+
+
+def test_35_the_new_jargon_words_are_in_the_list_gemini_is_told():
+    assert "activator" in explain.JARGON and "binding agent" in explain.JARGON
+
+
+def test_35_plain_binding_is_not_jargon(facts):
+    assert explain.check_explanation("It is binding to KCNK3.", facts) == []

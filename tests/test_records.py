@@ -238,3 +238,22 @@ def test_disease_description_is_empty_by_default():
 def test_disease_can_hold_a_description():
     disease = Disease(id="D1", name="d", description="A made-up disease for this test.")
     assert disease.description == "A made-up disease for this test."
+
+
+# ---- Ticket 3.5 add-on: ACTIVATOR is "up", BINDING AGENT stays "unknown" ----
+
+def test_activator_gives_up():
+    assert direction_from_action_types(["ACTIVATOR"]) == "up"
+
+
+def test_binding_agent_alone_gives_unknown():
+    assert direction_from_action_types(["BINDING AGENT"]) == "unknown"
+
+
+def test_binding_agent_does_not_change_a_known_direction():
+    assert direction_from_action_types(["BINDING AGENT", "ACTIVATOR"]) == "up"
+    assert direction_from_action_types(["BINDING AGENT", "INHIBITOR"]) == "down"
+
+
+def test_activator_with_a_down_word_is_mixed():
+    assert direction_from_action_types(["ACTIVATOR", "INHIBITOR"]) == "mixed"
