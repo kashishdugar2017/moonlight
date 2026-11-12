@@ -206,6 +206,29 @@ def test_path_with_no_action_types_says_unknown():
     assert path.direction == "unknown"
 
 
+# ---- Ticket 2.8. A path knows the other pieces of its machine ----
+
+def _plain_path(**extra):
+    return Path(
+        medicine=Medicine(name="T", forms=[form("T1", "T", "APPROVAL")]),
+        target=Target(id="E1", symbol="S", name="n", score=0.5),
+        disease=Disease(id="D1", name="d"),
+        action_types=[],
+        score=0.5,
+        sources=[],
+        **extra,
+    )
+
+
+def test_path_has_no_machine_partners_unless_told():
+    assert _plain_path().same_machine_ids == ()
+
+
+def test_path_keeps_the_ids_of_the_other_pieces_of_its_machine():
+    path = _plain_path(same_machine_ids=["E2", "E3"])
+    assert path.same_machine_ids == ("E2", "E3")
+
+
 # ---- Ticket 3.5: a disease can carry a description ----
 
 def test_disease_description_is_empty_by_default():

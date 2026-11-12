@@ -1,12 +1,13 @@
 """Rank: put the clues in order using Kashish's rule. Plain code, no AI.
 
-    1. Highest protein score first. If a medicine acts on more than one of
-       the disease's proteins, their scores are added.
+    1. Highest protein score first. Pieces of the same machine count once,
+       using the strongest piece. Different machines add.
     2. If tied, more reports first. Reports are the number of sources,
        added across the medicine's paths.
     3. If still tied, alphabetical by medicine name, ignoring case.
 
 A medicine appears once, as one Clue naming every protein it acts on.
+fetch says which proteins are pieces of one machine (Path.same_machine_ids).
 Nothing here fetches or filters. Being first on the list does not mean best.
 """
 
@@ -18,7 +19,8 @@ from moonlight.records import Medicine, Path
 
 RULE_TEXT = (
     "Ordered by how strongly the proteins are linked to the disease. "
-    "If a medicine acts on more than one protein, the scores are added. "
+    "Pieces of the same machine count once. "
+    "If a medicine acts on different machines, the scores are added. "
     "Ties: more reports first, then alphabetical. "
     "Being first on the list does not mean best."
 )
@@ -63,9 +65,35 @@ class Clue:
         return self.paths[0].medicine
 
     @property
+    def machines(self) -> Tuple[Tuple[Path, ...], ...]:
+        """The paths grouped into machines.
+
+        Two paths are in the same machine when either one names the other's
+        protein in same_machine_ids. Inside a machine, and from machine to
+        machine, the strongest protein comes first.
+        """
+        groups: List[List[Path]] = []
+        for path in self.paths:  # already strongest first
+            linked = [
+                group for group in groups
+                if any(
+                    path.target.id in other.same_machine_ids
+                    or other.target.id in path.same_machine_ids
+                    for other in group
+                )
+            ]
+            joined = [p for group in linked for p in group] + [path]
+            groups = [group for group in groups if not any(group is g for g in linked)]
+            groups.append(joined)
+        order = {id(path): place for place, path in enumerate(self.paths)}
+        groups = [sorted(group, key=lambda p: order[id(p)]) for group in groups]
+        groups.sort(key=lambda group: order[id(group[0])])
+        return tuple(tuple(group) for group in groups)
+
+    @property
     def total_score(self) -> float:
-        """The protein scores of all the paths, added."""
-        return math.fsum(p.score for p in self.paths)
+        """The strongest protein score in each machine, added across machines."""
+        return math.fsum(max(p.score for p in machine) for machine in self.machines)
 
     @property
     def reports(self) -> int:

@@ -225,6 +225,61 @@ def test_an_error_from_open_targets_is_raised_not_hidden(offline):
         fetch.fetch_targets(PAH)
 
 
+# ---- Ticket 2.8. fetch says which proteins are pieces of one machine ----
+
+GUCY1A1 = "ENSG00000164116"
+GUCY1B1 = "ENSG00000061918"
+GUCY1A2 = "ENSG00000152402"
+
+
+def test_the_saved_mechanism_row_lists_all_three_gucy1_proteins():
+    # The contract's check, against the saved live response.
+    saved = load(target_drugs_file(GUCY1A1))
+    rows = saved["data"]["target"]["drugAndClinicalCandidates"]["rows"]
+    (drug,) = [r["drug"] for r in rows if r["drug"]["name"] == "ISOSORBIDE MONONITRATE"]
+    (mechanism,) = drug["mechanismsOfAction"]["rows"]
+    assert {t["id"] for t in mechanism["targets"]} == {GUCY1A1, GUCY1B1, GUCY1A2}
+
+
+@pytest.mark.parametrize("symbol, own, others", [
+    ("GUCY1A1", GUCY1A1, {GUCY1B1, GUCY1A2}),
+    ("GUCY1B1", GUCY1B1, {GUCY1A1, GUCY1A2}),
+    ("GUCY1A2", GUCY1A2, {GUCY1A1, GUCY1B1}),
+])
+def test_isosorbide_mononitrate_path_names_the_other_two_pieces(symbol, own, others):
+    path = family(paths_for(symbol), "Isosorbide Mononitrate")
+    assert set(path.same_machine_ids) == others
+    assert len(path.same_machine_ids) == 2  # no id twice
+    assert own not in path.same_machine_ids
+
+
+def test_a_medicine_on_a_one_piece_machine_has_no_partners():
+    for path in paths_for("KCNK3") + paths_for("BMPR2"):
+        assert path.same_machine_ids == ()
+    assert family(paths_for("PDE5A"), "Avanafil").same_machine_ids == ()
+
+
+def test_only_the_rows_that_list_our_target_give_partners():
+    # Pentoxifylline has one row that lists PDE5A with 22 other proteins,
+    # and other rows about other targets. Only the first kind counts.
+    saved = load(target_drugs_file("ENSG00000138735"))
+    rows = saved["data"]["target"]["drugAndClinicalCandidates"]["rows"]
+    (drug,) = [r["drug"] for r in rows if r["drug"]["name"] == "PENTOXIFYLLINE"]
+    with_pde5a, without = set(), set()
+    for mechanism in drug["mechanismsOfAction"]["rows"]:
+        ids = {t["id"] for t in mechanism["targets"]}
+        if "ENSG00000138735" in ids:
+            with_pde5a |= ids
+        else:
+            without |= ids
+    assert len(with_pde5a) == 23 and without and not (with_pde5a & without)
+
+    partners = family(paths_for("PDE5A"), "Pentoxifylline").same_machine_ids
+    assert set(partners) == with_pde5a - {"ENSG00000138735"}
+    assert len(partners) == 22
+    assert not set(partners) & without
+
+
 # ---- Ticket 3.5: the disease description ----
 
 def saved_disease_record(body):

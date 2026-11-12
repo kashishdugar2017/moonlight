@@ -181,6 +181,22 @@ def _action_types_on(drug: dict, target_id: str) -> List[str]:
     return found
 
 
+def _same_machine_ids(drug: dict, target_id: str) -> List[str]:
+    """The other proteins that are pieces of the same machine as OUR target.
+
+    One mechanism row is one machine. If a row lists our target, every other
+    target in that row is a piece of the same machine.
+    """
+    found = []
+    for mechanism in drug["mechanismsOfAction"]["rows"]:
+        ids = [hit["id"] for hit in mechanism["targets"]]
+        if target_id in ids:
+            for other in ids:
+                if other != target_id and other not in found:
+                    found.append(other)
+    return found
+
+
 def fetch_paths(disease: Disease, target: Target) -> List[Path]:
     """One Path per medicine family acting on the target.
 
@@ -200,7 +216,7 @@ def fetch_paths(disease: Disease, target: Target) -> List[Path]:
         parent = drug["parentMolecule"]
         family_id = parent["id"] if parent else drug["id"]
         family = families.setdefault(
-            family_id, {"name": None, "forms": [], "actions": [], "sources": []}
+            family_id, {"name": None, "forms": [], "actions": [], "sources": [], "machine": []}
         )
         if parent:
             # Named after the parent, even if the parent has no row of its own.
@@ -223,6 +239,9 @@ def fetch_paths(disease: Disease, target: Target) -> List[Path]:
         for action in _action_types_on(drug, target.id):
             if action not in family["actions"]:
                 family["actions"].append(action)
+        for other in _same_machine_ids(drug, target.id):
+            if other not in family["machine"]:
+                family["machine"].append(other)
         for report in row["clinicalReports"]:
             url = report["url"]
             if url and url not in family["sources"]:
@@ -236,6 +255,7 @@ def fetch_paths(disease: Disease, target: Target) -> List[Path]:
             action_types=family["actions"],
             score=target.score,
             sources=family["sources"],
+            same_machine_ids=sorted(family["machine"]),
         )
         for family in families.values()
     ]
