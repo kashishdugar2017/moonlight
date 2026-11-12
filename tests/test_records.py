@@ -204,3 +204,14 @@ def test_path_with_no_action_types_says_unknown():
     )
 
     assert path.direction == "unknown"
+
+
+# ---- Ticket 3.5: a disease can carry a description ----
+
+def test_disease_description_is_empty_by_default():
+    assert Disease(id="D1", name="d").description == ""
+
+
+def test_disease_can_hold_a_description():
+    disease = Disease(id="D1", name="d", description="A made-up disease for this test.")
+    assert disease.description == "A made-up disease for this test."

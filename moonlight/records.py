@@ -75,6 +75,7 @@ def direction_from_action_types(action_types: Iterable[str]) -> str:
 class Disease:
     id: str
     name: str
+    description: str = ""  # what the disease is, in Open Targets' words; "" if not known
 
 
 @dataclass(frozen=True)

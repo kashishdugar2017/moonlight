@@ -1,0 +1,9 @@
+{
+  "data": {
+    "disease": {
+      "id": "MONDO_0015924",
+      "name": "pulmonary arterial hypertension",
+      "description": "Pulmonary arterial hypertension (PAH) is a group of diseases characterized by mean pulmonary artery pressure >20 mmHg and elevated pulmonary arterial resistance leading to right heart failure. PAH is progressive and potentially fatal. PAH may be idiopathic and/ or familial, have overt features of venous/capillary involvement (pulmonary veno-occlusive disease, PVOD/pulmonary capillary hemangiomatosis, PCH), induced by drug or toxin (drug-or toxin-induced PAH), or associated with other diseases like congenital heart disease, connective tissue disease, HIV, schistosomiasis, portal hypertension (PAH associated with other disease)."
+    }
+  }
+}
