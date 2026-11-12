@@ -554,3 +554,239 @@ def test_no_key_variable_means_no_key_header(monkeypatch):
     assert explain._headers() == {}
     monkeypatch.setenv("GEMINI_API_KEY", "made-up-for-this-test")
     assert explain._headers() == {"x-goog-api-key": "made-up-for-this-test"}
+
+
+# =====================================================================
+# Ticket 3.5: explainer follow-ups
+# =====================================================================
+
+KNOWN_NAMES = ["SEVOFLURANE", "PARACETAMOL", "VARDENAFIL", "VARDENAFIL HYDROCHLORIDE",
+               "SILDENAFIL CITRATE"]
+
+
+# ---- EXAMPLE 1: another medicine's name fails ----
+
+def test_35_1_another_known_medicine_fails(facts):
+    text = "Sevoflurane is a medicine just like paracetamol."
+    # Small letters, so the old grounding rule cannot see it.
+    assert explain.check_explanation(text, facts) == []
+    problems = explain.check_explanation(text, facts, KNOWN_NAMES)
+    assert rules_broken(problems) == {7}
+    assert "paracetamol" in problems[0]
+
+
+@pytest.mark.parametrize("spelling", ["paracetamol", "Paracetamol", "PARACETAMOL", "pArAcEtAmOl"])
+def test_35_1_any_letter_case_fails(facts, spelling):
+    text = f"It is a bit like {spelling}."
+    assert 7 in rules_broken(explain.check_explanation(text, facts, KNOWN_NAMES))
+
+
+def test_35_1_a_two_word_name_fails(facts):
+    text = "It is a bit like sildenafil citrate."
+    assert rules_broken(explain.check_explanation(text, facts, KNOWN_NAMES)) == {7}
+
+
+def test_35_1_only_whole_names_count(facts):
+    # "paracetamols" is not the name; half of a two-word name is not the name.
+    assert explain.check_explanation("There is some citrate.", facts, KNOWN_NAMES) == []
+
+
+# ---- EXAMPLE 2: the clue's own names pass ----
+
+def test_35_2_the_clues_own_name_passes(facts):
+    assert explain.check_explanation("Sevoflurane turns KCNK3 up.", facts, KNOWN_NAMES) == []
+
+
+def test_35_2_a_familys_second_form_name_passes(clues, disease):
+    facts = explain.facts_for(clues["VARDENAFIL"], disease)
+    assert facts["medicine"]["forms"] == ["Vardenafil", "Vardenafil Hydrochloride"]
+    text = "One form is called Vardenafil Hydrochloride."
+    assert explain.check_explanation(text, facts, KNOWN_NAMES) == []
+    # ...but for the Sevoflurane clue the very same name is a stranger.
+    sevo = explain.facts_for(clues["SEVOFLURANE"], disease)
+    assert 7 in rules_broken(explain.check_explanation(text, sevo, KNOWN_NAMES))
+
+
+def test_35_2_kashishs_example_still_passes_with_known_names(facts):
+    assert explain.check_explanation(KASHISH_EXAMPLE + " " + ENDING, facts, KNOWN_NAMES) == []
+
+
+def test_35_2_every_template_passes_with_every_name_known(clues, disease):
+    everything = [form.name for clue in clues.values() for form in clue.medicine.forms]
+    everything += [clue.medicine.name for clue in clues.values()]
+    with use(FakeGemini([BUSY])):
+        for clue in clues.values():
+            result = explain.explain(clue, disease, everything)
+            assert result.source == "template"
+            assert result.problems == (), clue.medicine.name
+
+
+def test_35_explain_passes_the_known_names_to_the_check(sevoflurane, disease):
+    naming = KASHISH_EXAMPLE + " It is a bit like paracetamol."
+    # Without the names this answer is accepted...
+    with use(FakeGemini([(200, answer(naming))])):
+        assert explain.explain(sevoflurane, disease).source == "gemini"
+    explain.forget_everything()
+    # ...with them it is refused, Gemini is told why, and the good answer wins.
+    gemini = FakeGemini([(200, answer(naming)), (200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        result = explain.explain(sevoflurane, disease, KNOWN_NAMES)
+    assert result.source == "gemini"
+    assert result.tries == 2
+    assert "paracetamol" not in result.text.lower()
+    assert "Rule 7" in gemini.prompts[1]
+
+
+def test_35_an_answer_naming_another_medicine_every_time_gives_the_template(sevoflurane, disease):
+    naming = KASHISH_EXAMPLE + " It is a bit like paracetamol."
+    with use(FakeGemini([(200, answer(naming))])):
+        result = explain.explain(sevoflurane, disease, KNOWN_NAMES)
+    assert result.source == "template"
+    assert "paracetamol" not in result.text.lower()
+
+
+def test_35_the_other_names_are_never_shown_to_gemini(sevoflurane, disease):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        explain.explain(sevoflurane, disease, KNOWN_NAMES)
+    assert "paracetamol" not in gemini.prompts[0].lower()
+    assert "sildenafil" not in gemini.prompts[0].lower()
+
+
+# ---- EXAMPLE 3: the disease description ----
+
+def test_35_3_with_a_description_the_facts_hold_it(sevoflurane):
+    described = Disease(id=PAH.id, name=PAH.name,
+                        description="High blood pressure in the arteries of the lungs.")
+    facts = explain.facts_for(sevoflurane, described)
+    assert facts["disease"] == {
+        "name": "pulmonary arterial hypertension",
+        "description": "High blood pressure in the arteries of the lungs.",
+    }
+
+
+def test_35_3_with_no_description_the_facts_have_none(sevoflurane):
+    for empty in ("", "   "):
+        plain = Disease(id=PAH.id, name=PAH.name, description=empty)
+        assert explain.facts_for(sevoflurane, plain)["disease"] == {
+            "name": "pulmonary arterial hypertension"
+        }
+
+
+def test_35_3_with_no_description_the_template_does_not_describe_the_disease(sevoflurane):
+    plain = Disease(id=PAH.id, name=PAH.name)
+    assert plain.description == ""
+    with use(FakeGemini([BUSY])):
+        result = explain.explain(sevoflurane, plain, KNOWN_NAMES)
+    assert result.source == "template"
+    assert result.problems == ()
+    facts = explain.facts_for(sevoflurane, plain)
+    assert explain.check_explanation(result.text, facts, KNOWN_NAMES) == []
+    # Word for word: the only sentence with the disease's name is the link.
+    assert result.text == (
+        "Sevoflurane is a medicine. Doctors already use it for something else. "
+        "It grabs a protein called KCNK3. A protein is a tiny machine in your body. "
+        "Sevoflurane turns KCNK3 up, like a volume knob. "
+        "KCNK3 is linked to pulmonary arterial hypertension. "
+        "The link score is 0.79. That is like 79 points out of 100. "
+        "Sevoflurane has no link to this disease in the database. "
+        "The database is a huge web with lots of information. " + ENDING
+    )
+
+
+def test_35_3_with_no_description_gemini_is_told_not_to_describe_it(sevoflurane):
+    gemini = FakeGemini([(200, answer(
+        "Sevoflurane is a medicine. It grabs a protein called KCNK3. "
+        "A protein is a tiny machine in your body."))])
+    with use(gemini):
+        explain.explain(sevoflurane, Disease(id=PAH.id, name=PAH.name))
+    assert "no description of the disease, so do not describe it" in gemini.prompts[0]
+
+
+# ---- EXAMPLE 4: at most 25 seconds, on a fake clock ----
+
+class FakeClock:
+    """Time that only moves when something waits. Nothing really waits."""
+
+    def __init__(self):
+        self.now = 1000.0
+
+    def monotonic(self):
+        return self.now
+
+    def sleep(self, seconds):
+        self.now += seconds
+
+
+def silent_gemini(clock, list_takes=None):
+    """A Gemini that never answers a question: every wait runs out.
+
+    list_takes: seconds the model list takes to arrive. None means the
+    model list never arrives either.
+    """
+    import requests
+
+    def request(method, path, body=None, timeout=None):
+        waited = explain.REQUEST_SECONDS if timeout is None else timeout
+        if method == "GET" and list_takes is not None and list_takes <= waited:
+            clock.sleep(list_takes)
+            return 200, MODEL_LIST
+        clock.sleep(waited)
+        raise requests.Timeout("no answer")
+
+    return request
+
+
+@pytest.mark.parametrize("list_takes", [None, 0, 10, 24, 24.5])
+def test_35_4_gemini_never_answers_gives_the_template_within_25_seconds(
+        sevoflurane, disease, facts, list_takes):
+    clock = FakeClock()
+    with patch("moonlight.explain._gemini_request", side_effect=silent_gemini(clock, list_takes)), \
+            patch("moonlight.explain.time.monotonic", side_effect=clock.monotonic), \
+            patch("moonlight.explain.time.sleep", side_effect=clock.sleep):
+        started = clock.now
+        result = explain.explain(sevoflurane, disease)
+        waited = clock.now - started
+    assert result.source == "template"
+    assert result.text.endswith(" " + ENDING)
+    assert explain.check_explanation(result.text, facts) == []
+    assert waited <= 25, f"waited {waited} seconds"
+
+
+def test_35_4_the_limit_is_25_seconds():
+    assert explain.TOTAL_SECONDS == 25
+
+
+def test_35_4_an_answer_that_comes_inside_25_seconds_is_still_used(sevoflurane, disease):
+    clock = FakeClock()
+
+    def slow_but_fine(method, path, body=None, timeout=None):
+        if method == "GET":
+            return 200, MODEL_LIST
+        clock.sleep(20)
+        assert timeout >= 20
+        return 200, answer(KASHISH_EXAMPLE)
+
+    with patch("moonlight.explain._gemini_request", side_effect=slow_but_fine), \
+            patch("moonlight.explain.time.monotonic", side_effect=clock.monotonic), \
+            patch("moonlight.explain.time.sleep", side_effect=clock.sleep):
+        result = explain.explain(sevoflurane, disease)
+    assert result.source == "gemini"
+
+
+# ---- Ticket 3.5 add-on: two more jargon words ----
+
+@pytest.mark.parametrize("word", ["activator", "Activator", "activators",
+                                  "binding agent", "Binding Agent", "binding agents"])
+def test_35_activator_and_binding_agent_are_jargon(facts, word):
+    problems = explain.check_explanation(f"This medicine is a strong {word}.", facts)
+    # Capital letters also trip the grounding rule (4), so only Rule 3 is asked about.
+    assert 3 in rules_broken(problems)
+
+
+def test_35_the_new_jargon_words_are_in_the_list_gemini_is_told():
+    assert "activator" in explain.JARGON and "binding agent" in explain.JARGON
+
+
+def test_35_plain_binding_is_not_jargon(facts):
+    assert explain.check_explanation("It is binding to KCNK3.", facts) == []

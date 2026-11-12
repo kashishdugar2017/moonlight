@@ -278,3 +278,51 @@ def test_only_the_rows_that_list_our_target_give_partners():
     assert set(partners) == with_pde5a - {"ENSG00000138735"}
     assert len(partners) == 22
     assert not set(partners) & without
+
+
+# ---- Ticket 3.5: the disease description ----
+
+def saved_disease_record(body):
+    assert set(body) == {"query", "variables"}
+    assert body["variables"] == {"diseaseId": PAH.id}
+    return load(GOLDEN / "disease_description.response.json")
+
+
+def test_fetch_disease_fills_the_description(offline):
+    offline.side_effect = saved_disease_record
+    saved = load(GOLDEN / "disease_description.response.json")["data"]["disease"]
+
+    disease = fetch.fetch_disease(PAH.id)
+
+    assert isinstance(disease, Disease)
+    assert disease.id == PAH.id
+    assert disease.name == "pulmonary arterial hypertension"
+    assert disease.description == saved["description"]
+    assert disease.description.startswith("Pulmonary arterial hypertension (PAH) is")
+
+
+def test_fetch_disease_asks_for_the_field_called_description(offline):
+    offline.side_effect = saved_disease_record
+    fetch.fetch_disease(PAH.id)
+    assert "description" in offline.call_args.args[0]["query"]
+
+
+def test_a_disease_with_no_description_gets_an_empty_one(offline):
+    # Open Targets may send null here (the schema says the field can be empty).
+    offline.side_effect = lambda body: {
+        "data": {"disease": {"id": "D1", "name": "d", "description": None}}
+    }
+    assert fetch.fetch_disease("D1") == Disease(id="D1", name="d", description="")
+
+
+def test_a_disease_open_targets_does_not_know_gives_none(offline):
+    offline.side_effect = lambda body: {"data": {"disease": None}}
+    assert fetch.fetch_disease("NOT_A_REAL_ID") is None
+
+
+# ---- Ticket 3.5 add-on: ACTIVATOR turns the protein up ----
+
+def test_isosorbide_mononitrate_on_gucy1a1_has_direction_up():
+    path = family(paths_for("GUCY1A1"), "Isosorbide Mononitrate")
+    assert path.action_types == ("ACTIVATOR",)
+    assert path.direction == "up"

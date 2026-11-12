@@ -1,8 +1,9 @@
 """Fetch: ask Open Targets about a disease, its proteins, and their medicines.
 
-Three questions, three functions:
+Four questions, four functions:
 
     search_diseases(text)          -> list of Disease, best match first
+    fetch_disease(disease_id)      -> one Disease with its description filled in
     fetch_targets(disease, limit)  -> list of Target, highest score first
     fetch_paths(disease, target)   -> list of Path, one per Medicine family
 
@@ -36,6 +37,12 @@ query DiseaseSearch($text: String!, $size: Int!) {
     total
     hits { id entity name }
   }
+}
+"""
+
+DISEASE_QUERY = """
+query DiseaseRecord($diseaseId: String!) {
+  disease(efoId: $diseaseId) { id name description }
 }
 """
 
@@ -114,6 +121,23 @@ def search_diseases(text: str) -> List[Disease]:
         for hit in data["search"]["hits"]
         if hit["entity"] == "disease"
     ]
+
+
+def fetch_disease(disease_id: str) -> Optional[Disease]:
+    """The disease with its description filled in. None if the id is not known.
+
+    Open Targets may send no description at all. Then it stays "", and
+    nothing is made up to fill the gap.
+    """
+    data = _ask(DISEASE_QUERY, {"diseaseId": disease_id})
+    record = data["disease"]
+    if record is None:
+        return None
+    return Disease(
+        id=record["id"],
+        name=record["name"],
+        description=(record["description"] or "").strip(),
+    )
 
 
 def fetch_targets(disease: Disease, limit: int = 25) -> List[Target]:

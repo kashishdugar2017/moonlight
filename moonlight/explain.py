@@ -1,12 +1,16 @@
 """Explain: turn one ranked Clue into a plain explanation.
 
-    facts_for(clue, disease)        -> the only facts Gemini is given
-    check_explanation(text, facts)  -> list of problems; empty means it passes
-    explain(clue, disease)          -> Explanation(text, source, model, tries)
+    facts_for(clue, disease)                     -> the only facts Gemini is given
+    check_explanation(text, facts, known_names)  -> list of problems; empty means it passes
+    explain(clue, disease, known_names)          -> Explanation(text, source, model, tries)
 
 explain asks Gemini, checks the answer against Kashish's rules, and tries
-again up to three times. If nothing passes, or Gemini cannot be reached, it
-builds the explanation from a template in code, using the same facts.
+again up to three times. If nothing passes, Gemini cannot be reached, or 25
+seconds have gone by, it builds the explanation from a template in code,
+using the same facts.
+
+known_names is every medicine name Moonlight met in this run. An explanation
+may only name its own medicine, so any other name from that collection fails.
 
 The ENDING is glued on by this code every time. Gemini never writes it.
 
@@ -22,7 +26,7 @@ import os
 import re
 import time
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 import requests
 
@@ -32,7 +36,7 @@ from moonlight.rank import Clue
 BASE_URL = "https://generativelanguage.googleapis.com/v1beta/"
 FIRST_MODEL = "gemini-3.5-flash"
 MAX_TRIES = 3  # answers checked before the template is used
-TOTAL_SECONDS = 60  # one explain() never spends longer than this on Gemini
+TOTAL_SECONDS = 25  # one explain() never waits longer than this, all Gemini calls together
 REQUEST_SECONDS = 25  # one HTTP call never waits longer than this
 WAIT_SECONDS = 1  # the brief wait before trying another model
 
@@ -57,7 +61,10 @@ KASHISH_EXAMPLE = (
 )
 
 MAX_WORDS = 20
-JARGON = ("inhibitor", "antagonist", "agonist", "blocker", "opener", "modulator")
+JARGON = (
+    "inhibitor", "antagonist", "agonist", "blocker", "opener", "modulator",
+    "activator", "binding agent",
+)
 GETTING_WORDS = (
     "buy", "shop", "pharmacy", "chemist", "order", "online", "price", "dose",
     "prescription",
@@ -136,7 +143,9 @@ def facts_for(clue: Clue, disease) -> dict:
         )
 
     disease_facts = {"name": disease.name}
-    description = getattr(disease, "description", None)
+    # An empty description is left out, so nobody is asked to describe
+    # the disease from nothing.
+    description = (getattr(disease, "description", None) or "").strip()
     if description:
         disease_facts["description"] = description
 
@@ -190,8 +199,48 @@ def _banned_found(text: str, banned) -> List[str]:
     return [word for _, word in sorted(found)]
 
 
-def check_explanation(text: str, facts: dict) -> List[str]:
-    """Kashish's six rules. Returns the problems; an empty list means pass."""
+def _own_names(facts: dict) -> List[str]:
+    """Every name this clue's own medicine goes by."""
+    return [facts["medicine"]["name"]] + list(facts["medicine"]["forms"])
+
+
+def _name_pattern(name: str) -> str:
+    """The whole name, in any letter case, not as part of a longer word."""
+    return r"(?<!\w)" + r"\s+".join(re.escape(w) for w in name.split()) + r"(?!\w)"
+
+
+def _other_medicines_found(text: str, facts: dict, known_names: Iterable[str]) -> List[str]:
+    """Known medicine names in the text that are not this clue's own,
+    as the text wrote them, in the order they appear."""
+    own = {" ".join(name.lower().split()) for name in _own_names(facts)}
+    # The clue's own names are covered up first, longest first, so a
+    # stranger can never be found inside one of them.
+    for name in sorted(own, key=len, reverse=True):
+        if name:
+            text = re.sub(
+                _name_pattern(name), lambda m: " " * len(m.group()), text, flags=re.IGNORECASE
+            )
+    others = {" ".join(name.lower().split()) for name in known_names if name} - own - {""}
+    found = []
+    for name in others:
+        for match in re.finditer(_name_pattern(name), text, flags=re.IGNORECASE):
+            found.append((match.start(), " ".join(match.group().split())))
+    names = []
+    for _, name in sorted(found):
+        if name not in names:
+            names.append(name)
+    return names
+
+
+def check_explanation(text: str, facts: dict,
+                      known_names: Optional[Iterable[str]] = None) -> List[str]:
+    """Kashish's rules. Returns the problems; an empty list means pass.
+
+    known_names: every medicine name Moonlight knows from this run. Rule 7
+    fails the text if it holds any of them, in any letter case, that is not
+    one of this clue's own forms. With no known_names, Rule 7 has nothing
+    to look for.
+    """
     problems = []
     sentences = _sentences(text)
 
@@ -247,6 +296,14 @@ def check_explanation(text: str, facts: dict) -> List[str]:
         problems.append(
             "Rule 6: it must not promise or hint it will help: " + ", ".join(promises) + "."
         )
+
+    # Rule 7: no other medicine Moonlight knows may be named.
+    if known_names:
+        others = _other_medicines_found(text, facts, known_names)
+        if others:
+            problems.append(
+                "Rule 7: it must not name any other medicine: " + ", ".join(others) + "."
+            )
 
     return problems
 
@@ -380,10 +437,15 @@ def _model_order(listing: dict) -> List[str]:
     return [name for *_, name in sorted(found)]
 
 
-def _models_to_try() -> List[str]:
+def _models_to_try(deadline: float) -> List[str]:
     if not _models:
+        left = deadline - time.monotonic()
+        if left <= 0:
+            raise GeminiUnavailable("no time left to get the model list")
         try:
-            status, listing = _gemini_request("GET", "models?pageSize=1000")
+            status, listing = _gemini_request(
+                "GET", "models?pageSize=1000", timeout=min(REQUEST_SECONDS, left)
+            )
         except requests.RequestException as error:
             raise GeminiUnavailable("could not get the model list") from error
         if status != 200:
@@ -409,9 +471,14 @@ def _ask_gemini(prompt: str, deadline: float) -> Tuple[str, str]:
         # this setting is skipped like any other refused model.
         "generationConfig": {"thinkingConfig": {"thinkingBudget": 0}},
     }
-    for number, model in enumerate(_models_to_try()):
+    for number, model in enumerate(_models_to_try(deadline)):
         if number:
-            time.sleep(WAIT_SECONDS)  # refused or busy: wait briefly, try another
+            # Refused or busy: wait briefly, try another. The wait is never
+            # longer than the time that is left.
+            left = deadline - time.monotonic()
+            if left <= 0:
+                break
+            time.sleep(min(WAIT_SECONDS, left))
         left = deadline - time.monotonic()
         if left <= 0:
             break
@@ -485,10 +552,16 @@ def _prompt(facts: dict, problems: List[str]) -> str:
 
 # ------------------------------------------------------------------ explain
 
-def explain(clue: Clue, disease) -> Explanation:
-    """One clue -> a checked explanation, from Gemini or from the template."""
+def explain(clue: Clue, disease,
+            known_names: Optional[Iterable[str]] = None) -> Explanation:
+    """One clue -> a checked explanation, from Gemini or from the template.
+
+    known_names: every medicine name Moonlight knows from this run. They are
+    only used by the check. They are never shown to Gemini.
+    """
     facts = facts_for(clue, disease)
-    key = json.dumps(facts, sort_keys=True)
+    known = sorted({name.lower() for name in known_names or () if name})
+    key = json.dumps([facts, known], sort_keys=True)
     if key in _made:
         return _made[key]  # the same clue is not asked twice
 
@@ -501,7 +574,7 @@ def explain(clue: Clue, disease) -> Explanation:
             answer, model = _ask_gemini(_prompt(facts, problems), deadline)
             tries += 1
             text = answer + " " + ending
-            problems = check_explanation(text, facts) + _missing_for_being_studied(text, facts)
+            problems = check_explanation(text, facts, known) + _missing_for_being_studied(text, facts)
             if not problems:
                 _made[key] = Explanation(text=text, source="gemini", model=model, tries=tries)
                 return _made[key]
@@ -512,5 +585,5 @@ def explain(clue: Clue, disease) -> Explanation:
     text = template_text(facts) + " " + ending
     return Explanation(
         text=text, source="template", model=None, tries=tries,
-        problems=tuple(check_explanation(text, facts)),
+        problems=tuple(check_explanation(text, facts, known)),
     )

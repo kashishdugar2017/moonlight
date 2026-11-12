@@ -25,8 +25,10 @@ STAGE_ORDER = (
 
 DOWN_ACTION_TYPES = frozenset({"INHIBITOR", "ANTAGONIST", "BLOCKER"})
 UP_ACTION_TYPES = frozenset(
-    {"AGONIST", "OPENER", "POSITIVE MODULATOR", "POSITIVE ALLOSTERIC MODULATOR"}
+    {"AGONIST", "OPENER", "ACTIVATOR", "POSITIVE MODULATOR", "POSITIVE ALLOSTERIC MODULATOR"}
 )
+# "BINDING AGENT" is on neither list on purpose. Sticking to a protein does
+# not say which way it turns, so it stays "unknown".
 
 
 def _stage_rank(stage: str) -> int:
@@ -75,6 +77,7 @@ def direction_from_action_types(action_types: Iterable[str]) -> str:
 class Disease:
     id: str
     name: str
+    description: str = ""  # what the disease is, in Open Targets' words; "" if not known
 
 
 @dataclass(frozen=True)
