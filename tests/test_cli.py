@@ -186,7 +186,7 @@ def test_no_name_from_a_hidden_group_is_ever_printed():
         for path in paths:
             hidden.add(path.medicine.name.upper())
             hidden.update(form.name.upper() for form in path.medicine.forms)
-    assert len(hidden) == 20  # 18 medicines, two of them with a tablet form
+    assert len(hidden) == 28  # 26 medicines, two of them with a tablet form
     for name in sorted(hidden):
         assert name not in text, name
     for name in ("SILDENAFIL", "TADALAFIL", "BOSENTAN", "GISADENAFIL"):
@@ -208,7 +208,8 @@ from moonlight.records import Medicine, MedicineForm, Path, Target  # noqa: E402
 
 RULE = (
     "Ordered by how strongly the proteins are linked to the disease. "
-    "If a medicine acts on more than one protein, the scores are added. "
+    "Pieces of the same machine count once. "
+    "If a medicine acts on different machines, the scores are added. "
     "Ties: more reports first, then alphabetical. "
     "Being first on the list does not mean best."
 )
@@ -314,3 +315,68 @@ def test_each_medicine_is_printed_once():
     code, lines = run("pulmonary arterial hypertension")
     printed = medicines_printed(lines)
     assert len(printed) == len(set(printed))
+
+
+# ---- Ticket 2.8. Pieces of one machine count once ----
+
+GUCY1 = ("GUCY1A1", "GUCY1B1", "GUCY1A2")
+MACHINE_NOTE = "GUCY1A1, GUCY1B1 and GUCY1A2 are pieces of one machine, counted once"
+
+
+# Example 1
+def test_isosorbide_mononitrate_is_one_line_naming_all_three_pieces():
+    lines = section(cli.clue_lines(PAH, targets_named(*GUCY1)), "New clues")
+    line = line_for(lines, "Isosorbide Mononitrate")  # line_for insists on one line
+    a1 = line.index("protein GUCY1A1, link score 0.60")
+    b1 = line.index("protein GUCY1B1, link score 0.58")  # 0.5817, just ahead of
+    a2 = line.index("protein GUCY1A2, link score 0.58")  # 0.5812
+    assert a1 < b1 < a2
+    assert MACHINE_NOTE in line
+    assert line.index(MACHINE_NOTE) > a2
+    assert "total score 0.60" in line
+    assert line.index("total score 0.60") > line.index(MACHINE_NOTE)
+
+
+def test_an_action_word_moonlight_does_not_know_still_says_so():
+    # ACTIVATOR is on neither list in records.py. Safety rule: never guess.
+    lines = section(cli.clue_lines(PAH, targets_named(*GUCY1)), "New clues")
+    line = line_for(lines, "Isosorbide Mononitrate")
+    assert line.count("the data does not say if it turns the protein up or down") == 3
+
+
+def test_different_machines_get_no_machine_note_and_still_add():
+    madeupine = line_for(made_up_lines(), "MADEUPINE")
+    assert "pieces of one machine" not in madeupine
+    assert "total score 1.40" in madeupine
+
+
+def machine_paths(disease, target):
+    """Stands in for fetch_paths: MACHINEX acts on AAA and BBB, two pieces of
+    one machine, and on CCC, a machine of its own."""
+    partners = {"AAA": ("ENSG_BBB",), "BBB": ("ENSG_AAA",), "CCC": ()}
+    form = MedicineForm(id="ID_MACHINEX", name="MACHINEX", best_stage="APPROVAL")
+    return [Path(
+        medicine=Medicine(name="MACHINEX", forms=(form,)),
+        target=target,
+        disease=disease,
+        action_types=("INHIBITOR",),
+        score=target.score,
+        sources=(),
+        same_machine_ids=partners[target.symbol],
+    )]
+
+
+# Example 3
+def test_a_two_piece_machine_and_a_separate_machine_on_one_line():
+    targets = [
+        Target(id="ENSG_" + symbol, symbol=symbol, name=symbol, score=score)
+        for symbol, score in (("CCC", 0.4), ("BBB", 0.6), ("AAA", 0.7))
+    ]
+    with patch("moonlight.engine.fetch_paths", side_effect=machine_paths):
+        lines = cli.clue_lines(PAH, targets)
+    line = line_for(lines, "MACHINEX")
+    for symbol in ("AAA", "BBB", "CCC"):
+        assert f"protein {symbol}, link score" in line
+    assert "AAA and BBB are pieces of one machine, counted once" in line
+    assert "CCC are" not in line and "CCC and" not in line
+    assert "total score 1.10" in line

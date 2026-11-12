@@ -140,10 +140,14 @@ class Path:
     action_types: Tuple[str, ...]  # what the medicine does to this target
     score: float
     sources: Tuple[str, ...]
+    # Ids of the other proteins that are pieces of the same machine as this
+    # target, for this medicine. Empty means the target is a machine alone.
+    same_machine_ids: Tuple[str, ...] = ()
 
     def __post_init__(self):
         object.__setattr__(self, "action_types", tuple(self.action_types))
         object.__setattr__(self, "sources", tuple(self.sources))
+        object.__setattr__(self, "same_machine_ids", tuple(self.same_machine_ids))
 
     @property
     def direction(self) -> str:
