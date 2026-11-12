@@ -337,11 +337,41 @@ def test_isosorbide_mononitrate_is_one_line_naming_all_three_pieces():
     assert line.index("total score 0.60") > line.index(MACHINE_NOTE)
 
 
-def test_an_action_word_moonlight_does_not_know_still_says_so():
-    # ACTIVATOR is on neither list in records.py. Safety rule: never guess.
+def test_isosorbide_mononitrate_turns_all_three_proteins_up():
+    # ACTIVATOR is an "up" word in records.py (Kashish's decision, 2026-11-12).
     lines = section(cli.clue_lines(PAH, targets_named(*GUCY1)), "New clues")
     line = line_for(lines, "Isosorbide Mononitrate")
-    assert line.count("the data does not say if it turns the protein up or down") == 3
+    assert "protein GUCY1A1, link score 0.60, turns the protein up" in line
+    assert "protein GUCY1B1, link score 0.58, turns the protein up" in line
+    assert "protein GUCY1A2, link score 0.58, turns the protein up" in line
+    assert line.count("turns the protein up") == 3
+    assert "the data does not say if it turns the protein up or down" not in line
+
+
+def test_an_action_word_moonlight_does_not_know_still_says_so():
+    # BINDING AGENT is on neither list in records.py. Safety rule: never guess.
+    def sticky_paths(disease, target):
+        """Stands in for fetch_paths: STICKYINE only sticks to the protein."""
+        form = MedicineForm(id="ID_STICKYINE", name="STICKYINE", best_stage="APPROVAL")
+        return [Path(
+            medicine=Medicine(name="STICKYINE", forms=(form,)),
+            target=target,
+            disease=disease,
+            action_types=("BINDING AGENT",),
+            score=target.score,
+            sources=("https://example.org/STICKYINE/1",),
+        )]
+
+    target = Target(id="ENSG_CCC", symbol="CCC", name="CCC", score=0.7)
+    with patch("moonlight.engine.fetch_paths", side_effect=sticky_paths):
+        lines = section(cli.clue_lines(PAH, [target]), "New clues")
+    line = line_for(lines, "STICKYINE")
+    assert (
+        "protein CCC, link score 0.70, "
+        "the data does not say if it turns the protein up or down"
+    ) in line
+    assert line.count("the data does not say if it turns the protein up or down") == 1
+    assert "turns the protein up" not in line.replace("turns the protein up or down", "")
 
 
 def test_different_machines_get_no_machine_note_and_still_add():
