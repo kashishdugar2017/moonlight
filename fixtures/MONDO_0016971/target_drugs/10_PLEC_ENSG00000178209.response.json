@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000178209",
+      "approvedSymbol": "PLEC",
+      "approvedName": "plectin",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

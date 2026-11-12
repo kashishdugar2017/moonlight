@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000173991",
+      "approvedSymbol": "TCAP",
+      "approvedName": "titin-cap",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

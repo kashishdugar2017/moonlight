@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000163069",
+      "approvedSymbol": "SGCB",
+      "approvedName": "sarcoglycan beta",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

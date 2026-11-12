@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000168538",
+      "approvedSymbol": "TRAPPC11",
+      "approvedName": "trafficking protein particle complex subunit 11",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

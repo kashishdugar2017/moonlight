@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000143337",
+      "approvedSymbol": "TOR1AIP1",
+      "approvedName": "torsin 1A interacting protein 1",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

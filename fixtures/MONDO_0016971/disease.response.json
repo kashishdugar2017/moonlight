@@ -1,0 +1,160 @@
+{
+  "data": {
+    "disease": {
+      "id": "MONDO_0016971",
+      "name": "limb-girdle muscular dystrophy",
+      "description": "Limb-girdle muscular dystrophy (LGMD) is a heterogeneous group of muscular dystrophies characterized by proximal weakness affecting the pelvic and shoulder girdles. Cardiac and respiratory impairment may be observed in certain forms of LGMD.",
+      "dbXRefs": [
+        "DOID:11724",
+        "GARD:0006907",
+        "MEDGEN:151940",
+        "MESH:D049288",
+        "NANDO:1200490",
+        "NANDO:2200858",
+        "NCIT:C84828",
+        "Orphanet:263",
+        "SCTID:78468005",
+        "UMLS:C0686353",
+        "icd11.foundation:887807212"
+      ],
+      "synonyms": [
+        {
+          "relation": "hasExactSynonym",
+          "terms": [
+            "LGMD",
+            "Leyden-Mobius muscular dystrophy",
+            "limb-girdle muscular dystrophy",
+            "calpainopathy",
+            "Erb's muscular dystrophy",
+            "Leyden-Mbius muscular dystrophy",
+            "Limb Girdle Muscular Dystrophies",
+            "Limb-girdle muscular dystrophy (disorder)",
+            "Muscular Dystrophies, Limb Girdle",
+            "Muscular Dystrophies, Limb-Girdle",
+            "Muscular Dystrophy, Limb Girdle",
+            "Muscular dystrophy, limb-girdle",
+            "limb girdle muscular dystrophy",
+            "limb-girdle muscular dystrophies"
+          ]
+        },
+        {
+          "relation": "hasRelatedSynonym",
+          "terms": []
+        },
+        {
+          "relation": "hasNarrowSynonym",
+          "terms": []
+        },
+        {
+          "relation": "hasBroadSynonym",
+          "terms": []
+        }
+      ],
+      "isTherapeuticArea": false,
+      "therapeuticAreas": [
+        {
+          "id": "MONDO_0005071",
+          "name": "nervous system disorder"
+        },
+        {
+          "id": "OTAR_0000018",
+          "name": "genetic, familial or congenital disease"
+        },
+        {
+          "id": "OTAR_0000006",
+          "name": "musculoskeletal or connective tissue disease"
+        },
+        {
+          "id": "EFO_0000651",
+          "name": "phenotype"
+        }
+      ],
+      "parents": [
+        {
+          "id": "MONDO_0016106",
+          "name": "progressive muscular dystrophy"
+        }
+      ],
+      "children": [
+        {
+          "id": "MONDO_0015151",
+          "name": "muscular dystrophy, limb-girdle, autosomal dominant"
+        },
+        {
+          "id": "MONDO_0015152",
+          "name": "autosomal recessive limb-girdle muscular dystrophy"
+        }
+      ],
+      "ancestors": [
+        "MONDO_0016106",
+        "MONDO_0020121",
+        "MONDO_0005336",
+        "MONDO_0100546",
+        "MONDO_0700223",
+        "HP_0011805",
+        "MONDO_0020120",
+        "MONDO_0019056",
+        "MONDO_0100545",
+        "MONDO_0003847",
+        "HP_0003011",
+        "MONDO_0003939",
+        "MONDO_0005071",
+        "OTAR_0000018",
+        "HP_0033127",
+        "MONDO_0002081",
+        "HP_0000118",
+        "OTAR_0000006",
+        "EFO_0000651"
+      ],
+      "descendants": [
+        "MONDO_0015151",
+        "MONDO_0015152",
+        "MONDO_0009181",
+        "MONDO_0009675",
+        "MONDO_0009676",
+        "MONDO_0009677",
+        "MONDO_0009683",
+        "MONDO_0011028",
+        "MONDO_0011170",
+        "MONDO_0011423",
+        "MONDO_0011787",
+        "MONDO_0011968",
+        "MONDO_0012034",
+        "MONDO_0012127",
+        "MONDO_0012193",
+        "MONDO_0012215",
+        "MONDO_0012652",
+        "MONDO_0012699",
+        "MONDO_0013161",
+        "MONDO_0013162",
+        "MONDO_0013297",
+        "MONDO_0013390",
+        "MONDO_0013440",
+        "MONDO_0014142",
+        "MONDO_0014144",
+        "MONDO_0014474",
+        "MONDO_0014489",
+        "MONDO_0014782",
+        "MONDO_0014788",
+        "MONDO_0014900",
+        "MONDO_0018098",
+        "MONDO_0021018",
+        "MONDO_0021569",
+        "MONDO_0029133",
+        "MONDO_0029135",
+        "MONDO_0029136",
+        "MONDO_0030014",
+        "MONDO_0030456",
+        "MONDO_0957270",
+        "MONDO_0971171",
+        "EFO_0009145",
+        "Orphanet_265"
+      ],
+      "obsoleteTerms": [
+        "EFO_0000310",
+        "EFO_0000758",
+        "Orphanet_263"
+      ]
+    }
+  }
+}

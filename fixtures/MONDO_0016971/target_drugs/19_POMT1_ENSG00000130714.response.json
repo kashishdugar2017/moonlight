@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000130714",
+      "approvedSymbol": "POMT1",
+      "approvedName": "protein O-mannosyltransferase 1",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

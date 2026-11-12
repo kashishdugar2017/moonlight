@@ -1,0 +1,1463 @@
+{
+  "data": {
+    "disease": {
+      "id": "MONDO_0016971",
+      "name": "limb-girdle muscular dystrophy",
+      "associatedTargets": {
+        "count": 2145,
+        "rows": [
+          {
+            "score": 0.8622673832285561,
+            "novelty": 0.008214046201856206,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.5823427877588855
+              },
+              {
+                "id": "animal_model",
+                "score": 0.758858984334275
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9657164014959344
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.7599134970145265
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.9877250666562457
+              },
+              {
+                "id": "eva",
+                "score": 0.9691496984019815
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "clingen",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "orphanet",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "impc",
+                "score": 0.758858984334275
+              },
+              {
+                "id": "europepmc",
+                "score": 0.5823427877588855
+              }
+            ],
+            "target": {
+              "id": "ENSG00000092529",
+              "approvedSymbol": "CAPN3",
+              "approvedName": "calpain 3",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8553338887958266,
+            "novelty": 0.008068879563497677,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.7574101311505516
+              },
+              {
+                "id": "animal_model",
+                "score": 0.7945881838225998
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9476781029009023
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.821202846814555
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.9800757068632079
+              },
+              {
+                "id": "eva",
+                "score": 0.9690864894024721
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8982177534711702
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.7945881838225998
+              },
+              {
+                "id": "europepmc",
+                "score": 0.7574101311505516
+              }
+            ],
+            "target": {
+              "id": "ENSG00000135636",
+              "approvedSymbol": "DYSF",
+              "approvedName": "dysferlin",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8532582672476791,
+            "novelty": 0.0001508595495024388,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.18244310553176252
+              },
+              {
+                "id": "animal_model",
+                "score": 0.6881404242942609
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9808239438337522
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8695147598695318
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.9913830919654845
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.9639756351293329
+              },
+              {
+                "id": "eva",
+                "score": 0.9385873513068231
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.6881404242942609
+              },
+              {
+                "id": "europepmc",
+                "score": 0.18244310553176252
+              }
+            ],
+            "target": {
+              "id": "ENSG00000160789",
+              "approvedSymbol": "LMNA",
+              "approvedName": "lamin A/C",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8521708300109788,
+            "novelty": 0.008372977010659128,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.31199586257089973
+              },
+              {
+                "id": "animal_model",
+                "score": 0.8113744664768053
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.943632131870802
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8319638042899793
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.9751960202125455
+              },
+              {
+                "id": "eva",
+                "score": 0.9665771715079091
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.9128646122571643
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.8113744664768053
+              },
+              {
+                "id": "europepmc",
+                "score": 0.31199586257089973
+              }
+            ],
+            "target": {
+              "id": "ENSG00000171714",
+              "approvedSymbol": "ANO5",
+              "approvedName": "anoctamin 5",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8513700224114376,
+            "novelty": 0.008405746639311313,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.28349361369432896
+              },
+              {
+                "id": "animal_model",
+                "score": 0.7794761204021609
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9466954434199908
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.7971337499295236
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.979400228199195
+              },
+              {
+                "id": "eva",
+                "score": 0.9664383691068944
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.865457038266544
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.7794761204021609
+              },
+              {
+                "id": "europepmc",
+                "score": 0.28349361369432896
+              }
+            ],
+            "target": {
+              "id": "ENSG00000108823",
+              "approvedSymbol": "SGCA",
+              "approvedName": "sarcoglycan alpha",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8374822952404538,
+            "novelty": 0.011970497716762828,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.22711631076519234
+              },
+              {
+                "id": "animal_model",
+                "score": 0.690432996849955
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9334100514574266
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.7692185602432756
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9641782459368864
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.9549947196932794
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.690432996849955
+              },
+              {
+                "id": "europepmc",
+                "score": 0.22711631076519234
+              }
+            ],
+            "target": {
+              "id": "ENSG00000163069",
+              "approvedSymbol": "SGCB",
+              "approvedName": "sarcoglycan beta",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8368288461539066,
+            "novelty": 0.00036220497655664596,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.5435055420673088
+              },
+              {
+                "id": "animal_model",
+                "score": 0.8253918957161596
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9335058639679148
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8728756626685396
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.9671529481664186
+              },
+              {
+                "id": "eva",
+                "score": 0.943617556665586
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.9391118789327693
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.8253918957161596
+              },
+              {
+                "id": "europepmc",
+                "score": 0.5435055420673088
+              }
+            ],
+            "target": {
+              "id": "ENSG00000181027",
+              "approvedSymbol": "FKRP",
+              "approvedName": "fukutin related protein",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8335728620094799,
+            "novelty": 6.565846955852717e-05,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.18384652509861862
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9281937189260119
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8921246009386585
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "genomics_england",
+                "score": 0.9631730517704179
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.9607983220922475
+              },
+              {
+                "id": "eva",
+                "score": 0.9401143824007993
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.18384652509861862
+              }
+            ],
+            "target": {
+              "id": "ENSG00000173540",
+              "approvedSymbol": "GMPPB",
+              "approvedName": "GDP-mannose pyrophosphorylase B",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8300252973691524,
+            "novelty": 0.00996005873752225,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.22153067985892924
+              },
+              {
+                "id": "animal_model",
+                "score": 0.7945585108271833
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9165306125157825
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8149994713287221
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9635878744007768
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8897742701710087
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.865457038266544
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.7945585108271833
+              },
+              {
+                "id": "europepmc",
+                "score": 0.22153067985892924
+              }
+            ],
+            "target": {
+              "id": "ENSG00000102683",
+              "approvedSymbol": "SGCG",
+              "approvedName": "sarcoglycan gamma",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8276153387188274,
+            "novelty": 0.0005809057434514367,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.11596727396390752
+              },
+              {
+                "id": "animal_model",
+                "score": 0.6462378256657603
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8884492740994154
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8813959152801429
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "genomics_england",
+                "score": 0.9421515329208274
+              },
+              {
+                "id": "eva",
+                "score": 0.917978004779747
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "orphanet",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.6462378256657603
+              },
+              {
+                "id": "europepmc",
+                "score": 0.11596727396390752
+              }
+            ],
+            "target": {
+              "id": "ENSG00000178209",
+              "approvedSymbol": "PLEC",
+              "approvedName": "plectin",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8196488431973908,
+            "novelty": 0.007535225862322347,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.3800015998961102
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8813056661342645
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8243375183588352
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9420286938056041
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8780141349357482
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.3800015998961102
+              }
+            ],
+            "target": {
+              "id": "ENSG00000168538",
+              "approvedSymbol": "TRAPPC11",
+              "approvedName": "trafficking protein particle complex subunit 11",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.811119191879729,
+            "novelty": 0.002458538869520127,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.1717229543367451
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8667025621751268
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8490142952440954
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "genomics_england",
+                "score": 0.9360722249447112
+              },
+              {
+                "id": "eva",
+                "score": 0.9052652801497881
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.1717229543367451
+              }
+            ],
+            "target": {
+              "id": "ENSG00000106692",
+              "approvedSymbol": "FKTN",
+              "approvedName": "fukutin",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8081412037314203,
+            "novelty": 0.009097941341680418,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.5529395879830157
+              },
+              {
+                "id": "animal_model",
+                "score": 0.7091883287553984
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8726054827439907
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8240576099527671
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9132998109240751
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8776156542187763
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.7091883287553984
+              },
+              {
+                "id": "europepmc",
+                "score": 0.5529395879830157
+              }
+            ],
+            "target": {
+              "id": "ENSG00000119401",
+              "approvedSymbol": "TRIM32",
+              "approvedName": "tripartite motif containing 32",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8039624045739885,
+            "novelty": 0.0008370059118050387,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.17913398551866994
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8834498620303345
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.856840549716722
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9449471826641436
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.9190679877429972
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.17913398551866994
+              }
+            ],
+            "target": {
+              "id": "ENSG00000009830",
+              "approvedSymbol": "POMT2",
+              "approvedName": "protein O-mannosyltransferase 2",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8036440956923168,
+            "novelty": 0.011713010327456017,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.23549193468030985
+              },
+              {
+                "id": "animal_model",
+                "score": 0.7372472614810712
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8607433532517152
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8060666106291228
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9520367761217494
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8776156542187763
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.7372472614810712
+              },
+              {
+                "id": "europepmc",
+                "score": 0.23549193468030985
+              }
+            ],
+            "target": {
+              "id": "ENSG00000170624",
+              "approvedSymbol": "SGCD",
+              "approvedName": "sarcoglycan delta",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8030330025962154,
+            "novelty": 0.0009037050085416547,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.203579448983308
+              },
+              {
+                "id": "animal_model",
+                "score": 0.6499963006248767
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.856020961320433
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8400107849903519
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "genomics_england",
+                "score": 0.9238174470993381
+              },
+              {
+                "id": "eva",
+                "score": 0.8907264345420105
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.6499963006248767
+              },
+              {
+                "id": "europepmc",
+                "score": 0.203579448983308
+              }
+            ],
+            "target": {
+              "id": "ENSG00000173402",
+              "approvedSymbol": "DAG1",
+              "approvedName": "dystroglycan 1",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.8024756639765567,
+            "novelty": 6.119373913416919e-05,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.15764895600197282
+              },
+              {
+                "id": "animal_model",
+                "score": 0.6414685838794045
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8521835288190209
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8365213862795708
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9403859039772489
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.9190679877429972
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.6414685838794045
+              },
+              {
+                "id": "europepmc",
+                "score": 0.15764895600197282
+              }
+            ],
+            "target": {
+              "id": "ENSG00000085998",
+              "approvedSymbol": "POMGNT1",
+              "approvedName": "protein O-linked mannose N-acetylglucosaminyltransferase 1 (beta 1,2-)",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7980174423211426,
+            "novelty": 0.006644572214200185,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.2694768663067369
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8790299335862206
+              },
+              {
+                "id": "somatic_mutation",
+                "score": 0.57753425773104
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.7692185602432756
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9220442023482214
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.8274613634158176
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "eva_somatic",
+                "score": 0.57753425773104
+              },
+              {
+                "id": "europepmc",
+                "score": 0.2694768663067369
+              }
+            ],
+            "target": {
+              "id": "ENSG00000105993",
+              "approvedSymbol": "DNAJB6",
+              "approvedName": "DnaJ heat shock protein family (Hsp40) member B6",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7957430778768257,
+            "novelty": 0.0007103203811701252,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.2929379110589868
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8544205053841905
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8704439394780932
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9434306776353961
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.9360722249447112
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.2929379110589868
+              }
+            ],
+            "target": {
+              "id": "ENSG00000130714",
+              "approvedSymbol": "POMT1",
+              "approvedName": "protein O-mannosyltransferase 1",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7851487068652565,
+            "novelty": 0.013113293084629425,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.15634787687949725
+              },
+              {
+                "id": "animal_model",
+                "score": 0.2843900271227163
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9077355345788554
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.7013445543177971
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "uniprot_variants",
+                "score": 0.9360722249447112
+              },
+              {
+                "id": "eva",
+                "score": 0.7943887731154323
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "gene2phenotype",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "clingen",
+                "score": 0.3039653988058105
+              },
+              {
+                "id": "impc",
+                "score": 0.2843900271227163
+              },
+              {
+                "id": "europepmc",
+                "score": 0.15634787687949725
+              }
+            ],
+            "target": {
+              "id": "ENSG00000184916",
+              "approvedSymbol": "JAG2",
+              "approvedName": "jagged canonical Notch ligand 2",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7817627031722657,
+            "novelty": 0.005739474237614445,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.3458644452019199
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8819852549175846
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8139517901355594
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.8996808377362402
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.865457038266544
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.865457038266544
+              },
+              {
+                "id": "orphanet",
+                "score": 0.7599134970145264
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.3458644452019199
+              }
+            ],
+            "target": {
+              "id": "ENSG00000120729",
+              "approvedSymbol": "MYOT",
+              "approvedName": "myotilin",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7790647390488405,
+            "novelty": 0.0018806385419021078,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.3705303721113874
+              },
+              {
+                "id": "animal_model",
+                "score": 0.8294166697858227
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.9072094251357098
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.607930797611621
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9448213947128951
+              },
+              {
+                "id": "uniprot_variants",
+                "score": 0.8897742701710087
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.8294166697858227
+              },
+              {
+                "id": "europepmc",
+                "score": 0.3705303721113874
+              }
+            ],
+            "target": {
+              "id": "ENSG00000196569",
+              "approvedSymbol": "LAMA2",
+              "approvedName": "laminin subunit alpha 2",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7755778039514056,
+            "novelty": 4.10631610571062e-05,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.20809753720333427
+              },
+              {
+                "id": "animal_model",
+                "score": 0.7357526551937744
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8790395003084385
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8139517901355594
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9468166759826427
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.865457038266544
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.7357526551937744
+              },
+              {
+                "id": "europepmc",
+                "score": 0.20809753720333427
+              }
+            ],
+            "target": {
+              "id": "ENSG00000155657",
+              "approvedSymbol": "TTN",
+              "approvedName": "titin",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7705589143248371,
+            "novelty": 0.0003402953070645213,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.1482590993347583
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8429367816053857
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8698735352729268
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "genomics_england",
+                "score": 0.9353592196882531
+              },
+              {
+                "id": "eva",
+                "score": 0.9016882776038267
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "europepmc",
+                "score": 0.1482590993347583
+              }
+            ],
+            "target": {
+              "id": "ENSG00000143337",
+              "approvedSymbol": "TOR1AIP1",
+              "approvedName": "torsin 1A interacting protein 1",
+              "biotype": "protein_coding"
+            }
+          },
+          {
+            "score": 0.7667647762823588,
+            "novelty": 0.03413897442187047,
+            "datatypeScores": [
+              {
+                "id": "literature",
+                "score": 0.7919543080859135
+              },
+              {
+                "id": "animal_model",
+                "score": 0.8040418191272373
+              },
+              {
+                "id": "genetic_association",
+                "score": 0.8433420883716959
+              },
+              {
+                "id": "genetic_literature",
+                "score": 0.8122699861149556
+              }
+            ],
+            "datasourceScores": [
+              {
+                "id": "eva",
+                "score": 0.9021949110617146
+              },
+              {
+                "id": "genomics_england",
+                "score": 0.8860591375189377
+              },
+              {
+                "id": "clingen",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "uniprot_literature",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "orphanet",
+                "score": 0.607930797611621
+              },
+              {
+                "id": "impc",
+                "score": 0.8040418191272373
+              },
+              {
+                "id": "europepmc",
+                "score": 0.7919543080859135
+              }
+            ],
+            "target": {
+              "id": "ENSG00000173991",
+              "approvedSymbol": "TCAP",
+              "approvedName": "titin-cap",
+              "biotype": "protein_coding"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

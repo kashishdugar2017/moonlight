@@ -1,0 +1,6 @@
+{
+  "query": "query TargetDrugs($targetId: String!) {\n  target(ensemblId: $targetId) {\n    id\n    approvedSymbol\n    approvedName\n    drugAndClinicalCandidates {\n      count\n      rows {\n        id\n        maxClinicalStage\n        drug { ...DrugFields }\n        diseases { diseaseFromSource disease { id name } }\n        clinicalReports { ...ReportFields }\n      }\n    }\n  }\n}\n\nfragment DrugFields on Drug {\n  id\n  name\n  drugType\n  maximumClinicalStage\n  description\n  parentMolecule { id name }\n  mechanismsOfAction {\n    uniqueActionTypes\n    uniqueTargetTypes\n    rows {\n      mechanismOfAction\n      actionType\n      targetName\n      targets { id approvedSymbol }\n      references { source ids urls }\n    }\n  }\n  indications {\n    count\n    rows { id maxClinicalStage disease { id name } }\n  }\n}\n\nfragment ReportFields on ClinicalReport {\n  id\n  type\n  source\n  provider\n  origin\n  clinicalStage\n  phaseFromSource\n  trialPhase\n  trialOverallStatus\n  year\n  url\n}\n",
+  "variables": {
+    "targetId": "ENSG00000173991"
+  }
+}

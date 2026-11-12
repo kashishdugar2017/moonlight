@@ -1,0 +1,7 @@
+{
+  "query": "query DiseaseSearch($text: String!, $size: Int!) {\n  search(queryString: $text, entityNames: [\"disease\"], page: {index: 0, size: $size}) {\n    total\n    hits { id entity name description score }\n  }\n}\n",
+  "variables": {
+    "text": "limb girdle muscular dystrophy",
+    "size": 10
+  }
+}

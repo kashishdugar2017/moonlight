@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000119401",
+      "approvedSymbol": "TRIM32",
+      "approvedName": "tripartite motif containing 32",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

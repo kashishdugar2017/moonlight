@@ -1,0 +1,79 @@
+{
+  "data": {
+    "search": {
+      "total": 624,
+      "hits": [
+        {
+          "id": "MONDO_0016971",
+          "entity": "disease",
+          "name": "limb-girdle muscular dystrophy",
+          "description": "Limb-girdle muscular dystrophy (LGMD) is a heterogeneous group of muscular dystrophies characterized by proximal weakness affecting the pelvic and shoulder girdles. Cardiac and respiratory impairment may be observed in certain forms of LGMD.",
+          "score": 5428.1914
+        },
+        {
+          "id": "MONDO_0015152",
+          "entity": "disease",
+          "name": "autosomal recessive limb-girdle muscular dystrophy",
+          "description": "Autosomal recessive form of limb-girdle muscular dystrophy.",
+          "score": 1633.0178
+        },
+        {
+          "id": "MONDO_0011423",
+          "entity": "disease",
+          "name": "autosomal recessive limb-girdle muscular dystrophy type 2E",
+          "description": "Autosomal recessive limb girdle muscular dystrophy type 2E (LGMD2E) is a subtype of autosomal recessive limb girdle muscular dystrophy characterized by a childhood to adolescent onset of progressive pelvic- and shoulder-girdle muscle weakness, particularly affecting the pelvic girdle (adductors and flexors of hip). Usually the knees are the earliest and most affected muscles. In advanced stages, involvement of the shoulder girdle (resulting in scapular winging) and the distal muscle groups are observed. Calf hypertrophy, cardiomyopathy, respiratory impairment, tendon contractures, scoliosis, and exercise-induced myoglobinuria may be observed.",
+          "score": 1440.6616
+        },
+        {
+          "id": "MONDO_0009677",
+          "entity": "disease",
+          "name": "autosomal recessive limb-girdle muscular dystrophy type 2C",
+          "description": "Autosomal recessive limb-girdle muscular dystrophy type 2C (LGMD2C) is a subtype of autosomal recessive limb-girdle muscular dystrophy characterized by a childhood onset of progressive shoulder and pelvic girdle muscle weakness and atrophy frequently associated with calf hypertrophy, diaphragmatic weakness, and/or variable cardiac abnormalities. Mild to moderate elevated serum creatine kinase levels and positive Gowers sign are reported.",
+          "score": 1380.0132
+        },
+        {
+          "id": "MONDO_0011968",
+          "entity": "disease",
+          "name": "autosomal recessive limb-girdle muscular dystrophy type 2D",
+          "description": "Autosomal recessive limb-girdle muscular dystrophy type 2D (LGMD2D) is a subtype of autosomal recessive limb-girdle muscular dystrophy characterized by childhood onset of progressive proximal weakness of the shoulder and pelvic girdle muscles, resulting in difficulty walking, scapular winging, calf hypertrophy and contractures of the Achilles tendon, which lead to a tiptoe gait pattern. Cardiac and respiratory involvement is rare.",
+          "score": 1371.1523
+        },
+        {
+          "id": "MONDO_0020121",
+          "entity": "disease",
+          "name": "muscular dystrophy",
+          "description": "Muscular dystrophy (MD) refers to a group of more than 30 genetic diseases characterized by progressive weakness and degeneration of the skeletal muscles that control movement. Some forms of MD are seen in newborns, infants or children, while others have late-onset and may not appear until middle age or later. The disorders differ in terms of the distribution and extent of muscle weakness (some forms of MD also affect cardiac muscle), age of onset, rate of progression, and pattern of inheritance. The prognosis for people with MD varies according to the type and progression of the disorder. There is no specific treatment to stop or reverse any form of MD. Treatment is supportive and may include physical therapy, respiratory therapy, speech therapy, orthopedic appliances used for support, corrective orthopedic surgery, and medicationsincluding corticosteroids, anticonvulsants (seizure medications), immunosuppressants, and antibiotics. Some individuals may need assisted ventilation to treat respiratory muscle weaknessor a pacemaker for cardiac (heart)abnormalities.",
+          "score": 1357.8453
+        },
+        {
+          "id": "MONDO_0009676",
+          "entity": "disease",
+          "name": "autosomal recessive limb-girdle muscular dystrophy type 2B",
+          "description": "Autosomal recessive limb-girdle muscular dystrophy type 2B (LGMD2B) is a subtype of autosomal recessive limb-girdle muscular dystrophy characterized by an onset in late adolescence or early adulthood of slowly progressive, proximal weakness and atrophy of shoulder and pelvic girdle muscles. Cardiac and respiratory muscles are not involved. Hypertrophy of the calf muscles and highly elevated serum creatine kinase levels are frequently observed.",
+          "score": 1349.0494
+        },
+        {
+          "id": "MONDO_0009675",
+          "entity": "disease",
+          "name": "autosomal recessive limb-girdle muscular dystrophy type 2A",
+          "description": "Autosomal recessive limb-girdle muscular dystrophy type 2A (LGMD2A) is a subtype of autosomal recessive limb girdle muscular dystrophy characterized by a variable age of onset of progressive, typically symmetrical and selective weakness and atrophy of proximal shoulder- and pelvic-girdle muscles (gluteus maximus, thigh adductors, and muscles of the posterior compartment of the limbs are most commonly affected) without cardiac or facial involvement. Clinical manifestations include exercise intolerance, a waddling gait, scapular winging and calf pseudo-hypertrophy.",
+          "score": 1341.0118
+        },
+        {
+          "id": "MONDO_0012193",
+          "entity": "disease",
+          "name": "autosomal dominant limb-girdle muscular dystrophy type 1G",
+          "description": "Autosomal dominant limb-girdle muscular dystrophy (LGMD1G) is a mild subtype of autosomal dominant limb-girdle muscular dystrophy characterized by a typically adult onset of mild, progressive, proximal weakness of pelvic and shoulder girdle muscles and progressive, permanent finger and toes flexion limitation without flexion contractures. Normal to highly elevated creatine kinase serum levels are observed.",
+          "score": 1329.6323
+        },
+        {
+          "id": "MONDO_0012034",
+          "entity": "disease",
+          "name": "autosomal dominant limb-girdle muscular dystrophy type 1F",
+          "description": "Autosomal dominant limb-girdle muscular dystrophy type 1F (LGMD1F) is a subtype of autosomal dominant limb-girdle muscular dystrophy,with a variable age of onset, characterized by progressive, proximal weakness and wasting of the shoulder and pelvic musculature (with the pelvic girdle, and especially the ileopsoas muscle, being more affected) and frequent association of calf hypertrophy, dysphagia, arachnodactyly with or without finger contractures and/or distal and axial muscle involvement. Additional features include an abnormal gait, exercise intolerance, myalgia, fatigue and respiratory insufficiency. Cardiac conduction defects are typically not observed.",
+          "score": 1325.8698
+        }
+      ]
+    }
+  }
+}

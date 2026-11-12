@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000184916",
+      "approvedSymbol": "JAG2",
+      "approvedName": "jagged canonical Notch ligand 2",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

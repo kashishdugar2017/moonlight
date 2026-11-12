@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000085998",
+      "approvedSymbol": "POMGNT1",
+      "approvedName": "protein O-linked mannose N-acetylglucosaminyltransferase 1 (beta 1,2-)",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}

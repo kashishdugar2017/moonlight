@@ -1,0 +1,787 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000196569",
+      "approvedSymbol": "LAMA2",
+      "approvedName": "laminin subunit alpha 2",
+      "drugAndClinicalCandidates": {
+        "count": 1,
+        "rows": [
+          {
+            "id": "9bb6225d387b53eb22008cb32fce24eca1b2c1e4cc27b7d4dfbd4c0e9ce0f5b9",
+            "maxClinicalStage": "WITHDRAWAL",
+            "drug": {
+              "id": "CHEMBL2095222",
+              "name": "OCRIPLASMIN",
+              "drugType": "Protein",
+              "maximumClinicalStage": "APPROVAL",
+              "description": "Protein drug with a maximum clinical stage of Approval (across all indications), with an approval for eye disorder and retinal disorder and 8 investigational indications.",
+              "parentMolecule": null,
+              "mechanismsOfAction": {
+                "uniqueActionTypes": [
+                  "PROTEOLYTIC ENZYME",
+                  "HYDROLYTIC ENZYME"
+                ],
+                "uniqueTargetTypes": [
+                  "single protein",
+                  "protein complex group"
+                ],
+                "rows": [
+                  {
+                    "mechanismOfAction": "Fibronectin proteolytic enzyme",
+                    "actionType": "PROTEOLYTIC ENZYME",
+                    "targetName": "Fibronectin",
+                    "targets": [
+                      {
+                        "id": "ENSG00000115414",
+                        "approvedSymbol": "FN1"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "DailyMed",
+                        "ids": [
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66"
+                        ],
+                        "urls": [
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Laminin hydrolytic enzyme",
+                    "actionType": "HYDROLYTIC ENZYME",
+                    "targetName": "Laminin",
+                    "targets": [
+                      {
+                        "id": "ENSG00000101680",
+                        "approvedSymbol": "LAMA1"
+                      },
+                      {
+                        "id": "ENSG00000196569",
+                        "approvedSymbol": "LAMA2"
+                      },
+                      {
+                        "id": "ENSG00000053747",
+                        "approvedSymbol": "LAMA3"
+                      },
+                      {
+                        "id": "ENSG00000112769",
+                        "approvedSymbol": "LAMA4"
+                      },
+                      {
+                        "id": "ENSG00000130702",
+                        "approvedSymbol": "LAMA5"
+                      },
+                      {
+                        "id": "ENSG00000091136",
+                        "approvedSymbol": "LAMB1"
+                      },
+                      {
+                        "id": "ENSG00000172037",
+                        "approvedSymbol": "LAMB2"
+                      },
+                      {
+                        "id": "ENSG00000196878",
+                        "approvedSymbol": "LAMB3"
+                      },
+                      {
+                        "id": "ENSG00000091128",
+                        "approvedSymbol": "LAMB4"
+                      },
+                      {
+                        "id": "ENSG00000135862",
+                        "approvedSymbol": "LAMC1"
+                      },
+                      {
+                        "id": "ENSG00000058085",
+                        "approvedSymbol": "LAMC2"
+                      },
+                      {
+                        "id": "ENSG00000050555",
+                        "approvedSymbol": "LAMC3"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "DailyMed",
+                        "ids": [
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66"
+                        ],
+                        "urls": [
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "mechanismOfAction": "Collagen hydrolytic enzyme",
+                    "actionType": "HYDROLYTIC ENZYME",
+                    "targetName": "Collagen",
+                    "targets": [
+                      {
+                        "id": "ENSG00000164692",
+                        "approvedSymbol": "COL1A2"
+                      },
+                      {
+                        "id": "ENSG00000108821",
+                        "approvedSymbol": "COL1A1"
+                      },
+                      {
+                        "id": "ENSG00000139219",
+                        "approvedSymbol": "COL2A1"
+                      },
+                      {
+                        "id": "ENSG00000168542",
+                        "approvedSymbol": "COL3A1"
+                      },
+                      {
+                        "id": "ENSG00000187498",
+                        "approvedSymbol": "COL4A1"
+                      },
+                      {
+                        "id": "ENSG00000130635",
+                        "approvedSymbol": "COL5A1"
+                      },
+                      {
+                        "id": "ENSG00000142156",
+                        "approvedSymbol": "COL6A1"
+                      },
+                      {
+                        "id": "ENSG00000060718",
+                        "approvedSymbol": "COL11A1"
+                      },
+                      {
+                        "id": "ENSG00000204291",
+                        "approvedSymbol": "COL15A1"
+                      },
+                      {
+                        "id": "ENSG00000182871",
+                        "approvedSymbol": "COL18A1"
+                      },
+                      {
+                        "id": "ENSG00000171502",
+                        "approvedSymbol": "COL24A1"
+                      },
+                      {
+                        "id": "ENSG00000196739",
+                        "approvedSymbol": "COL27A1"
+                      },
+                      {
+                        "id": "ENSG00000215018",
+                        "approvedSymbol": "COL28A1"
+                      },
+                      {
+                        "id": "ENSG00000134871",
+                        "approvedSymbol": "COL4A2"
+                      },
+                      {
+                        "id": "ENSG00000204262",
+                        "approvedSymbol": "COL5A2"
+                      },
+                      {
+                        "id": "ENSG00000142173",
+                        "approvedSymbol": "COL6A2"
+                      },
+                      {
+                        "id": "ENSG00000204248",
+                        "approvedSymbol": "COL11A2"
+                      },
+                      {
+                        "id": "ENSG00000169031",
+                        "approvedSymbol": "COL4A3"
+                      },
+                      {
+                        "id": "ENSG00000080573",
+                        "approvedSymbol": "COL5A3"
+                      },
+                      {
+                        "id": "ENSG00000163359",
+                        "approvedSymbol": "COL6A3"
+                      },
+                      {
+                        "id": "ENSG00000081052",
+                        "approvedSymbol": "COL4A4"
+                      },
+                      {
+                        "id": "ENSG00000188153",
+                        "approvedSymbol": "COL4A5"
+                      },
+                      {
+                        "id": "ENSG00000172752",
+                        "approvedSymbol": "COL6A5"
+                      },
+                      {
+                        "id": "ENSG00000197565",
+                        "approvedSymbol": "COL4A6"
+                      },
+                      {
+                        "id": "ENSG00000206384",
+                        "approvedSymbol": "COL6A6"
+                      }
+                    ],
+                    "references": [
+                      {
+                        "source": "DailyMed",
+                        "ids": [
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "setid=390682b7-72c4-11e1-b0c4-0800200c9a66"
+                        ],
+                        "urls": [
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66",
+                          "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=390682b7-72c4-11e1-b0c4-0800200c9a66"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "indications": {
+                "count": 10,
+                "rows": [
+                  {
+                    "id": "2a01e18e555573b901f5b017e2f4eaf157bbc13ab7705e4a3479760accac6ef1",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "EFO_0003907",
+                      "name": "deep vein thrombosis"
+                    }
+                  },
+                  {
+                    "id": "473b4b0280ad7a1e8d1f90380b8658b37ae4e179d94ec9c72cf7becf1e537263",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "EFO_0009760",
+                      "name": "non-proliferative diabetic retinopathy"
+                    }
+                  },
+                  {
+                    "id": "5f0a3c2246c0b76951b11d6463dba8ed0ae0bc93010b28493b15e6688c6db200",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0005328",
+                      "name": "eye disorder"
+                    }
+                  },
+                  {
+                    "id": "7cc2325756b209fca95aeea91df7728051f21749f50820592c9e22a9cd0342a2",
+                    "maxClinicalStage": "APPROVAL",
+                    "disease": {
+                      "id": "MONDO_0005283",
+                      "name": "retinal disorder"
+                    }
+                  },
+                  {
+                    "id": "9e4efa2ba11685b42c69c29b31c59b101e945a76c0b7231a957bc4d114dc7282",
+                    "maxClinicalStage": "PHASE_1",
+                    "disease": {
+                      "id": "MONDO_0006951",
+                      "name": "retinal vein occlusion"
+                    }
+                  },
+                  {
+                    "id": "aae69c6a401841bbe3c57ccc0ad85faa4e2e3a91b193002ce525b7ecd1017313",
+                    "maxClinicalStage": "PHASE_3",
+                    "disease": {
+                      "id": "MONDO_0006843",
+                      "name": "macular holes"
+                    }
+                  },
+                  {
+                    "id": "b7bb856d9d75a3ab632b1de0a1e2f965c03521b47caffdab2c5a617a89632d4d",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_0005150",
+                      "name": "age-related macular degeneration"
+                    }
+                  },
+                  {
+                    "id": "c25d891d20e196c53c5ea63225ce8782e5714855a0545b669ef6f6f2a4c693e3",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_1060198",
+                      "name": "ischemic stroke"
+                    }
+                  },
+                  {
+                    "id": "c713595ba17fa923b997d17463da06415f76ff898c471525c516f4fa2a3739a8",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_0004728",
+                      "name": "diabetic macular edema"
+                    }
+                  },
+                  {
+                    "id": "c94abd13287007eec368b108157ae7d1c2ff18658e87dc994cbb5ee42b18b034",
+                    "maxClinicalStage": "PHASE_2",
+                    "disease": {
+                      "id": "MONDO_0005098",
+                      "name": "stroke disorder"
+                    }
+                  }
+                ]
+              }
+            },
+            "diseases": [
+              {
+                "diseaseFromSource": "retinal diseases",
+                "disease": {
+                  "id": "MONDO_0005283",
+                  "name": "retinal disorder"
+                }
+              },
+              {
+                "diseaseFromSource": "vitreomacular traction",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "symptomatic vitreomacular adhesion",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "eye disease",
+                "disease": {
+                  "id": "MONDO_0005328",
+                  "name": "eye disorder"
+                }
+              },
+              {
+                "diseaseFromSource": "eye disorder",
+                "disease": {
+                  "id": "MONDO_0005328",
+                  "name": "eye disorder"
+                }
+              },
+              {
+                "diseaseFromSource": "vitreomacular adhesion",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "macular hole",
+                "disease": {
+                  "id": "MONDO_0006843",
+                  "name": "macular holes"
+                }
+              },
+              {
+                "diseaseFromSource": "focal vitreomacular adhesion",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "stroke",
+                "disease": {
+                  "id": "MONDO_0005098",
+                  "name": "stroke disorder"
+                }
+              },
+              {
+                "diseaseFromSource": "vitreomacular traction maculopathy",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "peripheral arterial occlusion",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "ischemic stroke",
+                "disease": {
+                  "id": "MONDO_1060198",
+                  "name": "ischemic stroke"
+                }
+              },
+              {
+                "diseaseFromSource": "diabetic macular edema",
+                "disease": {
+                  "id": "MONDO_0004728",
+                  "name": "diabetic macular edema"
+                }
+              },
+              {
+                "diseaseFromSource": "surgical vitrectomy",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "deep vein thrombosis",
+                "disease": {
+                  "id": "EFO_0003907",
+                  "name": "deep vein thrombosis"
+                }
+              },
+              {
+                "diseaseFromSource": "exudative age-related macular degeneration",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "patients scheduled for vitrectomy",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "age-related macular degeneration",
+                "disease": {
+                  "id": "MONDO_0005150",
+                  "name": "age-related macular degeneration"
+                }
+              },
+              {
+                "diseaseFromSource": "non-proliferative diabetic retinopathy",
+                "disease": {
+                  "id": "EFO_0009760",
+                  "name": "non-proliferative diabetic retinopathy"
+                }
+              },
+              {
+                "diseaseFromSource": "uveitic macular edema",
+                "disease": null
+              },
+              {
+                "diseaseFromSource": "central retinal vein occlusion",
+                "disease": {
+                  "id": "MONDO_0006951",
+                  "name": "retinal vein occlusion"
+                }
+              }
+            ],
+            "clinicalReports": [
+              {
+                "id": "emea/h/c/002381",
+                "type": "INDICATION",
+                "source": "EMA Human Drugs",
+                "provider": "EMA",
+                "origin": "REGULATORY_AGENCY",
+                "clinicalStage": "WITHDRAWAL",
+                "phaseFromSource": "withdrawn",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": 2013,
+                "url": "https://www.ema.europa.eu/en/medicines/human/EPAR/jetrea"
+              },
+              {
+                "id": "nct02035748",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_4",
+                "phaseFromSource": "PHASE4",
+                "trialPhase": "PHASE4",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT02035748"
+              },
+              {
+                "id": "nct02322229",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_4",
+                "phaseFromSource": "PHASE4",
+                "trialPhase": "PHASE4",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT02322229"
+              },
+              {
+                "id": "d0y7xg/symptomatic vitreomacular adhesion",
+                "type": "INDICATION",
+                "source": "TTD",
+                "provider": "TTD",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "APPROVAL",
+                "phaseFromSource": "approved",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://ttd.idrblab.cn/data/drug/details/D0Y7XG"
+              },
+              {
+                "id": "s01xa22",
+                "type": "INDICATION",
+                "source": "ATC",
+                "provider": "ChEMBL",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "APPROVAL",
+                "phaseFromSource": "APPROVAL",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://www.whocc.no/atc_ddd_index/?code=S01XA22"
+              },
+              {
+                "id": "d04ijz/eye disorder",
+                "type": "INDICATION",
+                "source": "TTD",
+                "provider": "TTD",
+                "origin": "CURATED_RESOURCE",
+                "clinicalStage": "PHASE_3",
+                "phaseFromSource": "phase 3",
+                "trialPhase": null,
+                "trialOverallStatus": null,
+                "year": null,
+                "url": "https://ttd.idrblab.cn/data/drug/details/D04IJZ"
+              },
+              {
+                "id": "nct00781859",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_3",
+                "phaseFromSource": "PHASE3",
+                "trialPhase": "PHASE3",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00781859"
+              },
+              {
+                "id": "nct00798317",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_3",
+                "phaseFromSource": "PHASE3",
+                "trialPhase": "PHASE3",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00798317"
+              },
+              {
+                "id": "nct01429441",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_3",
+                "phaseFromSource": "PHASE3",
+                "trialPhase": "PHASE3",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01429441"
+              },
+              {
+                "id": "nct01889251",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_3",
+                "phaseFromSource": "PHASE3",
+                "trialPhase": "PHASE3",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01889251"
+              },
+              {
+                "id": "nct00123266",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00123266"
+              },
+              {
+                "id": "nct00123279",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00123279"
+              },
+              {
+                "id": "nct00123292",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00123292"
+              },
+              {
+                "id": "nct00123305",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00123305"
+              },
+              {
+                "id": "nct00412451",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00412451"
+              },
+              {
+                "id": "nct00412958",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00412958"
+              },
+              {
+                "id": "nct00428129",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00428129"
+              },
+              {
+                "id": "nct00435539",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00435539"
+              },
+              {
+                "id": "nct00913744",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00913744"
+              },
+              {
+                "id": "nct00986362",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00986362"
+              },
+              {
+                "id": "nct00996684",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "UNKNOWN",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT00996684"
+              },
+              {
+                "id": "nct01055535",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01055535"
+              },
+              {
+                "id": "nct02681809",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_2",
+                "phaseFromSource": "PHASE2",
+                "trialPhase": "PHASE2",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT02681809"
+              },
+              {
+                "id": "nct01194674",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1_2",
+                "phaseFromSource": "PHASE1/PHASE2",
+                "trialPhase": "PHASE1/PHASE2",
+                "trialOverallStatus": "TERMINATED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT01194674"
+              },
+              {
+                "id": "nct02747030",
+                "type": "INDICATION",
+                "source": "ClinicalTrials.gov",
+                "provider": "AACT",
+                "origin": "CLINICAL_TRIAL",
+                "clinicalStage": "PHASE_1",
+                "phaseFromSource": "PHASE1",
+                "trialPhase": "PHASE1",
+                "trialOverallStatus": "COMPLETED",
+                "year": null,
+                "url": "https://clinicaltrials.gov/study/NCT02747030"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

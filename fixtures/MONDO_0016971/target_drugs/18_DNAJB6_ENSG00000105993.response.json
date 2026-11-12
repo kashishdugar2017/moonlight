@@ -1,0 +1,13 @@
+{
+  "data": {
+    "target": {
+      "id": "ENSG00000105993",
+      "approvedSymbol": "DNAJB6",
+      "approvedName": "DnaJ heat shock protein family (Hsp40) member B6",
+      "drugAndClinicalCandidates": {
+        "count": 0,
+        "rows": []
+      }
+    }
+  }
+}
