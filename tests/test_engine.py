@@ -79,3 +79,98 @@ def test_each_target_is_fetched_once_with_the_disease():
     with patch("moonlight.engine.fetch_paths", wraps=fetch.fetch_paths) as spy:
         engine.find_clues(PAH, targets)
     assert [call.args for call in spy.call_args_list] == [(PAH, t) for t in targets]
+
+
+# ---- Ticket 2.7. The engine hands back the clues in Kashish's ranked order ----
+
+from moonlight.rank import Clue, rank_clues  # noqa: E402
+from moonlight.records import Medicine, MedicineForm, Path, Target  # noqa: E402
+
+NEW_ORDER = [
+    "DIBOTERMIN ALFA", "EPTOTERMIN ALFA", "SEVOFLURANE", "DESFLURANE",
+    "ISOFLURANE", "DOXAPRAM", "ENFLURANE", "HALOTHANE", "ATRASENTAN",
+    "SPARSENTAN", "APROCITENTAN", "CLAZOSENTAN", "PENTOXIFYLLINE",
+    "DIPYRIDAMOLE", "AVANAFIL", "IBUDILAST",
+]
+
+
+def names(clues):
+    return [clue.medicine.name.upper() for clue in clues]
+
+
+# Example 1
+def test_ranked_new_clues_come_in_kashishs_order():
+    ranked = engine.find_ranked_clues(PAH, targets_named(*FIVE))
+    assert all(isinstance(clue, Clue) for clue in ranked.new_clues)
+    assert names(ranked.new_clues) == NEW_ORDER
+
+
+# Example 2
+def test_ranked_being_studied_is_udenafil_then_vardenafil():
+    ranked = engine.find_ranked_clues(PAH, targets_named(*FIVE))
+    assert all(isinstance(clue, Clue) for clue in ranked.being_studied)
+    assert names(ranked.being_studied) == ["UDENAFIL", "VARDENAFIL"]
+
+
+def test_ranked_order_does_not_depend_on_the_order_of_the_targets():
+    forwards = engine.find_ranked_clues(PAH, targets_named(*FIVE))
+    backwards = engine.find_ranked_clues(PAH, targets_named(*reversed(FIVE)))
+    assert names(backwards.new_clues) == names(forwards.new_clues) == NEW_ORDER
+    assert names(backwards.being_studied) == names(forwards.being_studied)
+
+
+def test_ranked_clues_are_what_rank_clues_makes_of_the_tray():
+    targets = targets_named(*FIVE)
+    tray = engine.find_clues(PAH, targets)
+    ranked = engine.find_ranked_clues(PAH, targets)
+    assert ranked.new_clues == rank_clues(tray["new_clue"])
+    assert ranked.being_studied == rank_clues(tray["being_studied"])
+
+
+def test_left_out_counts_are_by_group_and_name_no_medicine():
+    ranked = engine.find_ranked_clues(PAH, targets_named(*FIVE))
+    assert ranked.left_out == {
+        "not_approved": 12,
+        "already_approved": 6,
+        "unclear_link": 0,
+    }
+
+
+def test_ranked_with_no_targets_is_empty_but_complete():
+    ranked = engine.find_ranked_clues(PAH, [])
+    assert ranked.new_clues == []
+    assert ranked.being_studied == []
+    assert ranked.left_out == {
+        "not_approved": 0, "already_approved": 0, "unclear_link": 0,
+    }
+
+
+def made_up_paths(disease, target):
+    """Stands in for fetch_paths: one made-up medicine acting on any protein,
+    and one made-up medicine that is not approved anywhere."""
+    def one(name, stage):
+        form = MedicineForm(id="ID_" + name.upper(), name=name, best_stage=stage)
+        return Path(
+            medicine=Medicine(name=name, forms=(form,)),
+            target=target,
+            disease=disease,
+            action_types=("INHIBITOR",),
+            score=target.score,
+            sources=(f"https://example.org/{name}/{target.symbol}",),
+        )
+    return [one("MADEUPINE", "APPROVAL"), one("NOTYETINE", "PHASE_2")]
+
+
+# Example 4
+def test_a_medicine_on_two_proteins_is_one_clue_with_the_scores_added():
+    weak = Target(id="ENSG_AAA", symbol="AAA", name="AAA", score=0.5)
+    strong = Target(id="ENSG_BBB", symbol="BBB", name="BBB", score=0.9)
+    with patch("moonlight.engine.fetch_paths", side_effect=made_up_paths):
+        ranked = engine.find_ranked_clues(PAH, [weak, strong])
+    (clue,) = ranked.new_clues
+    assert clue.medicine.name == "MADEUPINE"
+    assert [p.target.symbol for p in clue.paths] == ["BBB", "AAA"]
+    assert clue.total_score == pytest.approx(1.4)
+    assert clue.reports == 2
+    # Left out on two proteins, but still one medicine.
+    assert ranked.left_out["not_approved"] == 1

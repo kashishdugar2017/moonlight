@@ -7,6 +7,9 @@ It prints the safety line first, then the diseases that matched, then two
 sections ("New clues" and "Already being studied for this disease"), then
 how many medicines were left out, as counts only. A medicine from a group
 that is not shown is never named.
+
+Both sections are in Kashish's ranked order (moonlight/rank.py), and each
+medicine is printed once, on one line that names every protein it acts on.
 """
 
 import argparse
@@ -15,16 +18,11 @@ from typing import List, Optional
 
 import requests
 
-from moonlight.engine import find_clues
+from moonlight.engine import find_ranked_clues
 from moonlight.fetch import FetchError, fetch_targets, search_diseases
-from moonlight.filter import (
-    ALREADY_APPROVED,
-    BEING_STUDIED,
-    NEW_CLUE,
-    NOT_APPROVED,
-    UNCLEAR_LINK,
-)
-from moonlight.records import Disease, Path, Target
+from moonlight.filter import ALREADY_APPROVED, NOT_APPROVED, UNCLEAR_LINK
+from moonlight.rank import RULE_TEXT, Clue
+from moonlight.records import Disease, Target
 
 # Word for word from CLAUDE.md. Changing it needs Kashish's approval.
 SAFETY_LINE = (
@@ -62,43 +60,49 @@ def _phase_words(stage: str) -> str:
     return ("Early " if early else "") + "Phase " + numbers
 
 
-def _clue_line(path: Path, with_phase: bool) -> str:
-    """One result: medicine and forms, protein and score, direction, source."""
-    forms = ", ".join(form.name for form in path.medicine.forms)
-    parts = [
-        f"- {path.medicine.name} (forms: {forms})",
-        f"protein {path.target.symbol}, link score {path.score:.2f}",
-        DIRECTION_WORDS[path.direction],
-    ]
+def _clue_line(clue: Clue, with_phase: bool) -> str:
+    """One medicine: its forms, every protein it acts on (strongest first,
+    each with its score and direction), the added score if there is more
+    than one protein, the number of reports, and one source."""
+    medicine = clue.medicine
+    forms = ", ".join(form.name for form in medicine.forms)
+    parts = [f"- {medicine.name} (forms: {forms})"]
+    for path in clue.paths:  # a Clue keeps its paths strongest first
+        parts.append(
+            f"protein {path.target.symbol}, link score {path.score:.2f}, "
+            f"{DIRECTION_WORDS[path.direction]}"
+        )
+    if len(clue.paths) > 1:
+        parts.append(f"total score {clue.total_score:.2f}")
+    parts.append(f"reports: {clue.reports}")
     if with_phase:
-        parts.append(f"trial phase: {_phase_words(path.medicine.disease_stage)}")
-    if path.sources:
-        parts.append(f"source: {path.sources[0]}")
+        parts.append(f"trial phase: {_phase_words(medicine.disease_stage)}")
+    sources = [source for path in clue.paths for source in path.sources]
+    if sources:
+        parts.append(f"source: {sources[0]}")  # from the strongest protein that has one
     else:
         parts.append("no source link in the data")
     return " | ".join(parts)
 
 
-def _section(heading: str, paths: List[Path], with_phase: bool) -> List[str]:
-    lines = [heading]
-    lines.extend(_clue_line(path, with_phase) for path in paths)
+def _section(heading: str, clues: List[Clue], with_phase: bool) -> List[str]:
+    lines = [_clue_line(clue, with_phase) for clue in clues]
     lines.append(NO_DIRECTION_LINE)
-    return lines
+    return [heading] + lines
 
 
 def clue_lines(disease: Disease, targets: List[Target]) -> List[str]:
     """The two shown sections, then the left-out counts, as lines of text."""
-    tray = find_clues(disease, targets)
+    ranked = find_ranked_clues(disease, targets)
 
-    lines = _section(NEW_HEADING, tray[NEW_CLUE], with_phase=False)
+    new = _section(NEW_HEADING, ranked.new_clues, with_phase=False)
+    lines = [new[0], RULE_TEXT] + new[1:]  # the rule sits directly under the heading
     lines.append("")
-    lines.extend(_section(STUDIED_HEADING, tray[BEING_STUDIED], with_phase=True))
+    lines.extend(_section(STUDIED_HEADING, ranked.being_studied, with_phase=True))
     lines.append("")
     lines.append(LEFT_OUT_HEADING)
     for group, label in LEFT_OUT_LABELS:
-        # A medicine that acts on two proteins is still one medicine.
-        medicines = {path.medicine.name for path in tray[group]}
-        lines.append(f"- {label}: {len(medicines)}")
+        lines.append(f"- {label}: {ranked.left_out[group]}")
     return lines
 
 
