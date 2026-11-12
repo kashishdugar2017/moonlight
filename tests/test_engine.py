@@ -174,3 +174,94 @@ def test_a_medicine_on_two_proteins_is_one_clue_with_the_scores_added():
     assert clue.reports == 2
     # Left out on two proteins, but still one medicine.
     assert ranked.left_out["not_approved"] == 1
+
+
+# ---- Ticket 6.1. Several proteins are fetched at the same time ----
+
+import threading  # noqa: E402
+import time  # noqa: E402
+
+from moonlight.filter import sort_paths  # noqa: E402
+
+
+class SlowOpenTargets:
+    """fake_post_json, made slow, counting how many calls run at once."""
+
+    def __init__(self, seconds_for):
+        self.seconds_for = seconds_for  # target id -> seconds to wait
+        self.lock = threading.Lock()
+        self.running = 0
+        self.most_at_once = 0
+        self.finished = []  # target ids, in the order their answers came back
+
+    def __call__(self, body):
+        target_id = body["variables"]["targetId"]
+        with self.lock:
+            self.running += 1
+            self.most_at_once = max(self.most_at_once, self.running)
+        try:
+            time.sleep(self.seconds_for(target_id))
+            return fake_post_json(body)
+        finally:
+            with self.lock:
+                self.running -= 1
+                self.finished.append(target_id)
+
+
+# Example 3
+def test_parallel_gives_the_same_clues_in_the_same_order_as_one_at_a_time(offline):
+    targets = targets_named(*FIVE)
+    one_at_a_time = sort_paths([p for t in targets for p in fetch.fetch_paths(PAH, t)])
+
+    # The first protein answers slowest and the last one fastest, so the
+    # answers come back in the opposite order to the one they were asked in.
+    wait = {t.id: 0.05 * (len(targets) - n) for n, t in enumerate(targets)}
+    slow = SlowOpenTargets(wait.get)
+    offline.side_effect = slow
+    together = engine.find_clues(PAH, targets)
+
+    assert slow.finished == [t.id for t in reversed(targets)]
+    assert slow.most_at_once == 5  # they really did run at the same time
+    assert together == one_at_a_time
+    for group in GROUPS:  # same clues, same order, written out plainly
+        assert [(p.medicine.name, p.target.symbol) for p in together[group]] == \
+               [(p.medicine.name, p.target.symbol) for p in one_at_a_time[group]]
+
+
+def test_parallel_ranked_clues_are_the_same_as_one_at_a_time(offline):
+    targets = targets_named(*FIVE)
+    tray = sort_paths([p for t in targets for p in fetch.fetch_paths(PAH, t)])
+    offline.side_effect = SlowOpenTargets(lambda target_id: 0.01)
+    ranked = engine.find_ranked_clues(PAH, targets)
+    assert ranked.new_clues == rank_clues(tray["new_clue"])
+    assert ranked.being_studied == rank_clues(tray["being_studied"])
+
+
+def test_at_most_5_proteins_are_fetched_at_once(offline):
+    targets = fetch.fetch_targets(PAH)[:10]  # the ten with saved files
+    slow = SlowOpenTargets(lambda target_id: 0.03)
+    offline.side_effect = slow
+    engine.find_clues(PAH, targets)
+    assert engine.AT_ONCE == 5
+    assert slow.most_at_once == 5
+
+
+def test_parallel_calls_start_in_the_order_the_targets_were_given():
+    targets = targets_named(*FIVE) * 4
+    for _ in range(20):
+        with patch("moonlight.engine.fetch_paths", wraps=fetch.fetch_paths) as spy:
+            engine.find_clues(PAH, targets)
+        assert [call.args for call in spy.call_args_list] == [(PAH, t) for t in targets]
+
+
+def test_a_problem_with_one_protein_is_still_raised(offline):
+    targets = targets_named(*FIVE)
+
+    def broken(body):
+        if body["variables"]["targetId"] == targets[2].id:
+            return {"errors": [{"message": "boom"}]}
+        return fake_post_json(body)
+
+    offline.side_effect = broken
+    with pytest.raises(fetch.FetchError):
+        engine.find_clues(PAH, targets)
