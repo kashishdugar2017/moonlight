@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Sevoflurane is a medicine. Doctors already use it for something else. It grabs a protein called KCNK3. A protein is a tiny machine in your body. Sevoflurane turns KCNK3 up, like a volume knob. KCNK3 is linked to pulmonary arterial hypertension. That is a disease with high pressure in your blood pipes. The link score is 0.79. That is like 79 points out of 100. Sevoflurane has no link to this disease in the database. A database is a big place with facts.",
+            "thoughtSignature": "EmkKZwFpFH0TcZfk6oH+u7lAtAIsLk0UFFJhl/TE6VGMb5p4xJpNXlXAHW2tpHvDpHKHEh0FrPLJDunjp9T2khvNq4vWY9OVNiSrA7vvSzSop9MjHzmqGI16tbIC1X5G+eoXp4MGzfGCozQ="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 796,
+    "candidatesTokenCount": 122,
+    "totalTokenCount": 918,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 796
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "f031atmcHKKnjMcPxJLaiQ4"
+}
