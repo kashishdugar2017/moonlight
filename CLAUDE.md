@@ -25,7 +25,7 @@ down to her.
 3. filter.py     sort medicines into groups using Kashish's rules below
 4. rank.py       rank the remaining paths (plain code, no AI)
 5. explain.py    one path's records -> plain-language text (Gemini), then a grounding check
-6. app.py        Streamlit page: search, ranked list, path map, safety banner
+6. api.py + web/index.html  small API and Sidha's designed page: search, ranked list, safety line
 Shared record types live in moonlight/records.py: Disease, Target,
 MedicineForm, Medicine, Path.
 
@@ -78,7 +78,8 @@ Changing safety text or the grounding rule needs Kashish's explicit approval.
 - Never edit, skip or delete a test to make it pass. If a test looks wrong,
   stop and say so.
 - If something in the ticket does not match the repo or the data, stop and ask.
-- Stack: Python 3, requests, pytest. Streamlit for the page. Open Targets
+- Stack: Python 3, requests, pytest. FastAPI and uvicorn
+  for the API, one static HTML page. Open Targets
   queries are plain POST requests with a JSON body holding "query" and
   "variables". Keep dependencies few and list them in requirements.txt.
 
