@@ -77,3 +77,32 @@ def test_vardenafil_is_being_studied_and_its_tablet_form_is_not_a_new_clue():
 def test_being_studied_holds_exactly_udenafil_and_vardenafil():
     names = sorted(p.medicine.name.upper() for p in tray()["being_studied"])
     assert names == ["UDENAFIL", "VARDENAFIL"]
+
+
+# ---- Ticket 2.7. The golden path still holds in what the runner prints ----
+
+from unittest.mock import patch  # noqa: E402
+
+import cli  # noqa: E402
+
+
+def test_no_sildenafil_or_tadalafil_in_the_ranked_clues():
+    ranked = engine.find_ranked_clues(PAH, targets_named(*FIVE))
+    shown = set()
+    for clue in ranked.new_clues + ranked.being_studied:
+        shown |= all_names(clue.paths)
+    assert len(shown) > 0
+    assert not any("SILDENAFIL" in name or "TADALAFIL" in name for name in shown)
+
+
+def test_no_sildenafil_or_tadalafil_anywhere_in_the_runner_output():
+    printed = []
+    with patch("cli.fetch_targets", return_value=targets_named(*FIVE)), \
+            patch("builtins.print", side_effect=lambda *a, **k: printed.append(
+                " ".join(str(x) for x in a))):
+        code = cli.main(["pulmonary arterial hypertension"])
+    text = "\n".join(printed).upper()
+    assert code == 0
+    assert "NEW CLUES" in text and "VARDENAFIL" in text  # it really printed
+    assert "SILDENAFIL" not in text
+    assert "TADALAFIL" not in text

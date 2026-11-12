@@ -93,7 +93,7 @@ def test_it_prints_the_top_matches_and_uses_the_first():
 
 
 def test_pick_chooses_another_match():
-    with patch("cli.find_clues", wraps=engine.find_clues) as spy:
+    with patch("cli.find_ranked_clues", wraps=engine.find_ranked_clues) as spy:
         code, lines = run("pulmonary arterial hypertension", "--pick", "2")
     assert "Using: heritable pulmonary arterial hypertension (MONDO_0017148)" in lines
     assert spy.call_args.args[0].id == "MONDO_0017148"
@@ -123,7 +123,8 @@ def test_the_two_sections_come_in_order_with_the_direction_note_under_each():
 
 def test_new_clues_has_16_lines_and_being_studied_has_2():
     lines = cli.clue_lines(PAH, targets_named(*FIVE))
-    assert len(section(lines, "New clues")) == 16 + 1  # + the direction note
+    # + the rule text (ticket 2.7) and the direction note
+    assert len(section(lines, "New clues")) == 16 + 2
     assert len(section(lines, "Already being studied for this disease")) == 2 + 1
 
 
@@ -198,3 +199,118 @@ def test_when_no_disease_matches_it_says_so_and_stops():
     assert code != 0
     assert lines[0] == SAFETY
     assert "New clues" not in lines
+
+
+# ---- Ticket 2.7. The runner prints the clues in Kashish's ranked order ----
+
+from moonlight.rank import RULE_TEXT  # noqa: E402
+from moonlight.records import Medicine, MedicineForm, Path, Target  # noqa: E402
+
+RULE = (
+    "Ordered by how strongly the proteins are linked to the disease. "
+    "If a medicine acts on more than one protein, the scores are added. "
+    "Ties: more reports first, then alphabetical. "
+    "Being first on the list does not mean best."
+)
+NEW_ORDER = [
+    "Dibotermin Alfa", "Eptotermin Alfa", "Sevoflurane", "Desflurane",
+    "Isoflurane", "Doxapram", "Enflurane", "Halothane", "Atrasentan",
+    "Sparsentan", "Aprocitentan", "Clazosentan", "Pentoxifylline",
+    "Dipyridamole", "Avanafil", "Ibudilast",
+]
+
+
+def medicines_printed(lines):
+    """The medicine name at the start of each "- NAME (forms: ...)" line."""
+    return [l[2:].split(" (forms:")[0] for l in lines if l.startswith("- ")]
+
+
+# Example 1
+def test_new_clues_print_in_kashishs_order():
+    lines = section(cli.clue_lines(PAH, targets_named(*FIVE)), "New clues")
+    assert medicines_printed(lines) == [name.upper() for name in NEW_ORDER]
+
+
+# Example 2
+def test_being_studied_prints_udenafil_then_vardenafil():
+    lines = section(
+        cli.clue_lines(PAH, targets_named(*FIVE)),
+        "Already being studied for this disease",
+    )
+    assert medicines_printed(lines) == ["UDENAFIL", "VARDENAFIL"]
+
+
+# Example 3
+def test_the_rule_text_is_directly_under_new_clues_word_for_word():
+    lines = cli.clue_lines(PAH, targets_named(*FIVE))
+    assert RULE_TEXT == RULE
+    assert lines[lines.index("New clues") + 1] == RULE
+    assert lines.count(RULE) == 1
+
+
+def made_up_paths(disease, target):
+    """Stands in for fetch_paths: MADEUPINE acts on every protein it is asked
+    about, with 2 reports each. ONLYONE acts on BBB alone."""
+    def one(name, reports):
+        form = MedicineForm(id="ID_" + name, name=name, best_stage="APPROVAL")
+        return Path(
+            medicine=Medicine(name=name, forms=(form,)),
+            target=target,
+            disease=disease,
+            action_types=("INHIBITOR",) if target.symbol == "BBB" else ("AGONIST",),
+            score=target.score,
+            sources=tuple(
+                f"https://example.org/{name}/{target.symbol}/{n}"
+                for n in range(reports)
+            ),
+        )
+    paths = [one("MADEUPINE", 2)]
+    if target.symbol == "BBB":
+        paths.append(one("ONLYONE", 1))
+    return paths
+
+
+def made_up_lines():
+    weak = Target(id="ENSG_AAA", symbol="AAA", name="AAA", score=0.5)
+    strong = Target(id="ENSG_BBB", symbol="BBB", name="BBB", score=0.9)
+    with patch("moonlight.engine.fetch_paths", side_effect=made_up_paths):
+        return cli.clue_lines(PAH, [weak, strong])  # weakest handed in first
+
+
+# Example 4
+def test_a_medicine_on_two_proteins_is_one_line_with_the_added_score():
+    lines = made_up_lines()
+    madeupine = line_for(lines, "MADEUPINE")  # line_for insists on one line
+    assert "\n".join(lines).count("MADEUPINE (forms:") == 1
+    # Both proteins, strongest first, each with its score and its direction.
+    bbb = madeupine.index("protein BBB, link score 0.90, turns the protein down")
+    aaa = madeupine.index("protein AAA, link score 0.50, turns the protein up")
+    assert bbb < aaa
+    assert "total score 1.40" in madeupine
+    assert madeupine.index("total score 1.40") > aaa
+    assert "reports: 4" in madeupine
+    assert madeupine.count("http") == 1
+    # Added score 1.40 beats 0.90, so it is printed first.
+    assert medicines_printed(section(lines, "New clues")) == ["MADEUPINE", "ONLYONE"]
+
+
+def test_a_medicine_on_one_protein_shows_no_total_score():
+    onlyone = line_for(made_up_lines(), "ONLYONE")
+    assert "total score" not in onlyone
+    assert "reports: 1" in onlyone
+    lines = section(cli.clue_lines(PAH, targets_named(*FIVE)), "New clues")
+    assert not any("total score" in line for line in lines)
+
+
+def test_each_line_shows_the_number_of_reports():
+    lines = cli.clue_lines(PAH, targets_named(*FIVE))
+    assert "reports: 8" in line_for(lines, "Doxapram")
+    assert "reports: 274" in line_for(lines, "Sevoflurane")
+    assert "reports: 0" in line_for(lines, "Avanafil")
+    assert "reports: 0" in line_for(lines, "Vardenafil")
+
+
+def test_each_medicine_is_printed_once():
+    code, lines = run("pulmonary arterial hypertension")
+    printed = medicines_printed(lines)
+    assert len(printed) == len(set(printed))
