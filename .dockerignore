@@ -1,0 +1,14 @@
+# Leave everything out of the image...
+*
+
+# ...except the three things the app needs to run.
+!requirements.txt
+!moonlight/
+!web/
+
+# This leaves out tests/, fixtures/, docs/, .git, tickets/, scripts/ and
+# any .env file. Caches are left out even inside the folders kept above.
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.moonlight-cache/
