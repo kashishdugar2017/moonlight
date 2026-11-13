@@ -10,6 +10,16 @@ An AI explorer that finds old medicines that might help new/rare diseases
 
 **For research, not medical advice**
 
+## Run in a container
+```bash
+docker build -t moonlight .
+docker run --rm -p 8080:8080 -e GEMINI_API_KEY moonlight
+```
+Then open http://localhost:8080. The Gemini key is never inside the image.
+`-e GEMINI_API_KEY` passes the key from your own terminal into the running
+container (on Cloud Run, set it as a secret). Without a key the page still
+works and explanations use the built-in template.
+
 ## The Team
 - Co-founders: Me (Kashish, 9yo) and Papa (Shreshth)
 - Designer: Mumma (Sidha)
