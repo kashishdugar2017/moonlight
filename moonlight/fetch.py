@@ -7,17 +7,29 @@ Four questions, four functions:
     fetch_targets(disease, limit)  -> list of Target, highest score first
     fetch_paths(disease, target)   -> list of Path, one per Medicine family
 
-Nothing here sorts medicines into groups or ranks them. Every HTTP call
-goes through _post_json, so tests can swap that one function for saved files.
+and one about the data itself:
+
+    data_version()                 -> the Open Targets data release, like "26.09"
+
+Nothing here sorts medicines into groups or ranks them.
+
+Every question goes through _post_json. It looks in the saved results
+(moonlight/cache.py) first and only asks Open Targets when the answer is
+not there. Tests that swap _post_json swap the saved results out with it.
+Every real HTTP call goes through _send, on one shared connection.
 
 Field names were read from the saved responses in fixtures/ and from
-docs/schema-notes.md, not from memory.
+docs/schema-notes.md, not from memory. "meta", "dataVersion", "year",
+"month" and "iteration" were read from the live API on 2026-11-12.
 """
 
+import threading
+import time
 from typing import Dict, List, Optional
 
 import requests
 
+from moonlight import cache
 from moonlight.records import (
     Disease,
     Medicine,
@@ -30,6 +42,21 @@ from moonlight.records import (
 URL = "https://api.platform.opentargets.org/api/v4/graphql"
 TIMEOUT_SECONDS = 30
 SEARCH_SIZE = 10
+VERSION_CHECK_SECONDS = 3600  # a long-running program reads the version again after this
+# Kashish's decision, 2026-11-12. Open Targets sometimes gives a short
+# answer to "which medicines act on this protein?", with reports missing.
+# So that question is asked twice, and a third time only if the first two
+# answers differ. The answer with the most clinical reports is kept, and
+# only then is it saved. The medicines must be the same in every answer.
+# If they are not, Moonlight stops and saves nothing.
+ASKS_AT_FIRST = 2
+ASKS_AT_MOST = 3
+
+VERSION_QUERY = """
+query DataVersion {
+  meta { dataVersion { year month iteration } }
+}
+"""
 
 SEARCH_QUERY = """
 query DiseaseSearch($text: String!, $size: Int!) {
@@ -95,15 +122,129 @@ class FetchError(RuntimeError):
     """Open Targets answered, but with an error instead of data."""
 
 
-def _post_json(body: dict) -> dict:
+class AnswersDisagree(FetchError):
+    """Asked the same question again, Open Targets named different medicines."""
+
+
+# One connection to Open Targets, opened once and used for every call.
+_session = requests.Session()
+
+_version: Optional[str] = None
+_version_read_at = 0.0
+_version_lock = threading.Lock()
+_turn = threading.local()  # see started()
+
+
+def _send(body: dict) -> dict:
     """The one place Moonlight talks to Open Targets. Tests replace this."""
-    response = requests.post(URL, json=body, timeout=TIMEOUT_SECONDS)
+    response = _session.post(URL, json=body, timeout=TIMEOUT_SECONDS)
     response.raise_for_status()
     return response.json()
 
 
+def data_version() -> str:
+    """The Open Targets data release, read from the API. Like "26.09".
+
+    It is read once and remembered, because every saved result is filed
+    under it. A program that runs for a long time reads it again every hour.
+    """
+    global _version, _version_read_at
+    with _version_lock:
+        now = time.monotonic()
+        if _version is None or now - _version_read_at > VERSION_CHECK_SECONDS:
+            answer = _send({"query": VERSION_QUERY, "variables": {}})
+            if answer.get("errors") or not answer.get("data"):
+                raise FetchError(f"Open Targets did not give its data version: {answer}")
+            version = answer["data"]["meta"]["dataVersion"]
+            parts = [version["year"], version["month"], version["iteration"]]
+            _version = ".".join(str(part) for part in parts if part)
+            _version_read_at = now
+        return _version
+
+
+def forget_version() -> None:
+    """Forget the data version, so the next question reads it again."""
+    global _version
+    with _version_lock:
+        _version = None
+
+
+def _is_good(answer: dict) -> bool:
+    return not answer.get("errors") and answer.get("data") is not None
+
+
+def _rows(answer: dict) -> List[dict]:
+    target = answer["data"].get("target") or {}
+    return (target.get("drugAndClinicalCandidates") or {}).get("rows") or []
+
+
+def _report_count(answer: dict) -> int:
+    """How many clinical reports a medicines-for-a-protein answer holds."""
+    return sum(len(row.get("clinicalReports") or []) for row in _rows(answer))
+
+
+def _medicine_ids(answer: dict) -> List[str]:
+    """The id of every medicine form in the answer, sorted."""
+    return sorted((row.get("drug") or {}).get("id") or "" for row in _rows(answer))
+
+
+def _send_keeping_the_fullest(body: dict) -> dict:
+    """Ask twice. Ask a third time only if the first two answers differ.
+    Keep the answer with the most clinical reports in total.
+
+    If two answers are equally full, the earlier one is kept. An answer
+    that is an error is handed straight back. If the answers do not hold
+    the same medicines, AnswersDisagree is raised and nothing is saved.
+    """
+    answers: List[dict] = []
+    while len(answers) < ASKS_AT_MOST:
+        answer = _send(body)
+        if not _is_good(answer):
+            return answer
+        answers.append(answer)
+        if _medicine_ids(answer) != _medicine_ids(answers[0]):
+            raise AnswersDisagree(
+                "Open Targets gave different medicines for the same question "
+                f"({body['variables']}). Nothing was saved. Please tell Kashish."
+            )
+        if len(answers) == ASKS_AT_FIRST and answers[0] == answers[1]:
+            break
+    return max(answers, key=_report_count)  # max keeps the earliest of equals
+
+
+def _post_json(body: dict) -> dict:
+    """One question for Open Targets: from the saved results if it is there,
+    from the network if not. Only good answers are saved. Tests replace this.
+    """
+    version = data_version()
+    saved = cache.load("open-targets", version, body)
+    if saved is not None:
+        return saved
+    if body["query"] == TARGET_DRUGS_QUERY:
+        answer = _send_keeping_the_fullest(body)
+    else:
+        answer = _send(body)
+    if _is_good(answer):
+        cache.save("open-targets", version, body, answer)
+    return answer
+
+
+def started(tell) -> None:
+    """Ask to be told when this thread next begins a question.
+
+    tell is called once, with nothing, at that moment. The engine uses it to
+    start several proteins in order: the next one sets off as soon as this
+    one has begun.
+    """
+    _turn.tell = tell
+
+
 def _ask(query: str, variables: dict) -> dict:
     """Send one question and hand back the "data" part of the answer."""
+    tell = getattr(_turn, "tell", None)
+    if tell is not None:
+        _turn.tell = None
+        tell()
     answer = _post_json({"query": query, "variables": variables})
     if answer.get("errors"):
         raise FetchError(f"Open Targets returned errors: {answer['errors']}")

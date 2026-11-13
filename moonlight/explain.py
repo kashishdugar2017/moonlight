@@ -2,7 +2,8 @@
 
     facts_for(clue, disease)                     -> the only facts Gemini is given
     check_explanation(text, facts, known_names)  -> list of problems; empty means it passes
-    explain(clue, disease, known_names)          -> Explanation(text, source, model, tries)
+    explain(clue, disease, known_names, data_version)
+                                                 -> Explanation(text, source, model, tries)
 
 explain asks Gemini, checks the answer against Kashish's rules, and tries
 again up to three times. If nothing passes, Gemini cannot be reached, or 25
@@ -14,8 +15,13 @@ may only name its own medicine, so any other name from that collection fails.
 
 The ENDING is glued on by this code every time. Gemini never writes it.
 
-Every Gemini call goes through _gemini_request, so tests can swap that one
-function. Field names ("models", "name", "supportedGenerationMethods",
+A finished Gemini explanation is remembered. With a data_version (from
+fetch.data_version()) it is also saved on disk by moonlight/cache.py. It is
+found again only for the same facts, known names, ENDING, prompt text and
+data version, and it is checked against today's rules before it is reused.
+
+Every Gemini call goes through _gemini_request, on one shared connection,
+so tests can swap that one function. Field names ("models", "name", "supportedGenerationMethods",
 "candidates", "content", "parts", "text", "modelVersion", "generationConfig",
 "thinkingConfig", "thinkingBudget") were checked against live responses and
 fixtures/gemini/, not taken from memory.
@@ -30,6 +36,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 import requests
 
+from moonlight import cache
 from moonlight.filter import BEING_STUDIED, NEW_CLUE, group_of
 from moonlight.rank import Clue
 
@@ -395,13 +402,17 @@ def _headers() -> Dict[str, str]:
     return {"x-goog-api-key": key} if key else {}
 
 
+# One connection to Gemini, opened once and used for every call.
+_session = requests.Session()
+
+
 def _gemini_request(method: str, path: str, body: Optional[dict] = None,
                     timeout: float = REQUEST_SECONDS) -> Tuple[int, dict]:
     """The one place Moonlight talks to Gemini. Tests replace this.
 
     Returns the HTTP status and the JSON answer ({} if it was not JSON).
     """
-    response = requests.request(
+    response = _session.request(
         method, BASE_URL + path, headers=_headers(), json=body, timeout=timeout
     )
     try:
@@ -552,20 +563,58 @@ def _prompt(facts: dict, problems: List[str]) -> str:
 
 # ------------------------------------------------------------------ explain
 
+def _problems(text: str, facts: dict, known: List[str]) -> List[str]:
+    return check_explanation(text, facts, known) + _missing_for_being_studied(text, facts)
+
+
+def _saved(data_version: Optional[str], key: str, facts: dict, known: List[str],
+           ending: str) -> Optional[Explanation]:
+    """A saved Gemini explanation, if there is one and it still passes.
+
+    The saved text is checked again with today's rules. A text that would
+    not pass today is not reused.
+    """
+    if data_version is None:
+        return None
+    entry = cache.load("explanation", data_version, key)
+    if not isinstance(entry, dict) or not isinstance(entry.get("text"), str):
+        return None
+    text = entry["text"]
+    if not text.endswith(ending) or _problems(text, facts, known):
+        return None
+    return Explanation(text=text, source="gemini", model=entry.get("model"),
+                       tries=entry.get("tries", 1))
+
+
 def explain(clue: Clue, disease,
-            known_names: Optional[Iterable[str]] = None) -> Explanation:
+            known_names: Optional[Iterable[str]] = None,
+            data_version: Optional[str] = None) -> Explanation:
     """One clue -> a checked explanation, from Gemini or from the template.
 
     known_names: every medicine name Moonlight knows from this run. They are
     only used by the check. They are never shown to Gemini.
+
+    data_version: the Open Targets data release the clue came from
+    (fetch.data_version()). With it, a finished explanation is saved on
+    disk under that version. Without it, it is only remembered in memory.
     """
     facts = facts_for(clue, disease)
     known = sorted({name.lower() for name in known_names or () if name})
-    key = json.dumps([facts, known], sort_keys=True)
+    ending = ending_for(facts)
+    # Everything the text depends on. Change the ENDING or the prompt text
+    # and the key changes, so old text is never handed back.
+    key = json.dumps(
+        {"facts": facts, "known": known, "ending": ending,
+         "prompt": _prompt(facts, []), "data_version": data_version},
+        sort_keys=True,
+    )
     if key in _made:
         return _made[key]  # the same clue is not asked twice
+    saved = _saved(data_version, key, facts, known, ending)
+    if saved is not None:
+        _made[key] = saved
+        return saved
 
-    ending = ending_for(facts)
     deadline = time.monotonic() + TOTAL_SECONDS
     tries = 0
     problems: List[str] = []
@@ -574,9 +623,12 @@ def explain(clue: Clue, disease,
             answer, model = _ask_gemini(_prompt(facts, problems), deadline)
             tries += 1
             text = answer + " " + ending
-            problems = check_explanation(text, facts, known) + _missing_for_being_studied(text, facts)
+            problems = _problems(text, facts, known)
             if not problems:
                 _made[key] = Explanation(text=text, source="gemini", model=model, tries=tries)
+                if data_version is not None:
+                    cache.save("explanation", data_version, key,
+                               {"text": text, "model": model, "tries": tries})
                 return _made[key]
     except GeminiUnavailable:
         pass

@@ -790,3 +790,144 @@ def test_35_the_new_jargon_words_are_in_the_list_gemini_is_told():
 
 def test_35_plain_binding_is_not_jargon(facts):
     assert explain.check_explanation("It is binding to KCNK3.", facts) == []
+
+
+# =====================================================================
+# Ticket 6.1: finished explanations are saved in memory and on disk
+# =====================================================================
+
+from moonlight import cache  # noqa: E402
+
+VERSION = "26.09"  # how fetch.data_version() writes the live data version
+
+
+@pytest.fixture
+def saved_results(tmp_path, monkeypatch):
+    """A throwaway folder for the saved results."""
+    monkeypatch.setenv("MOONLIGHT_CACHE_DIR", str(tmp_path / "saved"))
+    cache.forget_memory()
+    yield tmp_path / "saved"
+    cache.forget_memory()
+
+
+def new_program():
+    """What a fresh run of Moonlight starts with: nothing in memory."""
+    explain.forget_everything()
+    cache.forget_memory()
+
+
+def test_61_a_saved_explanation_is_reused_by_a_new_run(sevoflurane, disease, saved_results):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini) as request:
+        first = explain.explain(sevoflurane, disease, KNOWN_NAMES, data_version=VERSION)
+        new_program()
+        calls = request.call_count
+        second = explain.explain(sevoflurane, disease, KNOWN_NAMES, data_version=VERSION)
+        assert request.call_count == calls  # no HTTP call, not even the model list
+    assert second == first
+    assert second.source == "gemini"
+    assert list(saved_results.rglob("*.json"))
+
+
+# Example 4
+def test_61_changing_the_ending_means_a_saved_explanation_is_not_reused(
+        sevoflurane, disease, saved_results):
+    new_ending = "This is only a clue to read about. Do not try it."
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        old = explain.explain(sevoflurane, disease, data_version=VERSION)
+        assert len(gemini.asked) == 1
+
+        new_program()  # only the disk holds the old text now
+        with patch("moonlight.explain.ENDING", new_ending):
+            new = explain.explain(sevoflurane, disease, data_version=VERSION)
+    assert len(gemini.asked) == 2  # asked afresh, the saved one was not reused
+    assert old.text.endswith(ENDING)
+    assert new.text.endswith(new_ending)
+    assert ENDING not in new.text
+
+
+def test_61_changing_the_ending_in_the_same_run_is_not_reused_either(
+        sevoflurane, disease, saved_results):
+    new_ending = "This is only a clue to read about. Do not try it."
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        explain.explain(sevoflurane, disease, data_version=VERSION)
+        with patch("moonlight.explain.ENDING", new_ending):  # memory still holds the old text
+            new = explain.explain(sevoflurane, disease, data_version=VERSION)
+    assert len(gemini.asked) == 2
+    assert new.text.endswith(new_ending)
+    assert ENDING not in new.text
+
+
+def test_61_changing_the_prompt_text_means_it_is_not_reused(sevoflurane, disease, saved_results):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    real_prompt = explain._prompt
+    with use(gemini):
+        explain.explain(sevoflurane, disease, data_version=VERSION)
+        new_program()
+        with patch("moonlight.explain._prompt",
+                   side_effect=lambda facts, problems: real_prompt(facts, problems) + "\n- A new rule."):
+            explain.explain(sevoflurane, disease, data_version=VERSION)
+    assert len(gemini.asked) == 2
+
+
+def test_61_different_facts_are_not_reused(clues, disease, saved_results):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        explain.explain(clues["SEVOFLURANE"], disease, data_version=VERSION)
+        new_program()
+        explain.explain(clues["DESFLURANE"], disease, data_version=VERSION)
+    assert len(gemini.asked) == 2  # Desflurane was asked afresh
+
+
+def test_61_a_different_data_version_asks_again(sevoflurane, disease, saved_results):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        explain.explain(sevoflurane, disease, data_version="26.09")
+        explain.explain(sevoflurane, disease, data_version="26.12")
+        new_program()
+        explain.explain(sevoflurane, disease, data_version="26.12")
+    assert len(gemini.asked) == 2
+
+
+def test_61_a_saved_text_that_breaks_a_rule_added_later_is_not_reused(
+        sevoflurane, disease, saved_results):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    real_check = explain.check_explanation
+
+    def stricter(text, facts, known_names=None):
+        # A rule added after the text was saved. The prompt text is the same.
+        extra = ["Rule 99: no knobs."] if "knob" in text else []
+        return real_check(text, facts, known_names) + extra
+
+    with use(gemini):
+        explain.explain(sevoflurane, disease, data_version=VERSION)
+        new_program()
+        with patch("moonlight.explain.check_explanation", side_effect=stricter):
+            later = explain.explain(sevoflurane, disease, data_version=VERSION)
+    assert len(gemini.asked) == 1 + explain.MAX_TRIES  # it was asked afresh
+    assert later.source == "template"  # the saved text was refused
+
+
+def test_61_template_answers_are_still_not_saved(sevoflurane, disease, saved_results):
+    with use(FakeGemini([BUSY])):
+        made = explain.explain(sevoflurane, disease, data_version=VERSION)
+    assert made.source == "template"
+    assert not list(saved_results.rglob("*.json"))
+
+
+def test_61_without_a_data_version_nothing_goes_to_disk(sevoflurane, disease, saved_results):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        explain.explain(sevoflurane, disease)
+        explain.explain(sevoflurane, disease)
+    assert len(gemini.asked) == 1  # memory still works, as before
+    assert not list(saved_results.rglob("*.json"))
+
+
+def test_61_gemini_calls_share_one_connection():
+    import requests
+    assert isinstance(explain._session, requests.Session)
+    assert isinstance(fetch._session, requests.Session)
+    assert explain._session is not fetch._session
