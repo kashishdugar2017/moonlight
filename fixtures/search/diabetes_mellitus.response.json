@@ -1,0 +1,457 @@
+{
+  "data": {
+    "search": {
+      "total": 454,
+      "hits": [
+        {
+          "id": "MONDO_0005015",
+          "entity": "disease",
+          "name": "diabetes mellitus",
+          "category": [
+            "endocrine system disorder",
+            "phenotype",
+            "gastrointestinal disease",
+            "nutritional or metabolic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "DM",
+                  "diabetes",
+                  "diabetes mellitus",
+                  "diabetes mellitus (disease)",
+                  "DM - Diabetes mellitus",
+                  "Diabetes NOS",
+                  "Diabetes mellitus (disorder)",
+                  "Diabetes mellitus, NOS"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0005148",
+          "entity": "disease",
+          "name": "type 2 diabetes mellitus",
+          "category": [
+            "endocrine system disorder",
+            "phenotype",
+            "gastrointestinal disease",
+            "nutritional or metabolic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "NIDDM",
+                  "T2D",
+                  "T2DM",
+                  "T2DM - type 2 diabetes mellitus",
+                  "adult onset diabetes",
+                  "adult-onset diabetes",
+                  "diabetes mellitis type 2",
+                  "diabetes mellitis type II",
+                  "diabetes mellitus, noninsulin-dependent",
+                  "diabetes mellitus, noninsulin-dependent, association with",
+                  "diabetes mellitus, noninsulin-dependent, late onset",
+                  "diabetes mellitus, type 2",
+                  "diabetes mellitus, type II",
+                  "diabetes, type 2",
+                  "insulin resistance, severe, digenic",
+                  "non-insulin dependent diabetes",
+                  "non-insulin dependent diabetes mellitus",
+                  "noninsulin dependent diabetes",
+                  "noninsulin-dependent diabetes mellitus",
+                  "type 2 diabetes",
+                  "type 2 diabetes mellitus",
+                  "type 2 diabetes mellitus non-insulin dependent",
+                  "type II diabetes",
+                  "type II diabetes mellitus",
+                  "Adult-Onset Diabetes Mellitus",
+                  "DIABETES MELLITUS TYPE 02",
+                  "Diabetes Mellitus, Adult Onset",
+                  "Diabetes Mellitus, Adult-Onset",
+                  "Diabetes Mellitus, Ketosis Resistant",
+                  "Diabetes Mellitus, Ketosis-Resistant",
+                  "Diabetes Mellitus, Maturity Onset",
+                  "Diabetes Mellitus, Maturity-Onset",
+                  "Diabetes Mellitus, Non Insulin Dependent",
+                  "Diabetes Mellitus, Non-Insulin-Dependent",
+                  "Diabetes Mellitus, Noninsulin Dependent",
+                  "Diabetes Mellitus, Slow Onset",
+                  "Diabetes Mellitus, Slow-Onset",
+                  "Diabetes Mellitus, Stable",
+                  "Ketosis-Resistant Diabetes Mellitus",
+                  "MODY",
+                  "Maturity Onset Diabetes Mellitus",
+                  "Maturity-Onset Diabetes Mellitus",
+                  "Slow-Onset Diabetes Mellitus",
+                  "Stable Diabetes Mellitus",
+                  "diabetes mellitus type 2",
+                  "non-insulin-dependent diabetes mellitus"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": [
+                  "diabetes mellitus, noninsulin-dependent, 2"
+                ]
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0012480",
+          "entity": "disease",
+          "name": "diabetes mellitus, transient neonatal, 2",
+          "category": [
+            "phenotype",
+            "endocrine system disorder",
+            "nutritional or metabolic disease",
+            "genetic, familial or congenital disease",
+            "gastrointestinal disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "ABCC8 transient neonatal diabetes mellitus (disease)",
+                  "diabetes mellitus, transient neonatal 2",
+                  "diabetes mellitus, transient neonatal, 2",
+                  "diabetes mellitus, transient neonatal, type 2",
+                  "transient neonatal diabetes mellitus (disease) caused by mutation in ABCC8"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0005147",
+          "entity": "disease",
+          "name": "type 1 diabetes mellitus",
+          "category": [
+            "phenotype",
+            "nutritional or metabolic disease",
+            "immune system disorder",
+            "gastrointestinal disease",
+            "endocrine system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "IDDM",
+                  "T1D",
+                  "T1DM",
+                  "diabetes mellitis type 1",
+                  "diabetes mellitis type I",
+                  "immune mediated diabetes",
+                  "insulin dependent diabetes",
+                  "juvenile diabetes",
+                  "type 1 diabetes",
+                  "type I diabetes",
+                  "type I diabetes mellitus",
+                  "Autoimmune Diabete",
+                  "Autoimmune Diabetes",
+                  "Brittle Diabetes Mellitus",
+                  "DIABETES MELLITUS TYPE 01",
+                  "DMI UNSPF NT ST UNCNTRLD",
+                  "DMI UNSPF UNCNTRLD",
+                  "Diabete, Autoimmune",
+                  "Diabetes Mellitus, Brittle",
+                  "Diabetes Mellitus, Insulin Dependent",
+                  "Diabetes Mellitus, Insulin-Dependent",
+                  "Diabetes Mellitus, Juvenile Onset",
+                  "Diabetes Mellitus, Juvenile-Onset",
+                  "Diabetes Mellitus, Ketosis Prone",
+                  "Diabetes Mellitus, Ketosis-Prone",
+                  "Diabetes Mellitus, Sudden Onset",
+                  "Diabetes Mellitus, Sudden-Onset",
+                  "Diabetes Mellitus, Type 1",
+                  "Diabetes Mellitus, Type I",
+                  "Diabetes mellitus type 1",
+                  "Diabetes mellitus type 1 (disorder)",
+                  "Diabetes mellitus type I",
+                  "Diabetes mellitus type I [insulin dependent type] [IDDM] [juvenile type], not stated as uncontrolled, with unspecified complication",
+                  "Diabetes mellitus type I [insulin dependent type] [IDDM] [juvenile type], uncontrolled, with unspecified complication",
+                  "Diabetes, Autoimmune",
+                  "IDDM - Insulin-dependent diabetes mellitus",
+                  "Insulin dependent diabetes mellitus",
+                  "Insulin-Dependent Diabetes Mellitus",
+                  "Juvenile onset diabetes mellitus",
+                  "Juvenile-Onset Diabetes Mellitus",
+                  "Ketosis-Prone Diabetes Mellitus",
+                  "Mellitus, Sudden-Onset Diabetes",
+                  "Sudden-Onset Diabetes Mellitus"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0016391",
+          "entity": "disease",
+          "name": "neonatal diabetes mellitus",
+          "category": [
+            "genetic, familial or congenital disease",
+            "endocrine system disorder",
+            "phenotype",
+            "gastrointestinal disease",
+            "nutritional or metabolic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "NDM",
+                  "congenital diabetes mellitus",
+                  "diabetes mellitus syndrome in newborn infant"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0020525",
+          "entity": "disease",
+          "name": "transient neonatal diabetes mellitus",
+          "category": [
+            "nutritional or metabolic disease",
+            "phenotype",
+            "gastrointestinal disease",
+            "genetic, familial or congenital disease",
+            "endocrine system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "TNDM",
+                  "transient neonatal diabetes mellitus",
+                  "transient neonatal diabetes mellitus (disease)"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "chromosome 6-associated transient diabetes mellitus",
+                  "diabetes mellitus, 6q24-related transient neonatal",
+                  "diabetes mellitus, transient neonatal"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2001012",
+          "entity": "disease",
+          "name": "age of onset of type 1 diabetes mellitus",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "age at onset of type 1 diabetes mellitus",
+                  "age type 1 diabetes mellitus symptoms begin"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0100164",
+          "entity": "disease",
+          "name": "permanent neonatal diabetes mellitus",
+          "category": [
+            "endocrine system disorder",
+            "genetic, familial or congenital disease",
+            "gastrointestinal disease",
+            "nutritional or metabolic disease",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "PNDM",
+                  "monogenic diabetes of infancy"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "diabetes mellitus, permanent neonatal"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2001013",
+          "entity": "disease",
+          "name": "age of onset of type 2 diabetes mellitus",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "age at onset of type 2 diabetes mellitus",
+                  "age type 2 diabetes mellitus symptoms begin"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0012192",
+          "entity": "disease",
+          "name": "permanent neonatal diabetes mellitus-pancreatic and cerebellar agenesis syndrome",
+          "category": [
+            "pregnancy or perinatal disease",
+            "gastrointestinal disease",
+            "nervous system disorder",
+            "endocrine system disorder",
+            "phenotype",
+            "genetic, familial or congenital disease",
+            "nutritional or metabolic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "pancreatic and cerebellar agenesis",
+                  "Permanent neonatal diabetes mellitus - pancreatic and cerebellar agenesis"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "paca"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -24,3 +24,8 @@ Format: date, the decision, why.
 - 2026-11-12: The page is medicine first. The medicine is the clue, so the reader sees medicines in my ranked order. Proteins are filter buttons.
 - 2026-11-12: The page is a small API with Mumma's designed page, not Streamlit.
 - 2026-11-12: Open Targets sometimes gives a short answer for the same question. Moonlight asks again and keeps the fullest answer, because every report is a real record and a shorter list has something missing.
+- 2026-11-13: Moonlight shows "Did you mean: <disease>?" and the person taps it. Moonlight never picks a disease for the person. A helper can point at the map, but the person chooses the road.
+- 2026-11-13: Measurements are hidden from the list of matches. "Diastolic blood pressure" is a number a doctor measures. It is not a disease. Open Targets marks them itself with the word "measurement", so Moonlight does not guess.
+- 2026-11-13: Only measurements are hidden for now. Other things that are not diseases, like "response to high sodium diet", stay until I have seen more examples.
+- 2026-11-13: When the words typed are on Open Targets' own "also called" list for a disease, Moonlight shows that word next to the name, like "Orthomyxoviridae infectious disease, also called: flu". Open Targets has no entry named "influenza", only this one. The word comes from Open Targets, never from Gemini.
+- 2026-11-13: A suggestion that is already the first match is not shown twice.

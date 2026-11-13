@@ -1,0 +1,336 @@
+{
+  "data": {
+    "search": {
+      "total": 52,
+      "hits": [
+        {
+          "id": "EFO_0007411",
+          "entity": "disease",
+          "name": "Orthomyxoviridae infectious disease",
+          "category": [
+            "respiratory or thoracic disease",
+            "infectious disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Orthomyxoviridae Infections",
+                  "Orthomyxoviridae disease",
+                  "disease due to Orthomyxoviridae (disorder)",
+                  "Influenza with other manifestations",
+                  "flu",
+                  "influenza infection",
+                  "orthomyxoviridae caused disease or disorder",
+                  "orthomyxoviridae disease or disorder",
+                  "influenza",
+                  "Influenza with non-respiratory manifestation (disorder)",
+                  "Influenza with other manifestations (disorder)",
+                  "Influenza with other manifestations NOS (disorder)",
+                  "Influenza, Human",
+                  "influenza virus infection",
+                  "influenza with non-respiratory manifestation"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0005460",
+          "entity": "disease",
+          "name": "swine influenza",
+          "category": [
+            "respiratory or thoracic disease",
+            "infectious disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "H1N1 Influenza",
+                  "H1N1 Virus infection",
+                  "H1N1 flu",
+                  "Influenza A (H1N1)",
+                  "Influenza A (H1N1) Virus infection",
+                  "Swine influenza virus caused influenza",
+                  "Swine influenza virus influenza",
+                  "swine flu",
+                  "SIV"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_1001488",
+          "entity": "disease",
+          "name": "influenza A (H1N1)",
+          "category": [
+            "infectious disease",
+            "respiratory or thoracic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0803628",
+          "entity": "disease",
+          "name": "haemophilus influenzae seropositivity",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0018695",
+          "entity": "disease",
+          "name": "avian influenza",
+          "category": [
+            "respiratory or thoracic disease",
+            "infectious disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0803684",
+          "entity": "disease",
+          "name": "influenza B seropositivity",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0000889",
+          "entity": "disease",
+          "name": "haemophilus meningitis",
+          "category": [
+            "infectious disease",
+            "phenotype",
+            "nervous system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Haemophilus influenzae bacterial meningitis",
+                  "Haemophilus influenzae caused bacterial meningitis",
+                  "Haemophilus meningitis (disorder)",
+                  "Hemophilus meningitis",
+                  "Meningitis, Haemophilus",
+                  "Haemophilus influenzae meningitis"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2041451",
+          "entity": "disease",
+          "name": "level of eukaryotic translation initiation factor 4B in blood serum",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood serum eukaryotic translation initiation factor 4B amount"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2040557",
+          "entity": "disease",
+          "name": "level of delta-aminolevulinic acid dehydratase in blood serum",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood serum delta-aminolevulinic acid dehydratase amount"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0033542",
+          "entity": "disease",
+          "name": "immunodeficiency 70",
+          "category": [
+            "genetic, familial or congenital disease",
+            "immune system disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "IMD70"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

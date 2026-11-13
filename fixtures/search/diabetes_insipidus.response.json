@@ -1,0 +1,351 @@
+{
+  "data": {
+    "search": {
+      "total": 267,
+      "hits": [
+        {
+          "id": "MONDO_0004782",
+          "entity": "disease",
+          "name": "diabetes insipidus",
+          "category": [
+            "urinary system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0007450",
+          "entity": "disease",
+          "name": "neurohypophyseal diabetes insipidus",
+          "category": [
+            "reproductive system or breast disease",
+            "nervous system disorder",
+            "genetic, familial or congenital disease",
+            "phenotype",
+            "endocrine system disorder",
+            "urinary system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "ADH deficiency",
+                  "AVP deficiency",
+                  "Arginine vasopressin deficiency",
+                  "antidiuretic hormone deficiency",
+                  "diabetes insipidus of pituitary gland",
+                  "hereditary CDI",
+                  "hereditary neurogenic diabetes insipidus",
+                  "pituitary gland diabetes insipidus",
+                  "vasopressin deficiency",
+                  "Central diabetes insipidus",
+                  "Hereditary central diabetes insipidus"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0016383",
+          "entity": "disease",
+          "name": "nephrogenic diabetes insipidus",
+          "category": [
+            "urinary system disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "ADH resistant diabetes insipidus",
+                  "diabetes insipidus nephrogenic",
+                  "diabetes insipidus nephrogenic X-linked",
+                  "diabetes insipidus nephrogenic type 1"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0019846",
+          "entity": "disease",
+          "name": "acquired central diabetes insipidus",
+          "category": [
+            "nervous system disorder",
+            "endocrine system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "acquired CDI",
+                  "acquired central diabetes insipidus",
+                  "acquired neurogenic diabetes insipidus"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0009099",
+          "entity": "disease",
+          "name": "nephrogenic diabetes insipidus-intracranial calcification syndrome",
+          "category": [
+            "urinary system disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Schofer-Beetz-Bohl syndrome",
+                  "Nephrogenic diabetes insipidus - intracranial calcification"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "Schofer Beetz Bohl syndrome",
+                  "diabetes insipidus nephrogenic intellectual disability and intracerebral calcification",
+                  "diabetes insipidus nephrogenic mental retardation and intracerebral calcification",
+                  "diabetes insipidus, nephrogenic, with mental retardation and intracerebral calcification"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0007451",
+          "entity": "disease",
+          "name": "diabetes insipidus, nephrogenic, autosomal",
+          "category": [
+            "urinary system disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "diabetes insipidus, nephrogenic, 2",
+                  "diabetes insipidus, nephrogenic, autosomal"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0018105",
+          "entity": "disease",
+          "name": "Wolfram syndrome",
+          "category": [
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "DIDMOAD",
+                  "DIDMOAD syndrome",
+                  "Wolfram syndrome",
+                  "diabetes insipidus, diabetes mellitus, optic atrophy, and deafness syndrome",
+                  "diabetes insipidus-diabetes mellitus-optic atrophy-deafness syndrome",
+                  "diabetes mellitus and insipidus with optic atrophy and deafness",
+                  "Diabetes insipidus - diabetes mellitus - optic atrophy - deafness"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0003381",
+          "entity": "disease",
+          "name": "pituitary gland disorder",
+          "category": [
+            "endocrine system disorder",
+            "reproductive system or breast disease",
+            "nervous system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "disease of pituitary gland",
+                  "disease or disorder of pituitary gland",
+                  "disorder of pituitary gland",
+                  "pituitary gland disease",
+                  "pituitary gland disease or disorder",
+                  "pituitary gland disorder"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "Orphanet_183628",
+          "entity": "disease",
+          "name": "Rare genetic hypothalamic or pituitary disease",
+          "category": [
+            "genetic, familial or congenital disease",
+            "endocrine system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0100070",
+          "entity": "disease",
+          "name": "neuroendocrine disorder",
+          "category": [
+            "endocrine system disorder",
+            "nervous system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "neuroendocrine system disease"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

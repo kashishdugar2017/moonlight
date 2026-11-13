@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  \"hypertension\",\n  \"essential hypertension\",\n  \"secondary hypertension\"\n]",
+            "thoughtSignature": "EmkKZwFpFH0TQs5zjAXG/lQ/VBPSBsYpsGzjT4auit5s6ODvL09JggNqhYsAeE0p+WHE+ZCOfbc54aLHgjk8mbkxX5jP01eW1vqXk5jeEAfIlJP9PG0Ne+xLbF/mdSMU1xY6yc/e14MwEjE="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 79,
+    "candidatesTokenCount": 21,
+    "totalTokenCount": 100,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 79
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "5572ap_1E7f6-sAP_IPxgAU"
+}

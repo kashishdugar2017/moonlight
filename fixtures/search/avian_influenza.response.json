@@ -1,0 +1,342 @@
+{
+  "data": {
+    "search": {
+      "total": 10,
+      "hits": [
+        {
+          "id": "MONDO_0018695",
+          "entity": "disease",
+          "name": "avian influenza",
+          "category": [
+            "respiratory or thoracic disease",
+            "infectious disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0010675",
+          "entity": "disease",
+          "name": "chronic venous hypertension",
+          "category": [
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "CVI"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2052037",
+          "entity": "disease",
+          "name": "amount of granzyme H (human) in blood",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood granzyme H (human) amount"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2052174",
+          "entity": "disease",
+          "name": "amount of granulysin (human) in blood",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood granulysin (human) amount"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_2052887",
+          "entity": "disease",
+          "name": "amount of natural cytotoxicity triggering receptor 1 (human) in blood",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood natural cytotoxicity triggering receptor 1 (human) amount"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0018039",
+          "entity": "disease",
+          "name": "selective IgM deficiency",
+          "category": [
+            "genetic, familial or congenital disease",
+            "hematologic disorder",
+            "phenotype",
+            "immune system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "selective IgM deficiency disease",
+                  "selective immunoglobulin M deficiency"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "SIgMD"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0033554",
+          "entity": "disease",
+          "name": "immunodeficiency 73b with defective neutrophil chemotaxis and lymphopenia",
+          "category": [
+            "immune system disorder",
+            "phenotype",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "IMD73B",
+                  "immunodeficiency 73b with defective neutrophil chemotaxis and lymphopenia"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0024781",
+          "entity": "disease",
+          "name": "immunodeficiency 102",
+          "category": [
+            "phenotype",
+            "immune system disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "IMD102",
+                  "SASH3 deficiency",
+                  "X-linked CID due to SASH3 deficiency",
+                  "X-linked combined immunodeficiency due to SASH3 deficiency",
+                  "immunodeficiency 102"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0010421",
+          "entity": "disease",
+          "name": "Bruton-type agammaglobulinemia",
+          "category": [
+            "phenotype",
+            "immune system disorder",
+            "genetic, familial or congenital disease",
+            "hematologic disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "BTK-deficiency",
+                  "Bruton type agammaglobulinemia",
+                  "Bruton's Sex-linked agammaglobulinemia",
+                  "Bruton's X-linked agammaglobulinemia",
+                  "Bruton-type agammaglobulinemia",
+                  "X-linked agammaglobulinemia",
+                  "agammaglobulinemia, X-linked 1, X-linked recessive",
+                  "BTK deficiency",
+                  "Bruton agammaglobulinemia tyrosine kinase deficiency",
+                  "Bruton's agammaglobulinaemia",
+                  "Bruton's type agammaglobulinemia",
+                  "X-linked agammaglobulinemia (disorder)"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "Bruton's agammaglobulinemia",
+                  "XLA",
+                  "agammaglobulinemia, BTK",
+                  "agammaglobulinemia, Bruton tyrosine kinase",
+                  "agammaglobulinemia, X-linked"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "Orphanet_247522",
+          "entity": "disease",
+          "name": "Primary ciliary dyskinesia - retinitis pigmentosa",
+          "category": [
+            "genetic, familial or congenital disease",
+            "disorder of visual system"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

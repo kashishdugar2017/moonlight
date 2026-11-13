@@ -1,0 +1,340 @@
+{
+  "data": {
+    "search": {
+      "total": 32,
+      "hits": [
+        {
+          "id": "MONDO_0005044",
+          "entity": "disease",
+          "name": "hypertensive disorder",
+          "category": [
+            "cardiovascular disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood pressure, high",
+                  "blood pressure, increased",
+                  "high blood pressure",
+                  "hypertensive disease",
+                  "increased blood pressure",
+                  "pressure, high blood",
+                  "vascular hypertensive disorder",
+                  "Arterial hypertension",
+                  "Systemic hypertension",
+                  "Hypertension",
+                  "(hypertensive disease) or (hypertension)",
+                  "Blood Pressures, High",
+                  "HTN",
+                  "HTN - hypertension",
+                  "High Blood Pressures",
+                  "High blood pressure (& [essential hypertension])",
+                  "Hypertensive disease (disorder)",
+                  "Hypertensive disease NOS (disorder)",
+                  "SURG COMP - HYPERTENSION",
+                  "[X]Hypertensive diseases",
+                  "[X]Hypertensive diseases (disorder)",
+                  "hyperpiesia",
+                  "hypertension NOS",
+                  "hypertensive disease NOS"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "High blood pressure"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": [
+                  "HTN"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0006336",
+          "entity": "disease",
+          "name": "diastolic blood pressure",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "DIABP",
+                  "diastolic pressure"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0005763",
+          "entity": "disease",
+          "name": "pulse pressure measurement",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0006335",
+          "entity": "disease",
+          "name": "systolic blood pressure",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "SYSBP",
+                  "systolic pressure"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "OBA_VT0000183",
+          "entity": "disease",
+          "name": "blood pressure trait",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "pressure of blood",
+                  "blood pressure"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0006943",
+          "entity": "disease",
+          "name": "blood pressure change measurement",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0006945",
+          "entity": "disease",
+          "name": "diastolic blood pressure change measurement",
+          "category": [
+            "measurement"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0005401",
+          "entity": "disease",
+          "name": "response to high sodium diet",
+          "category": [
+            "biological_process"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0005468",
+          "entity": "disease",
+          "name": "hypotensive disorder",
+          "category": [
+            "phenotype",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "hypotension",
+                  "hypotension (disease)",
+                  "Arterial hypotension",
+                  "Low blood pressure"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0001422",
+          "entity": "disease",
+          "name": "primary aldosteronism",
+          "category": [
+            "endocrine system disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Conn syndrome",
+                  "Conn's syndrome",
+                  "primary aldosteronism",
+                  "primary hyperaldosteronism"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

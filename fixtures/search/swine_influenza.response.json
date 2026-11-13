@@ -1,0 +1,48 @@
+{
+  "data": {
+    "search": {
+      "total": 1,
+      "hits": [
+        {
+          "id": "MONDO_0005460",
+          "entity": "disease",
+          "name": "swine influenza",
+          "category": [
+            "respiratory or thoracic disease",
+            "infectious disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "H1N1 Influenza",
+                  "H1N1 Virus infection",
+                  "H1N1 flu",
+                  "Influenza A (H1N1)",
+                  "Influenza A (H1N1) Virus infection",
+                  "Swine influenza virus caused influenza",
+                  "Swine influenza virus influenza",
+                  "swine flu",
+                  "SIV"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

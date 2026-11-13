@@ -1,0 +1,18 @@
+{
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "A person typed these words into a disease search box:\n\"Diabaties\"\n\nWhich disease names might they mean? Give at most 3, most likely first.\nUse the plain medical name of each disease, with the spelling corrected.\nIf the words are not about a disease, give an empty list.\nAnswer with a JSON list of strings and nothing else.\n"
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "thinkingConfig": {
+      "thinkingBudget": 0
+    },
+    "responseMimeType": "application/json"
+  }
+}

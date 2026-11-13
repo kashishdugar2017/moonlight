@@ -1,0 +1,341 @@
+{
+  "data": {
+    "search": {
+      "total": 15,
+      "hits": [
+        {
+          "id": "MONDO_0001200",
+          "entity": "disease",
+          "name": "secondary hypertension",
+          "category": [
+            "phenotype",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0001785",
+          "entity": "disease",
+          "name": "malignant secondary hypertension",
+          "category": [
+            "phenotype",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0009193",
+          "entity": "disease",
+          "name": "Pulmonary arterial hypertension associated with another disease",
+          "category": [
+            "cardiovascular disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "PAH associated with another disease",
+                  "Secondary PAH",
+                  "Secondary pulmonary arterial hypertension"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "EFO_0010675",
+          "entity": "disease",
+          "name": "chronic venous hypertension",
+          "category": [
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "CVI"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0006964",
+          "entity": "disease",
+          "name": "secondary hyperparathyroidism",
+          "category": [
+            "endocrine system disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "secondary hyperparathyroidism",
+                  "secondary hyperparathyroidism (disease)",
+                  "Hyperparathyroidism, Secondary",
+                  "secondary hyperparathyroidism (disorder)",
+                  "secondary hyperparathyroidism NOS"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": [
+                  "secondary hyperparathyroidism NOS"
+                ]
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0001530",
+          "entity": "disease",
+          "name": "secondary hyperparathyroidism of renal origin",
+          "category": [
+            "endocrine system disorder",
+            "urinary system disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "secondary hyperparathyroidism (of renal origin)"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0006947",
+          "entity": "disease",
+          "name": "renovascular hypertension",
+          "category": [
+            "cardiovascular disorder",
+            "urinary system disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "renovascular hypertension",
+                  "renovascular hypertension (disease)",
+                  "Hypertension, Renovascular",
+                  "Renovascular hypertension (disorder)"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0022430",
+          "entity": "disease",
+          "name": "persistent fetal circulation syndrome",
+          "category": [
+            "pregnancy or perinatal disease",
+            "genetic, familial or congenital disease",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "PPHN",
+                  "persistent fetal circulation",
+                  "persistent foetal circulation",
+                  "persistent pulmonary hypertension of the newborn",
+                  "Fetal circulation",
+                  "Persistent fetal circulation (disorder)",
+                  "Persistent fetal circulation syndrome (disorder)",
+                  "Persistent pulmonary hypertension of the newborn (disorder)",
+                  "congenital alveolar capillary dysplasia with misalignment of pulmonary veins"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0001741",
+          "entity": "disease",
+          "name": "hyperparathyroidism",
+          "category": [
+            "endocrine system disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "hyperparathyroidism",
+                  "Elevated blood parathyroid hormone level"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0015446",
+          "entity": "disease",
+          "name": "atypical coarctation of aorta",
+          "category": [
+            "cardiovascular disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Midaortic syndrome",
+                  "coarctation of the abdominal aorta",
+                  "mid-aortic dysplastic syndrome",
+                  "mid-aortic syndrome",
+                  "middle aortic syndrome"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
