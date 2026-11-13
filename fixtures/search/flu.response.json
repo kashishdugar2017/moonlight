@@ -1,0 +1,441 @@
+{
+  "data": {
+    "search": {
+      "total": 7304,
+      "hits": [
+        {
+          "id": "EFO_0007411",
+          "entity": "disease",
+          "name": "Orthomyxoviridae infectious disease",
+          "category": [
+            "respiratory or thoracic disease",
+            "infectious disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Orthomyxoviridae Infections",
+                  "Orthomyxoviridae disease",
+                  "disease due to Orthomyxoviridae (disorder)",
+                  "Influenza with other manifestations",
+                  "flu",
+                  "influenza infection",
+                  "orthomyxoviridae caused disease or disorder",
+                  "orthomyxoviridae disease or disorder",
+                  "influenza",
+                  "Influenza with non-respiratory manifestation (disorder)",
+                  "Influenza with other manifestations (disorder)",
+                  "Influenza with other manifestations NOS (disorder)",
+                  "Influenza, Human",
+                  "influenza virus infection",
+                  "influenza with non-respiratory manifestation"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0000432",
+          "entity": "disease",
+          "name": "lymphoplasmacytic lymphoma",
+          "category": [
+            "cancer or benign tumor",
+            "immune system disorder",
+            "hematologic disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Immunocytoma, lymphoplasmacytic type",
+                  "lymphoma, lymphoplasmacytic, malignant",
+                  "lymphoma, plasmacytic",
+                  "lymphoplasmacytic lymphoma",
+                  "lymphoplasmacytic lymphoma (Waldenstrom macroglobulinemia)",
+                  "lymphoplasmacytoid lymphoma"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0018310",
+          "entity": "disease",
+          "name": "Langerhans cell histiocytosis",
+          "category": [
+            "hematologic disorder",
+            "cancer or benign tumor",
+            "immune system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "LCH",
+                  "Langerhans cell granulomatosis",
+                  "Langerhans cell histiocytosis",
+                  "Langerhans cell histiocytosis, NOS",
+                  "Langerhans cell histiocytosis, Not otherwise specified",
+                  "histiocytosis X",
+                  "Langerhan's cell histiocytosis",
+                  "letterer-Siwe disease involving intra-abdominal lymph nodes",
+                  "letterer-Siwe disease involving intrapelvic lymph nodes",
+                  "letterer-Siwe disease involving intrathoracic lymph nodes",
+                  "letterer-Siwe disease involving lymph nodes of axilla and upper limb",
+                  "letterer-Siwe disease involving lymph nodes of head, face and neck",
+                  "letterer-Siwe disease involving lymph nodes of head, face, and neck",
+                  "letterer-Siwe disease involving lymph nodes of inguinal region and lower limb",
+                  "letterer-Siwe disease involving lymph nodes of multiple sites",
+                  "letterer-Siwe disease involving spleen",
+                  "letterer-Siwe disease of intra-abdominal lymph nodes",
+                  "letterer-Siwe disease of intrapelvic lymph nodes",
+                  "letterer-Siwe disease of intrathoracic lymph nodes",
+                  "letterer-Siwe disease of lymph nodes of axilla and upper limb",
+                  "letterer-Siwe disease of lymph nodes of axilla and/or upper limb",
+                  "letterer-Siwe disease of lymph nodes of head, face and neck",
+                  "letterer-Siwe disease of lymph nodes of head, face and/or neck",
+                  "letterer-Siwe disease of lymph nodes of inguinal region amd/or lower limb",
+                  "letterer-Siwe disease of lymph nodes of inguinal region and lower limb",
+                  "letterer-Siwe disease of lymph nodes of inguinal region and/or lower limb",
+                  "letterer-Siwe disease of lymph nodes of multiple sites",
+                  "letterer-Siwe disease of spleen"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "Langerhans-cell histiocytosis",
+                  "Lch"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0020561",
+          "entity": "disease",
+          "name": "myxoid/round cell liposarcoma",
+          "category": [
+            "cancer or benign tumor",
+            "musculoskeletal or connective tissue disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "MRCLS",
+                  "myxoid/round-cell liposarcoma"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0019454",
+          "entity": "disease",
+          "name": "myelodysplastic syndrome with excess blasts",
+          "category": [
+            "hematologic disorder",
+            "phenotype",
+            "cancer or benign tumor"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "MDS-EB",
+                  "RAEB",
+                  "myelodysplastic syndrome with Excess blasts",
+                  "refractory Anaemia with Excess blasts",
+                  "refractory Anaemia with an Excess of blasts",
+                  "refractory Anemia with Excess blasts",
+                  "refractory Anemia with an Excess of blasts"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0004967",
+          "entity": "disease",
+          "name": "acute lymphoblastic leukemia",
+          "category": [
+            "cancer or benign tumor",
+            "hematologic disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "ALL",
+                  "ALL - acute lymphocytic leukaemia",
+                  "ALL - acute lymphocytic leukemia",
+                  "acute lymphoblastic leukaemia (ALL)",
+                  "acute lymphoblastic leukaemia (disease)",
+                  "acute lymphoblastic leukemia",
+                  "acute lymphoblastic leukemia (ALL)",
+                  "acute lymphoblastic leukemia (disease)",
+                  "acute lymphoblastic leukemia/lymphoma",
+                  "acute lymphocytic leukaemia",
+                  "acute lymphocytic leukemia",
+                  "acute lymphocytic leukemias",
+                  "acute lymphogenous leukaemia",
+                  "acute lymphogenous leukemia",
+                  "acute lymphoid leukaemia",
+                  "acute lymphoid leukemia",
+                  "leukemia, lymphoblastic, malignant",
+                  "lymphoblastic leukemia, acute",
+                  "precursor Lymphoblasic leukaemia",
+                  "precursor Lymphoblasic leukemia",
+                  "precursor cell lymphoblastic leukaemia",
+                  "precursor cell lymphoblastic leukemia",
+                  "precursor lymphoblastic leukaemia",
+                  "precursor lymphoblastic leukemia"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": [
+                  "lymphoblastic leukaemia",
+                  "lymphoblastic leukemia"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0011996",
+          "entity": "disease",
+          "name": "chronic myeloid leukemia",
+          "category": [
+            "musculoskeletal or connective tissue disease",
+            "cancer or benign tumor",
+            "immune system disorder",
+            "hematologic disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "BCR-ABL Positive chronic myelogenous leukaemia",
+                  "BCR-ABL Positive chronic myelogenous leukemia",
+                  "CML",
+                  "CML - chronic myelogenous leukaemia",
+                  "CML - chronic myelogenous leukemia",
+                  "chronic granulocytic leukemia",
+                  "chronic myelocytic leukaemia",
+                  "chronic myelocytic leukemia",
+                  "chronic myelogenous leukaemia (CML)",
+                  "chronic myelogenous leukemia",
+                  "chronic myelogenous leukemia (CML)",
+                  "chronic myelogenous leukemia, BCR-ABL1 Positive",
+                  "chronic myelogenous leukemias",
+                  "chronic myeloid leukemia",
+                  "hematopoeitic - chronic myelocytic leukaemia (CML)",
+                  "hematopoeitic - chronic myelocytic leukemia (CML)",
+                  "leukimia, chronic myeloid",
+                  "myeloid leukemia, chronic"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "leukemia, chronic myelogenous",
+                  "leukemia, chronic myeloid",
+                  "leukemia, chronic myeloid, atypical"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0000873",
+          "entity": "disease",
+          "name": "lymphoblastic lymphoma",
+          "category": [
+            "cancer or benign tumor",
+            "hematologic disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "lymphoblastic lymphoma",
+                  "lymphoma, lymphoblastic, malignant",
+                  "precursor cell lymphoblastic lymphoma",
+                  "precursor lymphoblastic lymphoma"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "lymphoma, lymphoblastic"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MP_0001845",
+          "entity": "disease",
+          "name": "inflammation",
+          "category": [
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "inflammatory response"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0005059",
+          "entity": "disease",
+          "name": "leukemia",
+          "category": [
+            "cancer or benign tumor",
+            "hematologic disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood (leukemia)",
+                  "leukaemia (disease)",
+                  "leukemia",
+                  "leukemia (disease)",
+                  "leukemia, disease",
+                  "leukemia, malignant",
+                  "leukemias",
+                  "leukemias, general"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "leukaemia NOS"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

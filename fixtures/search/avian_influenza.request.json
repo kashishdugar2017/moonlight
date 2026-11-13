@@ -1,0 +1,7 @@
+{
+  "query": "\nquery DiseaseSearch($text: String!, $size: Int!) {\n  search(queryString: $text, entityNames: [\"disease\"], page: {index: 0, size: $size}) {\n    total\n    hits {\n      id\n      entity\n      name\n      category\n      object { ... on Disease { synonyms { relation terms } } }\n    }\n  }\n}\n",
+  "variables": {
+    "text": "Avian influenza",
+    "size": 10
+  }
+}

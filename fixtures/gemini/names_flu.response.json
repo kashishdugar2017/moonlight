@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  \"Influenza\",\n  \"Avian influenza\",\n  \"Swine influenza\"\n]",
+            "thoughtSignature": "EmkKZwFpFH0TqpBzkobawJbPb8tQk+6cD+RmOV79R9BAJ5xg9f6xo4Q9z7jizYq96E3vbTL4R8/LC1K4WpnmWW+eFXsziCLTPeN6gRzD8AWF7wu+8Wy3RWC3ytA54jFCWbj5coqnHTK1nQw="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 77,
+    "candidatesTokenCount": 23,
+    "totalTokenCount": 100,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 77
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "5Z72ar7CA8-e_uMP2KPJwQY"
+}

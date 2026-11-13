@@ -3,6 +3,7 @@
 Four questions, four functions:
 
     search_diseases(text)          -> list of Disease, best match first
+    search_matches(text)           -> the same list, each with its "also called" names
     fetch_disease(disease_id)      -> one Disease with its description filled in
     fetch_targets(disease, limit)  -> list of Target, highest score first
     fetch_paths(disease, target)   -> list of Path, one per Medicine family
@@ -21,11 +22,14 @@ Every real HTTP call goes through _send, on one shared connection.
 Field names were read from the saved responses in fixtures/ and from
 docs/schema-notes.md, not from memory. "meta", "dataVersion", "year",
 "month" and "iteration" were read from the live API on 2026-11-12.
+"category", "object", "synonyms", "relation" and "terms" in the search were
+read from the live API on 2026-11-13 and are saved in fixtures/search/.
 """
 
 import threading
 import time
-from typing import Dict, List, Optional
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
 import requests
 
@@ -62,10 +66,24 @@ SEARCH_QUERY = """
 query DiseaseSearch($text: String!, $size: Int!) {
   search(queryString: $text, entityNames: ["disease"], page: {index: 0, size: $size}) {
     total
-    hits { id entity name }
+    hits {
+      id
+      entity
+      name
+      category
+      object { ... on Disease { synonyms { relation terms } } }
+    }
   }
 }
 """
+
+# Kashish's decision, 2026-11-13. Measurements are hidden from the list of
+# matches. Open Targets says which entries they are: each search hit has a
+# "category" list, and a measurement's list holds this word. Nothing is
+# guessed from the name or the id.
+MEASUREMENT = "measurement"
+# The group of "also called" names that mean exactly the same disease.
+EXACT_SYNONYM = "hasExactSynonym"
 
 DISEASE_QUERY = """
 query DiseaseRecord($diseaseId: String!) {
@@ -254,14 +272,42 @@ def _ask(query: str, variables: dict) -> dict:
     return data
 
 
-def search_diseases(text: str) -> List[Disease]:
-    """Diseases matching the words, in the order Open Targets ranks them."""
+@dataclass(frozen=True)
+class Match:
+    """One search match and Open Targets' exact "also called" names for it."""
+
+    disease: Disease
+    also_called: Tuple[str, ...]
+
+
+def _exact_names(hit: dict) -> Tuple[str, ...]:
+    """The names Open Targets says mean exactly this disease. () if none."""
+    names: List[str] = []
+    for group in (hit.get("object") or {}).get("synonyms") or []:
+        if group["relation"] == EXACT_SYNONYM:
+            names.extend(group["terms"])
+    return tuple(names)
+
+
+def search_matches(text: str) -> List[Match]:
+    """Diseases matching the words, in the order Open Targets ranks them,
+    each with its exact "also called" names. Measurements are left out.
+
+    An answer saved before 2026-11-13 has no "category" and no "object".
+    Then nothing is hidden and there are no "also called" names.
+    """
     data = _ask(SEARCH_QUERY, {"text": text, "size": SEARCH_SIZE})
     return [
-        Disease(id=hit["id"], name=hit["name"])
+        Match(disease=Disease(id=hit["id"], name=hit["name"]), also_called=_exact_names(hit))
         for hit in data["search"]["hits"]
-        if hit["entity"] == "disease"
+        if hit["entity"] == "disease" and MEASUREMENT not in (hit.get("category") or [])
     ]
+
+
+def search_diseases(text: str) -> List[Disease]:
+    """Diseases matching the words, in the order Open Targets ranks them.
+    Measurements are left out."""
+    return [match.disease for match in search_matches(text)]
 
 
 def fetch_disease(disease_id: str) -> Optional[Disease]:

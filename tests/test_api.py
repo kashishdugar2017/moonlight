@@ -488,3 +488,282 @@ def test_the_api_asks_for_the_top_25_proteins(client):
     with patch("moonlight.api.fetch_targets", return_value=[]) as spy:
         client.get("/api/clues", params={"disease_id": PAH_ID})
     assert spy.call_args.args[1:] == (25,) or spy.call_args.kwargs.get("limit") == 25
+
+
+# ==== Ticket 5.2: search that understands people ====
+#
+# New tests only. Saved files, no network: the searches come from
+# fixtures/search/ and Gemini's names from fixtures/gemini/names_*.
+
+import contextlib
+import threading
+import time
+
+from moonlight import translate
+
+SEARCHES = ROOT / "fixtures" / "search"
+FLU_ENTRY = {"id": "EFO_0007411", "name": "Orthomyxoviridae infectious disease"}
+AVIAN = {"id": "MONDO_0018695", "name": "avian influenza"}
+SWINE = {"id": "MONDO_0005460", "name": "swine influenza"}
+MEASUREMENT_NAMES = [
+    "diastolic blood pressure", "pulse pressure measurement",
+    "systolic blood pressure", "blood pressure trait",
+    "blood pressure change measurement",
+    "diastolic blood pressure change measurement",
+]
+
+
+def _slug(text):
+    return re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
+
+
+def saved_search(body):
+    """Stands in for fetch._post_json: the saved search for these words."""
+    words = body["variables"]["text"]
+    if words == "pulmonary arterial hypertension":
+        return load(GOLDEN / "disease_search.response.json")
+    saved = SEARCHES / f"{_slug(words)}.response.json"
+    assert saved.exists(), f"no saved search for {words!r}"
+    return load(saved)
+
+
+def gemini_names(words=None, text=None):
+    """Stands in for translate._gemini_request: a saved answer, or this text."""
+    if text is None:
+        answer = load(ROOT / "fixtures" / "gemini" / f"names_{_slug(words)}.response.json")
+    else:
+        answer = {"candidates": [{"content": {"parts": [{"text": text}]}}]}
+
+    def fake(method, path, body=None, timeout=None):
+        if method == "GET":
+            return 200, {"models": [{
+                "name": "models/gemini-3.5-flash",
+                "supportedGenerationMethods": ["generateContent"],
+            }]}
+        return 200, answer
+    return fake
+
+
+@contextlib.contextmanager
+def search_world(gemini, open_targets=saved_search):
+    translate.forget_everything()
+    with patch("moonlight.fetch._post_json", side_effect=open_targets), \
+            patch("moonlight.translate._gemini_request", side_effect=gemini):
+        yield
+    translate.forget_everything()
+
+
+def search_json(client, words, gemini, **more):
+    with search_world(gemini, **more):
+        response = client.get("/api/search", params={"q": words})
+    assert response.status_code == 200
+    return response.json()
+
+
+# ---- Example 1 ----
+# Open Targets has no entry called "influenza". Its own entry for
+# influenza is "Orthomyxoviridae infectious disease", and it is already
+# the first match for "flu". Kashish, 2026-11-13: show Open Targets'
+# "also called" word beside it, and do not repeat it in did_you_mean.
+
+def test_flu_first_match_is_the_influenza_entry_with_its_small_print(client):
+    data = search_json(client, "flu", gemini_names("flu"))
+    assert data["matches"][0] == FLU_ENTRY
+    assert data["also_called"][FLU_ENTRY["id"]] == "flu"
+
+
+def test_flu_did_you_mean_holds_open_targets_entries_and_no_repeat(client):
+    data = search_json(client, "flu", gemini_names("flu"))
+    assert data["did_you_mean"] == [AVIAN, SWINE]
+    assert FLU_ENTRY not in data["did_you_mean"]  # already the first match
+
+
+def test_the_answer_has_three_parts_and_entries_are_id_and_name_only(client):
+    data = search_json(client, "flu", gemini_names("flu"))
+    assert set(data) == {"matches", "did_you_mean", "also_called"}
+    for entry in data["matches"] + data["did_you_mean"]:
+        assert set(entry) == {"id", "name"}
+    shown = {entry["id"] for entry in data["matches"] + data["did_you_mean"]}
+    assert set(data["also_called"]) <= shown
+
+
+# ---- Example 2 ----
+
+def test_diabaties_did_you_mean_holds_open_targets_entry_for_diabetes(client):
+    data = search_json(client, "Diabaties", gemini_names("Diabaties"))
+    assert data["matches"] == []
+    assert data["did_you_mean"][0] == {"id": "MONDO_0005015", "name": "diabetes mellitus"}
+    assert data["did_you_mean"][1] == {"id": "MONDO_0004782", "name": "diabetes insipidus"}
+
+
+# ---- Example 3 ----
+
+def test_high_blood_pressure_matches_hold_the_disease_and_no_measurement(client):
+    data = search_json(client, "high blood pressure", gemini_names("high blood pressure"))
+    names = [match["name"] for match in data["matches"]]
+    assert names[0] == "hypertensive disorder"  # the page shows "Hypertensive disorder"
+    for measurement in MEASUREMENT_NAMES:
+        assert measurement not in names
+    assert not [name for name in names if "measurement" in name or "trait" in name]
+    assert data["also_called"]["MONDO_0005044"] == "high blood pressure"
+
+
+def test_did_you_mean_never_holds_a_measurement(client):
+    data = search_json(client, "high blood pressure", gemini_names("high blood pressure"))
+    for entry in data["did_you_mean"]:
+        assert entry["name"] not in MEASUREMENT_NAMES
+    assert [entry["id"] for entry in data["did_you_mean"]] == ["MONDO_0001134", "MONDO_0001200"]
+
+
+# ---- Example 4 ----
+
+def test_a_disease_gemini_made_up_is_not_in_the_answer(client):
+    made_up = gemini_names(text='["Zorblax fever", "Swine influenza"]')
+    with search_world(made_up):
+        response = client.get("/api/search", params={"q": "flu"})
+    assert response.status_code == 200
+    assert response.json()["did_you_mean"] == [SWINE]
+    assert "zorblax" not in response.text.lower()
+
+
+# ---- Example 5 ----
+
+def test_gemini_unreachable_matches_still_come_back(client):
+    def unreachable(method, path, body=None, timeout=None):
+        raise requests.ConnectionError("no network")
+    data = search_json(client, "flu", unreachable)
+    assert data["matches"][0] == FLU_ENTRY and len(data["matches"]) == 10
+    assert data["did_you_mean"] == []
+
+
+def test_gemini_busy_matches_still_come_back(client):
+    def busy(method, path, body=None, timeout=None):
+        return 503, {"error": {"status": "UNAVAILABLE"}}
+    data = search_json(client, "flu", busy)
+    assert data["matches"][0] == FLU_ENTRY
+    assert data["did_you_mean"] == []
+
+
+def test_gemini_breaking_in_a_strange_way_shows_no_error(client):
+    def broken(method, path, body=None, timeout=None):
+        raise RuntimeError("something odd")
+    data = search_json(client, "flu", broken)
+    assert data["matches"][0] == FLU_ENTRY
+    assert data["did_you_mean"] == []
+
+
+def test_gemini_slow_matches_come_back_without_waiting_for_it(client):
+    let_go = threading.Event()
+
+    def slow(method, path, body=None, timeout=None):
+        let_go.wait(10)
+        raise requests.ConnectionError("too late")
+    try:
+        with patch("moonlight.api.DID_YOU_MEAN_SECONDS", 0.2):
+            began = time.monotonic()
+            data = search_json(client, "flu", slow)
+            took = time.monotonic() - began
+    finally:
+        let_go.set()
+    assert data["matches"][0] == FLU_ENTRY
+    assert data["did_you_mean"] == []
+    assert took < 5
+
+
+def test_the_wait_is_three_seconds_for_gemini_and_a_little_for_looking_up():
+    assert translate.GEMINI_SECONDS == 3
+    assert translate.GEMINI_SECONDS < api.DID_YOU_MEAN_SECONDS <= 6
+
+
+def test_open_targets_down_is_still_a_502_for_search(client):
+    def down(body):
+        raise requests.ConnectionError("down")
+    with search_world(gemini_names("flu"), open_targets=down):
+        response = client.get("/api/search", params={"q": "flu"})
+    assert response.status_code == 502
+
+
+# ---- Gemini and Open Targets run at the same time ----
+
+def test_gemini_and_the_search_run_at_the_same_time(client):
+    # Two runners who must both be on the track before either may go.
+    # One after the other, the first would wait for ever and the gate breaks.
+    gate = threading.Barrier(2, timeout=5)
+    passed = []
+
+    def gemini(method, path, body=None, timeout=None):
+        if method == "POST":
+            gate.wait()
+            passed.append("gemini")
+        return gemini_names("flu")(method, path, body, timeout)
+
+    def open_targets(body):
+        if body["variables"]["text"] == "flu" and "search" not in passed:
+            gate.wait()
+            passed.append("search")
+        return saved_search(body)
+
+    data = search_json(client, "flu", gemini, open_targets=open_targets)
+    assert sorted(passed) == ["gemini", "search"]
+    assert data["did_you_mean"] == [AVIAN, SWINE]
+
+
+# ---- Example 6 ----
+
+def test_pah_first_match_is_mondo_0015924_as_before(client):
+    words = "pulmonary arterial hypertension"
+    data = search_json(client, words, gemini_names(text=json.dumps([words])))
+    assert data["matches"][0] == {"id": PAH_ID, "name": words}
+    assert data["did_you_mean"] == []  # it is the first match already
+    assert data["also_called"] == {}
+
+
+def test_nothing_typed_asks_gemini_nothing(client):
+    with patch("moonlight.translate.did_you_mean") as spy, \
+            patch("moonlight.api.search_matches") as other:
+        response = client.get("/api/search", params={"q": "   "})
+    assert response.json() == {"matches": []}
+    spy.assert_not_called()
+    other.assert_not_called()
+
+
+# ---- the page ----
+
+def page_script(client):
+    return re.search(r"(?s)<script>(.*?)</script>", client.get("/").text).group(1)
+
+
+def test_did_you_mean_sits_above_the_matches_on_the_page(client):
+    page = client.get("/").text
+    assert 'data-slot="did-you-mean"' in page
+    assert "Did you mean" in page
+    assert page.index('data-slot="search"') < page.index('data-slot="did-you-mean"') \
+        < page.index('data-slot="matches"')
+
+
+def test_did_you_mean_is_hidden_until_there_is_a_suggestion(client):
+    page = client.get("/").text
+    tag = re.search(r'<[^>]*data-slot="did-you-mean"[^>]*>', page).group(0)
+    assert " hidden" in tag
+
+
+def test_a_new_search_removes_the_old_results_before_it_asks(client):
+    script = page_script(client)
+    search = script[script.index("async function search("):]
+    assert "clearResults()" in search
+    assert search.index("clearResults()") < search.index('ask("/api/search"')
+
+
+def test_the_page_never_picks_a_disease_by_itself(client):
+    # showClues is only ever called from a tap ("click") handler.
+    script = page_script(client)
+    calls = [m.start() for m in re.finditer(r"showClues\(", script)]
+    # Its own definition, the quick-start chip, and choice(), the one
+    # function that makes both the match buttons and the did-you-mean buttons.
+    assert len(calls) == 3
+    for at in calls:
+        before = script[:at]
+        if before.endswith("async function "):
+            continue
+        last_tap = before.rfind('addEventListener("click"')
+        assert last_tap != -1 and "\n  }\n" not in before[last_tap:]

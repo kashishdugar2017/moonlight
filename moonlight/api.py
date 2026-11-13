@@ -1,7 +1,7 @@
 """The small API behind Sidha's page. Medicine first.
 
     GET /                                   the page (web/index.html)
-    GET /api/search?q=                      matching diseases, best first
+    GET /api/search?q=                      matching diseases, best first, and "did you mean"
     GET /api/clues?disease_id=              Kashish's ranked clues, no explanations
     GET /api/explain?disease_id=&clue_id=   one clue's explanation
 
@@ -17,15 +17,23 @@ up again to find its clue. (Remembering is a later ticket.)
 """
 
 import pathlib
+import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Optional, Tuple
 
 import requests
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 
-from moonlight import explain
+from moonlight import explain, translate
 from moonlight.engine import find_clues
-from moonlight.fetch import FetchError, fetch_disease, fetch_targets, search_diseases
+from moonlight.fetch import (
+    FetchError,
+    fetch_disease,
+    fetch_targets,
+    search_diseases,
+    search_matches,
+)
 from moonlight.filter import (
     ALREADY_APPROVED,
     BEING_STUDIED,
@@ -43,6 +51,13 @@ TOP_TARGETS = 25  # the same number of proteins the terminal runner looks at
 
 # The left-out groups, in the order they are sent. Counts only.
 LEFT_OUT_GROUPS = (NOT_APPROVED, ALREADY_APPROVED, UNCLEAR_LINK)
+
+# "Did you mean" is given up on after this long, counted from the start of
+# the search: Gemini's 3 seconds, and 2 more to look its names up in Open
+# Targets. The normal matches never wait longer than this for it.
+DID_YOU_MEAN_SECONDS = translate.GEMINI_SECONDS + 2
+# Where "did you mean" runs while the normal search runs.
+_side_lane = ThreadPoolExecutor(max_workers=8, thread_name_prefix="did-you-mean")
 
 app = FastAPI(title="Moonlight", docs_url=None, redoc_url=None, openapi_url=None)
 
@@ -143,16 +158,47 @@ def page() -> str:
 
 @app.get("/api/search")
 def search(q: str = "") -> dict:
+    """The matches, as before, plus "did_you_mean" and "also_called".
+
+    Two swimmers, two lanes. Gemini's guesses set off in the side lane
+    while the normal Open Targets search swims here. If the side lane is
+    slow or goes wrong, the matches still come back, with no suggestions
+    and no error. Moonlight never picks a disease: it only offers them.
+    """
     text = q.strip()
     if not text:
         return {"matches": []}
+    give_up_at = time.monotonic() + DID_YOU_MEAN_SECONDS
+    guessing = _side_lane.submit(translate.did_you_mean, text)
     try:
         matches = search_diseases(text)
+        # The same question once more, answered from the saved results:
+        # is what the person typed one of an entry's "also called" names?
+        also_called = {
+            match.disease.id: translate.small_print(text, match)
+            for match in search_matches(text)
+        }
     except (FetchError, requests.RequestException):
         raise HTTPException(
             status_code=502, detail="Could not get the data from Open Targets."
         ) from None
-    return {"matches": [{"id": disease.id, "name": disease.name} for disease in matches]}
+    try:
+        guesses = guessing.result(timeout=max(0.0, give_up_at - time.monotonic()))
+    except Exception:  # slow, busy, unreachable or broken: no suggestions, no error
+        guesses = []
+
+    did_you_mean = []
+    for guess in guesses:
+        if matches and guess.disease.id == matches[0].id:
+            continue  # already the first match: not repeated
+        did_you_mean.append({"id": guess.disease.id, "name": guess.disease.name})
+        also_called.setdefault(guess.disease.id, guess.also_called)
+    return {
+        "matches": [{"id": disease.id, "name": disease.name} for disease in matches],
+        "did_you_mean": did_you_mean,
+        # id -> Open Targets' own "also called" word, only where there is one.
+        "also_called": {key: word for key, word in also_called.items() if word},
+    }
 
 
 @app.get("/api/clues")

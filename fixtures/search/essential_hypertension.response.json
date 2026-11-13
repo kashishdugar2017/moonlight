@@ -1,0 +1,422 @@
+{
+  "data": {
+    "search": {
+      "total": 11,
+      "hits": [
+        {
+          "id": "MONDO_0001134",
+          "entity": "disease",
+          "name": "essential hypertension",
+          "category": [
+            "phenotype",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "idiopathic hypertension",
+                  "primary hypertension"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0007781",
+          "entity": "disease",
+          "name": "essential hypertension, genetic",
+          "category": [
+            "phenotype",
+            "genetic, familial or congenital disease",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "blood pressure regulation QTL",
+                  "genetic essential hypertension",
+                  "hypertension, essential, salt-sensitive"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "EHT"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": [
+                  "hypertension, essential, susceptibility to, 2",
+                  "hypertension, essential, susceptibility to, 3",
+                  "hypertension, essential, susceptibility to, 4",
+                  "hypertension, essential, susceptibility to, 5",
+                  "hypertension, essential, susceptibility to, 6",
+                  "hypertension, susceptibility to"
+                ]
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0016293",
+          "entity": "disease",
+          "name": "congenital stationary night blindness",
+          "category": [
+            "disorder of visual system",
+            "genetic, familial or congenital disease",
+            "nervous system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "congenital essential nyctalopia",
+                  "congenital night blindness",
+                  "hereditary night blindness",
+                  "night blindness, congenital stationary"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": [
+                  "Oguchi's disease"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0019148",
+          "entity": "disease",
+          "name": "Wolman disease",
+          "category": [
+            "endocrine system disorder",
+            "genetic, familial or congenital disease",
+            "nutritional or metabolic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "Wolman disease with hypolipoproteinemia and acanthocytosis",
+                  "Wolman's disease"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "familial xanthomatosis",
+                  "liposomal acid lipase deficiency, Wolman type"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": [
+                  "lysosomal acid lipase deficiency"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0005045",
+          "entity": "disease",
+          "name": "hypertrophic cardiomyopathy",
+          "category": [
+            "musculoskeletal or connective tissue disease",
+            "cardiovascular disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "hypertrophic cardiomyopathy",
+                  "hypertrophic subaortic stenosis",
+                  "obstructive hypertrophic cardiomyopathy",
+                  "Asymmetric Septal Hypertrophies",
+                  "Asymmetric Septal Hypertrophy",
+                  "Cardiomyopathies, Hypertrophic",
+                  "Cardiomyopathies, Hypertrophic Obstructive",
+                  "Cardiomyopathy, Hypertrophic Obstructive",
+                  "Cardiomyopathy, hypertrophic",
+                  "HCM",
+                  "HCM - Hypertrophic cardiomyopathy",
+                  "HOCM - Hypertrophic obstructive cardiomyopathy",
+                  "HYPERTR OBSTR CARDIOMYOP",
+                  "Hypertrophic Cardiomyopathies",
+                  "Hypertrophic Obstructive Cardiomyopathies",
+                  "Hypertrophic Obstructive Cardiomyopathy",
+                  "Hypertrophic cardiomyopathy (disorder)",
+                  "Hypertrophic obstructive cardiomyopathy (disorder)",
+                  "Hypertrophies, Asymmetric Septal",
+                  "Hypertrophy, Asymmetric Septal",
+                  "IDIOPATHIC HYPERTROPHIC SUBVALV STENOSIS",
+                  "IHSS",
+                  "IHSSs",
+                  "Idiopathic Hypertrophic Subaortic Stenosis",
+                  "Idiopathic Hypertrophic Subvalvular Stenosis",
+                  "Obstructive Cardiomyopathies, Hypertrophic",
+                  "Obstructive Cardiomyopathy, Hypertrophic",
+                  "Obstructive cardiomyopathy",
+                  "Primary hypertrophic cardiomyopathy",
+                  "SUBVALV STENOSIS",
+                  "SUBVALV STENOSIS IDIOPATHIC HYPERTROPHIC",
+                  "Septal Hypertrophies, Asymmetric",
+                  "Septal Hypertrophy, Asymmetric",
+                  "Subvalvular Stenosis, Idiopathic Hypertrophic",
+                  "hyper. obst. cardiomyopathy",
+                  "hypertrophic myocardiopathy",
+                  "primary hypertrophic cardiomyopathy (disorder) [Ambiguous]"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": [
+                  "familial hypertrophic cardiomyopathy"
+                ]
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0014381",
+          "entity": "disease",
+          "name": "cholestasis, progressive familial intrahepatic, 4",
+          "category": [
+            "nutritional or metabolic disease",
+            "phenotype",
+            "hepatobiliary disorder",
+            "gastrointestinal disease",
+            "genetic, familial or congenital disease",
+            "endocrine system disorder"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "PFIC4",
+                  "TJP2 deficit",
+                  "TJP2 progressive familial intrahepatic cholestasis",
+                  "cholestasis, progressive familial intrahepatic, 4",
+                  "cholestasis, progressive familial intrahepatic, type 4",
+                  "progressive familial intrahepatic cholestasis caused by mutation in TJP2",
+                  "progressive familial intrahepatic cholestasis type 4"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "cholestasis, progressive familial intrahepatic 4",
+                  "progressive familial intrahepatic cholestasis 4"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0018816",
+          "entity": "disease",
+          "name": "isolated neonatal sclerosing cholangitis",
+          "category": [
+            "genetic, familial or congenital disease",
+            "endocrine system disorder",
+            "gastrointestinal disease",
+            "hepatobiliary disorder",
+            "phenotype"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "NSC"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0011497",
+          "entity": "disease",
+          "name": "hereditary North American Indian childhood cirrhosis",
+          "category": [
+            "gastrointestinal disease",
+            "phenotype",
+            "endocrine system disorder",
+            "genetic, familial or congenital disease",
+            "hepatobiliary disorder",
+            "nutritional or metabolic disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "NAIC",
+                  "NORTH American Indian childhood cirrhosis"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0011874",
+          "entity": "disease",
+          "name": "neonatal ichthyosis-sclerosing cholangitis syndrome",
+          "category": [
+            "genetic, familial or congenital disease",
+            "integumentary system disorder",
+            "endocrine system disorder",
+            "phenotype",
+            "hepatobiliary disorder",
+            "gastrointestinal disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "IHSC",
+                  "NISCH syndrome",
+                  "ichthyosis-hypotrichosis-sclerosing cholangitis syndrome",
+                  "neonatal ichthyosis-sclerosing cholangitis syndrome",
+                  "Ichthyosis - hypotrichosis - sclerosing cholangitis"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "ILVASC"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        },
+        {
+          "id": "MONDO_0010979",
+          "entity": "disease",
+          "name": "Timothy syndrome",
+          "category": [
+            "cardiovascular disorder",
+            "genetic, familial or congenital disease"
+          ],
+          "object": {
+            "synonyms": [
+              {
+                "relation": "hasExactSynonym",
+                "terms": [
+                  "TIMOTHY syndrome",
+                  "TS",
+                  "Timothy syndrome",
+                  "long QT syndrome-syndactyly syndrome",
+                  "LQT8",
+                  "Long QT syndrome - syndactyly",
+                  "Long QT syndrome type 8"
+                ]
+              },
+              {
+                "relation": "hasRelatedSynonym",
+                "terms": [
+                  "LQT8"
+                ]
+              },
+              {
+                "relation": "hasNarrowSynonym",
+                "terms": []
+              },
+              {
+                "relation": "hasBroadSynonym",
+                "terms": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

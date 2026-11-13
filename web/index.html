@@ -55,6 +55,8 @@ small,.fine{font-size:12px}.muted{color:var(--muted)}
 .match-list button{width:100%;text-align:left;border:0;background:transparent;padding:11px;border-radius:8px;color:var(--navy)}
 .match-list button:hover,.match-list button:focus-visible{background:var(--mist)}
 .match-list .secondary{display:block;font-size:11px;color:var(--muted)}
+.did-you-mean{margin-top:10px}.did-you-mean .chip-label{margin:0 0 9px;font-size:13px;font-weight:700;color:var(--navy)}
+.chip .secondary{display:block;font-size:11px;color:var(--muted)}.did-you-mean .chip{text-align:left;border-radius:14px}
 .chip-label{font-size:12px;color:var(--muted);margin:16px 0 9px}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .chip{border:1px solid #C7D7D9;border-radius:999px;padding:8px 12px;background:var(--paper);font-size:12px;color:var(--navy);min-height:36px}
@@ -169,6 +171,10 @@ div.explanation{padding:12px 13px}
       </div>
     </form>
     <p id="search-note" class="selection-note" role="status"></p>
+    <div id="did-you-mean" class="did-you-mean" data-slot="did-you-mean" hidden>
+      <p class="chip-label">Did you mean:</p>
+      <div class="chips" id="suggestions"></div>
+    </div>
     <ul id="disease-matches" class="match-list" data-slot="matches" aria-label="Disease matches" hidden></ul>
     <p class="chip-label">Quick start</p>
     <div class="chips" data-slot="chips"><button class="chip" type="button" data-disease-id="MONDO_0015924">Pulmonary arterial hypertension</button></div>
@@ -325,39 +331,75 @@ div.explanation{padding:12px 13px}
 
   const input = byId("disease-search"), matches = byId("disease-matches"), note = byId("search-note");
 
+  const didYouMean = byId("did-you-mean"), suggestions = byId("suggestions");
+
+  /* Take away the last disease's results, so they can never sit under
+     words they do not belong to. */
+  function clearResults() {
+    byId("results").hidden = true;
+    byId("found").hidden = true;
+    byId("problem").hidden = true;
+    byId("loading").hidden = true;
+    byId("disease-title").textContent = "";
+    byId("new-cards").replaceChildren();
+    byId("studied-cards").replaceChildren();
+    byId("filters").replaceChildren();
+  }
+
+  function clearChoices() {
+    matches.hidden = true;
+    matches.replaceChildren();
+    didYouMean.hidden = true;
+    suggestions.replaceChildren();
+  }
+
+  /* One disease the person can tap. Moonlight never taps for them.
+     The small print is Open Targets' own "also called" word. */
+  function choice(entry, alsoCalled, ending) {
+    const button = document.createElement("button");
+    const name = document.createElement("strong"), small = document.createElement("span");
+    button.type = "button";
+    name.textContent = capital(entry.name) + ending;
+    small.className = "secondary";
+    small.textContent = (alsoCalled ? "Also called: " + alsoCalled + " · " : "") + entry.id;
+    button.append(name, small);
+    button.addEventListener("click", () => {
+      clearChoices();
+      note.textContent = "";
+      input.value = capital(entry.name);
+      showClues(entry.id);
+    });
+    return button;
+  }
+
   async function search(text) {
     const mine = ++latest;
-    matches.hidden = true;
+    clearResults();
+    clearChoices();
     note.textContent = "Searching…";
-    let found;
+    let answer;
     try {
-      found = (await ask("/api/search", {q: text})).matches;
+      answer = await ask("/api/search", {q: text});
     } catch (problem) {
       if (mine === latest) note.textContent = "Moonlight could not search just now. Please try again.";
       return;
     }
     if (mine !== latest) return;
-    matches.replaceChildren();
+    const found = answer.matches, guesses = answer.did_you_mean || [], alsoCalled = answer.also_called || {};
+    for (const guess of guesses) {
+      const button = choice(guess, alsoCalled[guess.id], "?");
+      button.className = "chip";
+      suggestions.append(button);
+    }
+    didYouMean.hidden = !guesses.length;
     if (!found.length) {
-      note.textContent = "No disease matched “" + text + "”. Try another name.";
+      note.textContent = "No disease matched “" + text + "”." + (guesses.length ? "" : " Try another name.");
       return;
     }
     note.textContent = "Pick the disease you mean.";
     for (const match of found) {
-      const item = document.createElement("li"), button = document.createElement("button");
-      const name = document.createElement("strong"), id = document.createElement("span");
-      button.type = "button";
-      name.textContent = capital(match.name);
-      id.className = "secondary";
-      id.textContent = match.id;
-      button.append(name, id);
-      button.addEventListener("click", () => {
-        matches.hidden = true;
-        note.textContent = "";
-        input.value = capital(match.name);
-        showClues(match.id);
-      });
-      item.append(button);
+      const item = document.createElement("li");
+      item.append(choice(match, alsoCalled[match.id], ""));
       matches.append(item);
     }
     matches.hidden = false;
@@ -370,7 +412,7 @@ div.explanation{padding:12px 13px}
   });
 
   document.querySelectorAll("[data-disease-id]").forEach(chip => chip.addEventListener("click", () => {
-    matches.hidden = true;
+    clearChoices();
     note.textContent = "";
     input.value = chip.textContent;
     showClues(chip.dataset.diseaseId);

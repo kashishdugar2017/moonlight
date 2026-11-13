@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[\n  \"Diabetes mellitus\",\n  \"Diabetes insipidus\"\n]",
+            "thoughtSignature": "EmkKZwFpFH0TD1FKAgI2PhIrL2mn15EchWNIyE2b8IBXWwFpgHmA4iAREjiXFxN6U3by3H1DhbxITfhaoSaFpazCqg4tcZaRworE/IBm5iFgWBS44Hwp9K9xCc0y/8+GMrOBIv5Lk+/mc8g="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 79,
+    "candidatesTokenCount": 17,
+    "totalTokenCount": 96,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 79
+      }
+    ],
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-3.6-flash",
+  "responseId": "5p72asz1BZ3J39IPpJ3r4QY"
+}
