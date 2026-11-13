@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Moonlight</title>
+<style>
+/* MOONLIGHT / LUNAR OBSERVATORY. Sidha's design. One file, mobile first, no outside assets. */
+:root{
+  --cream:#F5F0E8;--navy:#101F31;--teal:#429D9A;--gold:#E9B45B;
+  --paper:#FFFFFF;--mist:#E7F1EF;--slate:#EAEFF2;--line:#D5E0E2;
+  --muted:#566877;--neutral:#53606C;--neutral-bg:#EFF1F3;
+  --radius:14px;--space:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--navy);font:400 15px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{cursor:pointer}a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wordmark,h1,h2,h3,.display{font-family:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.035em}
+.wrap{width:min(100% - 32px,1060px);margin-inline:auto}
+[hidden]{display:none!important}.hide{display:none!important}
+
+/* header and the pinned safety line */
+.site-header{background:var(--navy);color:#F5F0E8;padding:20px 0}
+.brandline{display:flex;align-items:center;gap:10px}
+.wordmark{font-size:clamp(27px,5.5vw,35px);line-height:1.12;font-weight:700;color:#F5F0E8}
+.brand-dot{background:var(--gold);width:7px;height:7px;border-radius:100%;flex:none}
+.tagline{margin:8px 0 0;color:#C4D2D9;font-size:13px;max-width:640px}
+.safety{position:sticky;top:0;z-index:10;background:#203448;color:white;border-bottom:1px solid #5F9E9B}
+.safety-inner{display:flex;align-items:flex-start;gap:10px;padding:11px 0;font-size:12px;line-height:1.45;color:#F4F0E9}
+.safety svg{flex:none;margin-top:1px}
+
+/* type */
+.main{padding:28px 0 58px;min-height:60vh}
+.eyebrow{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.13em;color:#327F80}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(29px,6vw,43px);line-height:1.15;margin:9px 0 10px;font-weight:650}
+h2{font-size:clamp(23px,4vw,29px);line-height:1.2;margin:0 0 11px}
+h3{font-size:22px;line-height:1.2;margin:0}
+small,.fine{font-size:12px}.muted{color:var(--muted)}
+.intro{max-width:760px;margin-bottom:24px}.intro h1{max-width:650px}.intro p{color:var(--muted);margin:0}
+
+/* search */
+.search-area{max-width:760px}
+.search-box{border:1px solid #C4D4D1;background:var(--paper);border-radius:var(--radius);padding:8px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 22px #101F3108}
+.search-box svg{flex:none;color:var(--teal);margin-left:6px}
+.search-box input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--navy);padding:9px 0;font-size:15px}
+.search-box input:focus-visible{outline:none}.search-box:focus-within{outline:2px solid var(--teal);outline-offset:2px}
+.btn{border:0;border-radius:9px;background:#287D7C;color:#fff;padding:11px 14px;font-weight:650;font-size:13px;min-height:42px}
+.btn:hover{background:#2C7977}
+.match-list{margin:8px 0 0;padding:5px;list-style:none;border:1px solid var(--line);background:var(--paper);border-radius:12px;max-width:720px}
+.match-list li+li{border-top:1px solid var(--line)}
+.match-list button{width:100%;text-align:left;border:0;background:transparent;padding:11px;border-radius:8px;color:var(--navy)}
+.match-list button:hover,.match-list button:focus-visible{background:var(--mist)}
+.match-list .secondary{display:block;font-size:11px;color:var(--muted)}
+.chip-label{font-size:12px;color:var(--muted);margin:16px 0 9px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid #C7D7D9;border-radius:999px;padding:8px 12px;background:var(--paper);font-size:12px;color:var(--navy);min-height:36px}
+.chip:hover,.chip:focus-visible{background:var(--mist);border-color:var(--teal)}
+.selection-note{min-height:19px;font-size:12px;color:var(--muted);margin-top:10px}
+
+/* results: one column */
+.results{max-width:760px;margin-top:40px;scroll-margin-top:70px}
+.section{margin-top:46px}.section-head{display:flex;align-items:center;gap:12px}
+.section-head h2,.section>h2{color:#327F80}
+.rule{background:var(--mist);border-left:3px solid var(--teal);padding:14px 15px;border-radius:0 11px 11px 0;font-size:13px;line-height:1.55;margin:6px 0 17px}
+.filter-label{font-size:12px;color:var(--muted);margin:0 0 9px}
+.filters{margin-bottom:8px}
+.filter{font-weight:700}
+.filter[aria-pressed="true"]{background:#287D7C;border-color:#287D7C;color:#fff}
+.filter-note{font-size:12px;color:var(--muted);min-height:19px;margin:0 0 12px}
+.cards{display:grid;gap:15px}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:var(--radius);padding:18px 16px 17px;box-shadow:0 4px 13px #101F3107;min-width:0}
+.card-top{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.card-title{display:flex;align-items:flex-start;gap:11px;min-width:0}
+.rank{flex:none;min-width:30px;height:30px;padding:0 6px;border-radius:999px;background:var(--mist);color:#286F70;font-weight:750;font-size:13px;display:inline-flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.card h3{overflow-wrap:anywhere}
+.forms{font-size:12px;color:var(--muted);margin:8px 0 0}
+.reports{font-size:11px;color:var(--muted);white-space:nowrap;text-align:right;flex:none}
+.card-subhead{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:750;margin:18px 0 8px}
+.path{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 12px}
+.path-node{background:var(--mist);border-radius:7px;padding:6px 9px;font-size:11px;overflow-wrap:anywhere}
+.path-node.protein-node{font-weight:700;color:#327F80}
+.path-arrow{color:var(--teal);font-size:16px;line-height:1}
+.protein-list{display:grid;gap:8px;margin:13px 0}
+.protein-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:0 0 8px}
+.protein-row:last-child{border-bottom:0;padding-bottom:0}
+.protein-id{font-weight:700;font-size:13px}
+.protein-facts{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.score{font-weight:750;color:var(--navy);font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.machine-note{font-size:12px;background:var(--slate);border-radius:6px;padding:8px 10px;margin:4px 0 12px;color:var(--neutral)}
+.direction{display:inline-flex;align-items:center;gap:5px;border:1px solid #C8CFD6;background:var(--neutral-bg);color:var(--neutral);border-radius:6px;padding:4px 8px;font-size:12px;font-weight:650;white-space:nowrap}
+.direction svg{width:13px;height:13px}
+.direction-note{font-size:12px;color:var(--muted);margin:12px 0 16px}
+
+/* explanation slot */
+.explanation{margin:16px 0;border:1px solid var(--line);background:#F8FAFA;border-radius:10px;min-height:115px}
+div.explanation{padding:12px 13px}
+.explanation summary{cursor:pointer;list-style:none;padding:12px 13px;position:relative}
+.explanation summary::-webkit-details-marker{display:none}.explanation summary:focus-visible{outline-offset:-2px}
+.slot-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:750;color:#327F80;margin-bottom:6px}
+.excerpt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;height:4.5em;line-height:1.5;font-size:12px;color:var(--navy)}
+.read-more{display:inline-block;color:#327F80;font-size:12px;font-weight:750;margin-top:6px}
+.explanation[open] .excerpt{display:none}.explanation[open] .read-more{display:none}
+.full-explanation{padding:0 13px 14px;font-size:12px;line-height:1.65;color:var(--navy)}.full-explanation p{margin:0}
+.explanation[open] summary{padding-bottom:6px}
+.placeholder{color:var(--muted);font-size:12px;margin:0 0 10px}
+.ghost-btn{display:inline-block;text-decoration:none;color:#287D7C;border:1px solid #A9CACB;background:white;padding:9px 12px;border-radius:9px;font-size:12px;font-weight:700}
+.ghost-btn:hover{background:var(--mist)}
+.ending{background:var(--cream);padding:12px;border-radius:9px;font-size:12px;line-height:1.6;margin:13px 0;border:1px solid #EAE4D8}
+.card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.source-link{font-size:12px;font-weight:700}
+.phase{display:inline-flex;border-radius:6px;border:1px solid #CBD3DB;background:var(--neutral-bg);font-size:12px;padding:4px 8px;color:var(--neutral);font-weight:700}
+
+/* being studied box and left-out counts */
+.studied{background:#E9EEF2;border:1px solid #D0DBE2;border-radius:16px;padding:18px 14px}
+.studied h2{color:var(--navy)}.studied .card{border-left-color:#788A9F;box-shadow:none}
+.section-desc{font-size:12px;color:var(--muted);margin:0 0 16px}
+.left-out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.count{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 8px;text-align:center}
+.count strong{display:block;font-size:26px;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.2}
+.count span{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+.page-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+
+/* states */
+.state-box{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:17px}
+.loading-line{display:flex;align-items:center;gap:10px;font-weight:700}
+.spinner{width:17px;height:17px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
+.skeleton{border-radius:5px;background:linear-gradient(90deg,#E8EEEC 20%,#F5F8F7 50%,#E8EEEC 80%);background-size:200% 100%;animation:shimmer 2s linear infinite;height:12px;margin:10px 0}
+.skeleton.short{width:58%}.skeleton.medium{width:80%}
+.empty-box h3{font-size:19px}.empty-box p{font-size:13px;color:var(--muted);margin:8px 0 0}
+
+.site-footer{border-top:1px solid var(--line);padding:24px 0 36px}
+.footer-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px}
+.footer-note{margin-top:12px;color:var(--muted);font-size:11px}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes shimmer{to{background-position-x:-200%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.spinner,.skeleton{animation:none}}
+@media(min-width:760px){.main{padding-top:44px;padding-bottom:74px}.intro{margin-bottom:28px}.card{padding:21px 22px}.studied{padding:23px}.left-out{gap:13px}.count{padding:16px}.safety-inner{font-size:13px;padding:12px 0}.rule{padding:15px 18px}}
+@media(max-width:540px){.card-top{gap:8px}.reports{white-space:normal}.safety-inner{padding:9px 0;font-size:11px}.site-header{padding:16px 0}.page-actions{flex-direction:column}.page-actions button{text-align:center}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap">
+  <div class="brandline"><span class="wordmark">Moonlight</span><span class="brand-dot" aria-hidden="true"></span></div>
+  <p class="tagline">An explorer that shows which existing medicines act on the proteins linked to a disease, using open research data.</p>
+</div></header>
+
+<div class="safety" data-slot="safety-line" role="note"><div class="wrap safety-inner"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2 21 6v6c0 5-3.4 8.2-9 10-5.6-1.8-9-5-9-10V6l9-4Z"/><path d="M12 7v6m0 3h.01"/></svg><span>For learning and research exploration, not medical advice. Never start, stop or change any medicine without a doctor.</span></div></div>
+
+<main class="wrap main">
+
+  <section id="home" class="search-area">
+    <div class="intro">
+      <div class="eyebrow">Explore open research</div>
+      <h1>Old medicines. New questions.</h1>
+      <p>Start with a disease. Follow the research clues, not treatment recommendations.</p>
+    </div>
+    <form id="search-form" data-slot="search" autocomplete="off">
+      <label for="disease-search" class="fine muted">Search by disease name</label>
+      <div class="search-box">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m17 17 4.5 4.5"/></svg>
+        <input id="disease-search" type="search" placeholder="Type a disease name" aria-controls="disease-matches">
+        <button class="btn" type="submit">Explore</button>
+      </div>
+    </form>
+    <p id="search-note" class="selection-note" role="status"></p>
+    <ul id="disease-matches" class="match-list" data-slot="matches" aria-label="Disease matches" hidden></ul>
+    <p class="chip-label">Quick start</p>
+    <div class="chips" data-slot="chips"><button class="chip" type="button" data-disease-id="MONDO_0015924">Pulmonary arterial hypertension</button></div>
+  </section>
+
+  <section id="results" class="results" hidden>
+
+    <div id="loading" class="state-box" data-slot="loading" role="status" hidden>
+      <div class="loading-line"><span aria-hidden="true" class="spinner"></span><span>Please wait, fetching data</span></div>
+      <div class="skeleton"></div><div class="skeleton medium"></div><div class="skeleton short"></div>
+    </div>
+
+    <div id="problem" class="state-box empty-box" role="alert" hidden>
+      <h3>Moonlight could not get the data.</h3>
+      <p id="problem-text"></p>
+    </div>
+
+    <div id="found" hidden>
+      <div class="eyebrow">Disease results</div>
+      <h1 id="disease-title"></h1>
+      <p class="muted">Medicines that act on the proteins linked to this disease. These are connections worth reading about, never treatments.</p>
+
+      <section class="section" data-slot="new-clues" id="new-clues">
+        <div class="section-head"><h2>New clues</h2></div>
+        <div id="new-list">
+          <p class="rule" data-slot="rule-text" id="rule-text"></p>
+          <p class="filter-label">Show only the medicines for one protein. Tap again to show all.</p>
+          <div class="chips filters" data-slot="filters" id="filters"></div>
+          <p class="filter-note" id="filter-note" role="status"></p>
+          <div class="cards" id="new-cards"></div>
+        </div>
+        <div class="state-box empty-box" data-slot="empty" id="empty" hidden>
+          <h3>No new clues found for this disease.</h3>
+          <p>There may not be enough information in the available research records yet. You can try another disease or check back when new data is available. This does not mean a treatment exists or does not exist.</p>
+        </div>
+      </section>
+
+      <section class="section studied" data-slot="studied" id="studied">
+        <h2>Already being studied for this disease</h2>
+        <p class="section-desc">A separate research category, not a prediction of effectiveness.</p>
+        <p class="filter-note" id="studied-note"></p>
+        <div class="cards" id="studied-cards"></div>
+      </section>
+
+      <section aria-labelledby="left-out-title" class="section" data-slot="left-out">
+        <h2 id="left-out-title">Left-out counts</h2>
+        <p class="section-desc">Counts only. No medicine names are displayed here.</p>
+        <div class="left-out">
+          <div class="count"><strong id="count-not-approved">0</strong><span>Not approved anywhere</span></div>
+          <div class="count"><strong id="count-already-approved">0</strong><span>Already approved for this disease</span></div>
+          <div class="count"><strong id="count-unclear-link">0</strong><span>Unclear link</span></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="page-actions"><button class="ghost-btn" type="button" id="new-search">New search</button></div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="about"><div class="wrap">
+  <div class="footer-row"><span>About Us</span><span>Developed by The SMAKS Project</span></div>
+  <div class="footer-note">Moonlight · Research exploration only · Not clinical findings · Data from Open Targets</div>
+</div></footer>
+
+<!-- One medicine card. The script copies this and fills the slots. -->
+<template id="card-template">
+  <article class="card" data-slot="card">
+    <div class="card-top">
+      <div class="card-title">
+        <span class="rank" data-slot="rank" hidden></span>
+        <div><h3 data-slot="medicine-name"></h3><p class="forms" data-slot="forms"></p></div>
+      </div>
+      <span class="reports" data-slot="reports"></span>
+    </div>
+    <p class="card-subhead" data-part="path-head">Research pathway</p>
+    <div class="path" data-slot="path"></div>
+    <div class="protein-list" data-part="proteins"></div>
+    <div data-part="machines"></div>
+    <p class="direction-note">The data does not say which direction this disease needs.</p>
+    <div class="explanation" data-slot="explanation">
+      <div class="slot-label">Plain-language explanation</div>
+      <p class="placeholder">A short explanation of this clue in plain words.</p>
+      <button class="ghost-btn" type="button" data-part="read">Read explanation</button>
+    </div>
+    <p class="ending" data-slot="ending"></p>
+    <div class="card-foot">
+      <a class="source-link" data-slot="source" hidden>Source record</a>
+      <span class="fine muted" data-part="no-source" hidden>No source link in the data</span>
+      <span class="phase" data-slot="phase" hidden></span>
+    </div>
+  </article>
+</template>
+
+<template id="protein-template">
+  <div class="protein-row" data-slot="protein">
+    <span class="protein-id"></span>
+    <span class="protein-facts"><span data-part="direction"></span><span class="score" data-slot="score"></span></span>
+  </div>
+</template>
+
+<!-- What the medicine does to the protein. All four badges share one neutral style. -->
+<template id="direction-up"><span class="direction" data-slot="direction" title="The medicine turns this protein up"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 16 16"><path d="M8 13V3m-4 4 4-4 4 4"/></svg>Up</span></template>
+<template id="direction-down"><span class="direction" data-slot="direction" title="The medicine turns this protein down"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 16 16"><path d="M8 3v10m-4-4 4 4 4-4"/></svg>Down</span></template>
+<template id="direction-mixed"><span class="direction" data-slot="direction" title="The data says the medicine turns this protein both up and down"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 16 16"><path d="M5 13V3M2 6l3-3 3 3m3-3v10m-3-3 3 3 3-3"/></svg>Mixed</span></template>
+<template id="direction-unknown"><span class="direction" data-slot="direction" title="The data does not say if the medicine turns this protein up or down">Unknown</span></template>
+
+<!-- The explanation slot while it waits. -->
+<template id="explanation-loading">
+  <div aria-label="Explanation loading" aria-busy="true" class="explanation" data-slot="explanation">
+    <div class="slot-label">Plain-language explanation</div>
+    <div class="skeleton"></div><div class="skeleton medium"></div><div class="skeleton short"></div>
+  </div>
+</template>
+
+<!-- The explanation slot when the words have arrived. -->
+<template id="explanation-ready">
+  <details class="explanation" data-slot="explanation">
+    <summary><div class="slot-label">Plain-language explanation</div><span class="excerpt"></span><span class="read-more">Read more ↓</span></summary>
+    <div class="full-explanation"><p data-part="text"></p><p class="fine muted" style="margin-top:7px" data-part="writer"></p><p class="fine muted" style="margin-top:7px">Tap the explanation heading to close.</p></div>
+  </details>
+</template>
+
+<!-- The explanation slot when the words could not be fetched. -->
+<template id="explanation-failed">
+  <div class="explanation" data-slot="explanation">
+    <div class="slot-label">Plain-language explanation</div>
+    <p class="placeholder">Moonlight could not get this explanation. The facts on this card are still correct.</p>
+    <button class="ghost-btn" type="button" data-part="read">Try again</button>
+  </div>
+</template>
+
+<script>
+(() => {
+  "use strict";
+  const FIRST_EXPLAINED = 5;  // this many cards fetch their explanation straight away
+  const byId = id => document.getElementById(id);
+  const copyOf = id => byId(id).content.firstElementChild.cloneNode(true);
+  const part = (el, name) => el.querySelector('[data-part="' + name + '"]');
+  const slot = (el, name) => el.querySelector('[data-slot="' + name + '"]');
+  const capital = text => text ? text[0].toUpperCase() + text.slice(1) : text;
+  const listed = words => words.length < 2 ? words.join("") : words.slice(0, -1).join(", ") + " and " + words[words.length - 1];
+
+  let latest = 0;       // the number of the newest request; older answers are dropped
+  let chosen = null;    // the protein whose filter button is pressed, or null
+
+  async function ask(path, params) {
+    const answer = await fetch(path + "?" + new URLSearchParams(params));
+    if (!answer.ok) throw new Error("status " + answer.status);
+    return answer.json();
+  }
+
+  /* ---- search ---- */
+
+  const input = byId("disease-search"), matches = byId("disease-matches"), note = byId("search-note");
+
+  async function search(text) {
+    const mine = ++latest;
+    matches.hidden = true;
+    note.textContent = "Searching…";
+    let found;
+    try {
+      found = (await ask("/api/search", {q: text})).matches;
+    } catch (problem) {
+      if (mine === latest) note.textContent = "Moonlight could not search just now. Please try again.";
+      return;
+    }
+    if (mine !== latest) return;
+    matches.replaceChildren();
+    if (!found.length) {
+      note.textContent = "No disease matched “" + text + "”. Try another name.";
+      return;
+    }
+    note.textContent = "Pick the disease you mean.";
+    for (const match of found) {
+      const item = document.createElement("li"), button = document.createElement("button");
+      const name = document.createElement("strong"), id = document.createElement("span");
+      button.type = "button";
+      name.textContent = capital(match.name);
+      id.className = "secondary";
+      id.textContent = match.id;
+      button.append(name, id);
+      button.addEventListener("click", () => {
+        matches.hidden = true;
+        note.textContent = "";
+        input.value = capital(match.name);
+        showClues(match.id);
+      });
+      item.append(button);
+      matches.append(item);
+    }
+    matches.hidden = false;
+  }
+
+  byId("search-form").addEventListener("submit", event => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (text) search(text);
+  });
+
+  document.querySelectorAll("[data-disease-id]").forEach(chip => chip.addEventListener("click", () => {
+    matches.hidden = true;
+    note.textContent = "";
+    input.value = chip.textContent;
+    showClues(chip.dataset.diseaseId);
+  }));
+
+  byId("new-search").addEventListener("click", () => {
+    byId("home").scrollIntoView();
+    input.focus();
+    input.select();
+  });
+
+  /* ---- clues ---- */
+
+  async function showClues(diseaseId) {
+    const mine = ++latest;
+    const results = byId("results");
+    results.hidden = false;
+    byId("found").hidden = true;
+    byId("problem").hidden = true;
+    byId("loading").hidden = false;
+    results.scrollIntoView();
+    let data;
+    try {
+      data = await ask("/api/clues", {disease_id: diseaseId});
+    } catch (problem) {
+      if (mine !== latest) return;
+      byId("loading").hidden = true;
+      byId("problem-text").textContent = "Please try again in a moment. Nothing is wrong with what you typed.";
+      byId("problem").hidden = false;
+      return;
+    }
+    if (mine !== latest) return;
+    byId("loading").hidden = true;
+    draw(data);
+    byId("found").hidden = false;
+  }
+
+  function draw(data) {
+    const disease = data.disease, diseaseName = capital(disease.name);
+    byId("disease-title").textContent = diseaseName;
+    byId("rule-text").textContent = data.rule_text;
+
+    const newCards = data.new_clues.map((clue, place) => card(clue, disease, diseaseName, place + 1));
+    const studiedCards = data.being_studied.map(clue => card(clue, disease, diseaseName, null));
+    byId("new-cards").replaceChildren(...newCards);
+    byId("studied-cards").replaceChildren(...studiedCards);
+    byId("new-list").hidden = !newCards.length;
+    byId("empty").hidden = !!newCards.length;
+
+    byId("count-not-approved").textContent = data.left_out.not_approved;
+    byId("count-already-approved").textContent = data.left_out.already_approved;
+    byId("count-unclear-link").textContent = data.left_out.unclear_link;
+
+    drawFilters(data.new_clues.concat(data.being_studied));
+    applyFilter(null);
+
+    // The first cards fetch their explanations together. The rest wait for a tap.
+    newCards.slice(0, FIRST_EXPLAINED).forEach(el => el.readExplanation());
+  }
+
+  function card(clue, disease, diseaseName, number) {
+    const el = copyOf("card-template");
+    const symbols = clue.proteins.map(protein => protein.symbol);
+    el.dataset.proteins = symbols.join(",");
+
+    if (number !== null) {
+      const rank = slot(el, "rank");
+      rank.textContent = number;
+      rank.setAttribute("aria-label", "Number " + number + " on the list");
+      rank.hidden = false;
+    }
+    slot(el, "medicine-name").textContent = clue.medicine;
+    slot(el, "forms").textContent = "Forms: " + clue.forms.join(", ");
+    slot(el, "reports").textContent = clue.reports + (clue.reports === 1 ? " report" : " reports");
+
+    if (symbols.length > 1) part(el, "path-head").textContent = "Research pathways";
+    const path = slot(el, "path");
+    [[clue.medicine, ""], [symbols.join(" / "), " protein-node"], [diseaseName, ""]].forEach(([words, kind], place) => {
+      if (place) {
+        const arrow = document.createElement("span");
+        arrow.className = "path-arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "→";
+        path.append(arrow);
+      }
+      const node = document.createElement("span");
+      node.className = "path-node" + kind;
+      node.textContent = words;
+      path.append(node);
+    });
+
+    const machines = new Map();
+    for (const protein of clue.proteins) {
+      const row = copyOf("protein-template");
+      row.querySelector(".protein-id").textContent = protein.symbol;
+      part(row, "direction").replaceWith(copyOf("direction-" + protein.direction));
+      slot(row, "score").textContent = protein.points + " / 100 points";
+      part(el, "proteins").append(row);
+      if (protein.piece_of_machine) {
+        if (!machines.has(protein.machine)) machines.set(protein.machine, []);
+        machines.get(protein.machine).push(protein.symbol);
+      }
+    }
+    for (const pieces of machines.values()) {
+      const line = document.createElement("p");
+      line.className = "machine-note";
+      line.textContent = listed(pieces) + " are pieces of one machine, counted once.";
+      part(el, "machines").append(line);
+    }
+
+    slot(el, "ending").textContent = clue.ending;
+
+    if (clue.source) {
+      const source = slot(el, "source");
+      source.href = clue.source;
+      source.hidden = false;
+    } else {
+      part(el, "no-source").hidden = false;
+    }
+    if (clue.trial_phase) {
+      const phase = slot(el, "phase");
+      phase.textContent = clue.trial_phase;
+      phase.hidden = false;
+    }
+
+    // Fetched straight away: stays closed, three lines showing. Fetched by a tap: opens.
+    el.readExplanation = () => readExplanation(el, clue, disease, false);
+    el.readNow = () => readExplanation(el, clue, disease, true);
+    part(el, "read").addEventListener("click", el.readNow);
+    return el;
+  }
+
+  /* ---- protein filter buttons ---- */
+
+  function drawFilters(clues) {
+    const points = new Map();
+    for (const clue of clues) for (const protein of clue.proteins) points.set(protein.symbol, protein.points);
+    const symbols = [...points.keys()].sort((a, b) => points.get(b) - points.get(a) || a.localeCompare(b));
+    byId("filters").replaceChildren(...symbols.map(symbol => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "chip filter";
+      button.dataset.protein = symbol;
+      button.textContent = symbol;
+      button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", () => applyFilter(chosen === symbol ? null : symbol));
+      return button;
+    }));
+  }
+
+  function applyFilter(symbol) {
+    chosen = symbol;
+    byId("filters").querySelectorAll("button").forEach(button =>
+      button.setAttribute("aria-pressed", String(button.dataset.protein === symbol)));
+    const shownIn = id => {
+      let shown = 0;
+      byId(id).querySelectorAll(".card").forEach(el => {
+        const has = symbol === null || el.dataset.proteins.split(",").includes(symbol);
+        el.hidden = !has;
+        if (has) shown++;
+      });
+      return shown;
+    };
+    const fresh = shownIn("new-cards"), studied = shownIn("studied-cards");
+    byId("filter-note").textContent = symbol === null ? ""
+      : fresh ? "Showing only the medicines that act on " + symbol + ". The numbers are their places on the whole list."
+      : "No new clue acts on " + symbol + ".";
+    byId("studied-note").textContent = studied ? ""
+      : symbol === null ? "No medicine in this data is being studied for this disease."
+      : "No medicine in this box acts on " + symbol + ".";
+  }
+
+  /* ---- explanations ---- */
+
+  async function readExplanation(el, clue, disease, open) {
+    slot(el, "explanation").replaceWith(copyOf("explanation-loading"));
+    let answer;
+    try {
+      answer = await ask("/api/explain", {disease_id: disease.id, clue_id: clue.id});
+    } catch (problem) {
+      const failed = copyOf("explanation-failed");
+      part(failed, "read").addEventListener("click", el.readNow);
+      slot(el, "explanation").replaceWith(failed);
+      return;
+    }
+    // The ending is already on the card, always in view, so it is not printed twice.
+    let text = answer.text;
+    if (text.endsWith(clue.ending)) text = text.slice(0, -clue.ending.length).trim();
+    const ready = copyOf("explanation-ready");
+    ready.querySelector(".excerpt").textContent = text;
+    part(ready, "text").textContent = text;
+    part(ready, "writer").textContent = answer.source === "gemini"
+      ? "Written by Gemini (" + answer.model + ") from the facts on this card, then checked by Moonlight."
+      : "Written by Moonlight's own template from the facts on this card.";
+    ready.open = open;
+    slot(el, "explanation").replaceWith(ready);
+  }
+})();
+</script>
+</body>
+</html>
