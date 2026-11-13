@@ -488,3 +488,179 @@ def test_the_api_asks_for_the_top_25_proteins(client):
     with patch("moonlight.api.fetch_targets", return_value=[]) as spy:
         client.get("/api/clues", params={"disease_id": PAH_ID})
     assert spy.call_args.args[1:] == (25,) or spy.call_args.kwargs.get("limit") == 25
+
+
+# =====================================================================
+# Ticket 6.3: the API gives explain() the data version, so a finished
+# explanation is saved
+# =====================================================================
+
+from moonlight import cache  # noqa: E402
+
+NEW_ENDING = "This is only a clue to read about. Do not try it."
+
+
+def fake_send(body):
+    """Stands in for fetch._send. Only the data version is ever asked for
+    here, because fetch._post_json is already swapped for saved files.
+    The shape was copied from the live API on 2026-11-12."""
+    assert "dataVersion" in body["query"], "only the data version may be asked"
+    return {"data": {"meta": {"dataVersion": {"year": "26", "month": "09",
+                                              "iteration": None}}}}
+
+
+@pytest.fixture(autouse=True)
+def pretend_data_version_and_throwaway_folder(tmp_path, monkeypatch):
+    """Every test in this file gets data version 26.09 and a throwaway
+    folder for the saved results.
+
+    Kashish's decision, 2026-11-13 (asked under STOP AND ASK). The API now
+    reads the data version for /api/explain. The ticket 5.1 tests above
+    block the network and had no pretend version, so five of them failed.
+    This is new set-up. No line of those tests was changed.
+    """
+    monkeypatch.setenv("MOONLIGHT_CACHE_DIR", str(tmp_path / "saved"))
+    cache.forget_memory()
+    fetch.forget_version()
+    with patch("moonlight.fetch._send", side_effect=fake_send):
+        yield tmp_path / "saved"
+    cache.forget_memory()
+    fetch.forget_version()
+
+
+@pytest.fixture
+def saved_results(pretend_data_version_and_throwaway_folder):
+    """The throwaway folder the saved results go in."""
+    return pretend_data_version_and_throwaway_folder
+
+
+def new_program():
+    """What a restarted server starts with: nothing in memory."""
+    explain.forget_everything()
+    cache.forget_memory()
+    fetch.forget_version()
+
+
+class CountingGemini:
+    """Stands in for explain._gemini_request. Counts the generate calls."""
+
+    def __init__(self, text=GOOD_ANSWER):
+        self.text = text
+        self.calls = 0  # every call, the model list too
+        self.generate_calls = 0
+
+    def __call__(self, method, path, body=None, timeout=None):
+        self.calls += 1
+        if method == "GET":
+            return 200, {"models": [{
+                "name": "models/gemini-3.5-flash",
+                "supportedGenerationMethods": ["generateContent"],
+            }]}
+        self.generate_calls += 1
+        return 200, {"candidates": [{"content": {"parts": [{"text": self.text}]}}]}
+
+
+def sevoflurane_id(client):
+    return clue_named(clues_json(client, *FIVE)["new_clues"], "Sevoflurane")["id"]
+
+
+def ask_explain(client, clue_id):
+    with with_targets(*FIVE):
+        return client.get("/api/explain", params={"disease_id": PAH_ID, "clue_id": clue_id})
+
+
+# Example 3
+def test_63_example_3_two_explain_requests_for_the_same_clue_make_one_gemini_call(
+        client, saved_results):
+    clue_id = sevoflurane_id(client)
+    gemini = CountingGemini()
+    with patch("moonlight.explain._gemini_request", side_effect=gemini):
+        first = ask_explain(client, clue_id)
+        second = ask_explain(client, clue_id)
+    assert first.status_code == second.status_code == 200
+    assert gemini.generate_calls == 1
+    assert second.json() == first.json()
+    assert first.json()["source"] == "gemini"
+
+
+def test_63_example_3_still_one_gemini_call_after_the_server_restarts(client, saved_results):
+    clue_id = sevoflurane_id(client)
+    gemini = CountingGemini()
+    with patch("moonlight.explain._gemini_request", side_effect=gemini):
+        first = ask_explain(client, clue_id)
+        calls = gemini.calls
+        new_program()  # only the disk holds the explanation now
+        second = ask_explain(client, clue_id)
+    assert gemini.calls == calls  # no Gemini call at all, not even the model list
+    assert gemini.generate_calls == 1
+    assert second.json() == first.json()
+    assert second.json()["source"] == "gemini"
+
+
+def test_63_the_api_gives_explain_the_data_version(client, saved_results):
+    clue_id = sevoflurane_id(client)
+    with patch("moonlight.api.explain.explain", wraps=explain.explain) as spy, \
+            patch("moonlight.explain._gemini_request", side_effect=CountingGemini()):
+        ask_explain(client, clue_id)
+    arguments = spy.call_args
+    given = arguments.kwargs.get("data_version") or arguments.args[3]
+    assert given == "26.09"
+    # The explanation is filed under that data version on disk.
+    saved = [json.loads(file.read_text(encoding="utf-8"))
+             for file in saved_results.rglob("*.json")]
+    assert [(entry["kind"], entry["version"]) for entry in saved] == [("explanation", "26.09")]
+
+
+# Example 4
+def test_63_example_4_changing_the_ending_means_a_saved_explanation_is_not_reused(
+        client, saved_results):
+    clue_id = sevoflurane_id(client)
+    gemini = CountingGemini()
+    with patch("moonlight.explain._gemini_request", side_effect=gemini):
+        old = ask_explain(client, clue_id).json()
+        assert gemini.generate_calls == 1
+
+        new_program()  # only the disk holds the old text now
+        with patch("moonlight.explain.ENDING", NEW_ENDING):
+            new = ask_explain(client, clue_id).json()
+    assert gemini.generate_calls == 2  # asked afresh, the saved one was not reused
+    assert old["text"].endswith(ENDING)
+    assert new["text"].endswith(NEW_ENDING)
+    assert ENDING not in new["text"]
+
+
+def test_63_example_4_changing_the_ending_without_a_restart_is_not_reused_either(
+        client, saved_results):
+    clue_id = sevoflurane_id(client)
+    gemini = CountingGemini()
+    with patch("moonlight.explain._gemini_request", side_effect=gemini):
+        ask_explain(client, clue_id)
+        with patch("moonlight.explain.ENDING", NEW_ENDING):
+            new = ask_explain(client, clue_id).json()
+    assert gemini.generate_calls == 2
+    assert new["text"].endswith(NEW_ENDING)
+    assert ENDING not in new["text"]
+
+
+def test_63_a_template_explanation_is_not_saved_so_gemini_gets_another_go(client, saved_results):
+    clue_id = sevoflurane_id(client)
+    with patch("moonlight.explain._gemini_request", side_effect=gemini_unreachable):
+        first = ask_explain(client, clue_id).json()
+    assert first["source"] == "template"
+    assert not list(saved_results.rglob("*.json"))
+    gemini = CountingGemini()
+    with patch("moonlight.explain._gemini_request", side_effect=gemini):
+        second = ask_explain(client, clue_id).json()
+    assert second["source"] == "gemini"
+    assert gemini.generate_calls == 1
+
+
+def test_63_if_the_data_version_cannot_be_read_it_is_a_502_not_a_crash(client, saved_results):
+    clue_id = sevoflurane_id(client)
+    gemini = CountingGemini()
+    with patch("moonlight.fetch._send", side_effect=requests.ConnectionError("down")), \
+            patch("moonlight.explain._gemini_request", side_effect=gemini):
+        response = ask_explain(client, clue_id)
+    assert response.status_code == 502
+    assert "detail" in response.json()
+    assert gemini.calls == 0

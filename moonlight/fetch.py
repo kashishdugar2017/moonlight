@@ -15,7 +15,8 @@ Nothing here sorts medicines into groups or ranks them.
 
 Every question goes through _post_json. It looks in the saved results
 (moonlight/cache.py) first and only asks Open Targets when the answer is
-not there. Tests that swap _post_json swap the saved results out with it.
+not there, or is past its use-by date of one day. Tests that swap
+_post_json swap the saved results out with it.
 Every real HTTP call goes through _send, on one shared connection.
 
 Field names were read from the saved responses in fixtures/ and from
@@ -51,6 +52,10 @@ VERSION_CHECK_SECONDS = 3600  # a long-running program reads the version again a
 # If they are not, Moonlight stops and saves nothing.
 ASKS_AT_FIRST = 2
 ASKS_AT_MOST = 3
+# Kashish's decision, 2026-11-13. A saved Open Targets answer has a use-by
+# date of one day, like milk. An older one is not used and is asked for
+# fresh. So a short answer saved by mistake can only stay for a day.
+USE_BY_SECONDS = 24 * 60 * 60
 
 VERSION_QUERY = """
 query DataVersion {
@@ -213,11 +218,12 @@ def _send_keeping_the_fullest(body: dict) -> dict:
 
 
 def _post_json(body: dict) -> dict:
-    """One question for Open Targets: from the saved results if it is there,
-    from the network if not. Only good answers are saved. Tests replace this.
+    """One question for Open Targets: from the saved results if it is there
+    and not past its use-by date, from the network if not. Only good answers
+    are saved. Tests replace this.
     """
     version = data_version()
-    saved = cache.load("open-targets", version, body)
+    saved = cache.load("open-targets", version, body, max_age_seconds=USE_BY_SECONDS)
     if saved is not None:
         return saved
     if body["query"] == TARGET_DRUGS_QUERY:

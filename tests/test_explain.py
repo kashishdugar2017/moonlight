@@ -931,3 +931,44 @@ def test_61_gemini_calls_share_one_connection():
     assert isinstance(explain._session, requests.Session)
     assert isinstance(fetch._session, requests.Session)
     assert explain._session is not fetch._session
+
+
+# =====================================================================
+# Ticket 6.3: "store": false, and saved explanations have no use-by date
+# =====================================================================
+
+# Example 2
+def test_63_example_2_the_gemini_request_body_has_store_false_at_the_top_level(
+        sevoflurane, disease):
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        explain.explain(sevoflurane, disease)
+    body = json.loads(gemini.prompts[0])
+    assert body["store"] is False
+    assert "store" not in body["generationConfig"]
+    # The rest of the body is as it was.
+    assert set(body) == {"contents", "generationConfig", "store"}
+
+
+def test_63_every_gemini_request_has_store_false(sevoflurane, disease):
+    # A refused model, then two bad answers, then a good one: four requests.
+    bad = "You can buy it at a pharmacy."
+    gemini = FakeGemini([BUSY, (200, answer(bad)), (200, answer(bad)),
+                         (200, answer(KASHISH_EXAMPLE))])
+    with use(gemini):
+        result = explain.explain(sevoflurane, disease)
+    assert result.source == "gemini"
+    assert len(gemini.prompts) == 4
+    assert all(json.loads(sent)["store"] is False for sent in gemini.prompts)
+
+
+def test_63_a_saved_explanation_has_no_use_by_date(sevoflurane, disease, saved_results):
+    clock = [1_800_000_000.0]
+    gemini = FakeGemini([(200, answer(KASHISH_EXAMPLE))])
+    with use(gemini), patch("moonlight.cache._now", side_effect=lambda: clock[0]):
+        first = explain.explain(sevoflurane, disease, data_version=VERSION)
+        clock[0] += 365 * 24 * 60 * 60  # a year later
+        new_program()
+        second = explain.explain(sevoflurane, disease, data_version=VERSION)
+    assert len(gemini.asked) == 1
+    assert second == first
