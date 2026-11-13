@@ -12,8 +12,9 @@ fetch.py, engine.py, rank.py and explain.py, and turns their answers into
 JSON. Only new clues and medicines being studied are ever named. Medicines
 that are left out are sent as three counts and nothing else.
 
-Nothing is remembered between requests, so /api/explain looks the disease
-up again to find its clue. (Remembering is a later ticket.)
+/api/explain looks the disease up again to find its clue. It gives
+explain.py the Open Targets data version, so a finished explanation is
+saved, and asking for the same clue again makes no Gemini call.
 """
 
 import pathlib
@@ -25,7 +26,13 @@ from fastapi.responses import HTMLResponse
 
 from moonlight import explain
 from moonlight.engine import find_clues
-from moonlight.fetch import FetchError, fetch_disease, fetch_targets, search_diseases
+from moonlight.fetch import (
+    FetchError,
+    data_version,
+    fetch_disease,
+    fetch_targets,
+    search_diseases,
+)
 from moonlight.filter import (
     ALREADY_APPROVED,
     BEING_STUDIED,
@@ -177,7 +184,15 @@ def explain_clue(disease_id: str, clue_id: str) -> dict:
             break
     else:
         raise HTTPException(status_code=404, detail="No clue with this id for this disease.")
-    answer = explain.explain(clue, found.disease, found.known_names)
+    # A finished explanation is saved under the data version the clue came
+    # from. _find has just read that version, so this asks nothing new.
+    try:
+        version = data_version()
+    except (FetchError, requests.RequestException):
+        raise HTTPException(
+            status_code=502, detail="Could not get the data from Open Targets."
+        ) from None
+    answer = explain.explain(clue, found.disease, found.known_names, data_version=version)
     return {
         "clue_id": clue_id,
         "text": answer.text,

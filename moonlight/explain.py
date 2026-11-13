@@ -19,11 +19,15 @@ A finished Gemini explanation is remembered. With a data_version (from
 fetch.data_version()) it is also saved on disk by moonlight/cache.py. It is
 found again only for the same facts, known names, ENDING, prompt text and
 data version, and it is checked against today's rules before it is reused.
+A saved explanation has no use-by date.
+
+Every Gemini request carries "store": false at the top level, which asks
+Gemini not to keep the request.
 
 Every Gemini call goes through _gemini_request, on one shared connection,
 so tests can swap that one function. Field names ("models", "name", "supportedGenerationMethods",
 "candidates", "content", "parts", "text", "modelVersion", "generationConfig",
-"thinkingConfig", "thinkingBudget") were checked against live responses and
+"thinkingConfig", "thinkingBudget", "store") were checked against live responses and
 fixtures/gemini/, not taken from memory.
 """
 
@@ -481,6 +485,10 @@ def _ask_gemini(prompt: str, deadline: float) -> Tuple[str, str]:
         # and the checks below do the checking anyway. A model that refuses
         # this setting is skipped like any other refused model.
         "generationConfig": {"thinkingConfig": {"thinkingBudget": 0}},
+        # Asks Gemini not to keep this request. It belongs here at the top
+        # level, not inside generationConfig. Ticket 6.2 showed Gemini
+        # answers 200 with it.
+        "store": False,
     }
     for number, model in enumerate(_models_to_try(deadline)):
         if number:

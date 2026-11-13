@@ -24,3 +24,4 @@ Format: date, the decision, why.
 - 2026-11-12: The page is medicine first. The medicine is the clue, so the reader sees medicines in my ranked order. Proteins are filter buttons.
 - 2026-11-12: The page is a small API with Mumma's designed page, not Streamlit.
 - 2026-11-12: Open Targets sometimes gives a short answer for the same question. Moonlight asks again and keeps the fullest answer, because every report is a real record and a shorter list has something missing.
+- 2026-11-13: A saved Open Targets answer has a use-by date of one day, like milk. If a short answer is saved by mistake, it can only stay for a day.

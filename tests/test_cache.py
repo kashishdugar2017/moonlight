@@ -365,3 +365,157 @@ def test_preload_skips_an_id_open_targets_does_not_know():
 
     with patch("moonlight.fetch._send", side_effect=unknown):
         assert engine.preload(["MONDO_NOT_REAL"]) == []
+
+
+# =====================================================================
+# Ticket 6.3: a saved Open Targets answer has a use-by date of one day
+# =====================================================================
+
+HOUR = 60 * 60
+
+
+class Clock:
+    """Stands in for cache._now, the one place the cache reads the time."""
+
+    def __init__(self):
+        self.now = 1_800_000_000.0  # seconds, like time.time()
+
+    def hours_later(self, hours):
+        self.now += hours * HOUR
+
+
+@pytest.fixture
+def clock():
+    ticking = Clock()
+    with patch("moonlight.cache._now", side_effect=lambda: ticking.now):
+        yield ticking
+
+
+def saved_files(tmp_path):
+    return [load(file) for file in (tmp_path / "saved").rglob("*.json")]
+
+
+def test_63_every_saved_open_targets_answer_records_when_it_was_saved(clock, tmp_path):
+    with use(FakeOpenTargets()):
+        fetch.fetch_targets(PAH, 25)
+        clock.hours_later(2)
+        fetch.fetch_paths(PAH, PDE5A)
+    saved = saved_files(tmp_path)
+    assert len(saved) == 2
+    assert sorted(entry["saved_at"] for entry in saved) == [clock.now - 2 * HOUR, clock.now]
+
+
+# Example 1
+def test_63_example_1_an_answer_saved_23_hours_ago_is_used(clock):
+    fake = FakeOpenTargets()
+    with use(fake):
+        first = fetch.fetch_targets(PAH, 25)
+        clock.hours_later(23)
+        second = fetch.fetch_targets(PAH, 25)
+    assert second == first
+    assert len(fake.data_calls) == 1  # no fresh call
+
+
+def test_63_example_1_an_answer_saved_25_hours_ago_is_not_used_and_a_fresh_call_is_made(clock):
+    fake = FakeOpenTargets()
+    with use(fake):
+        first = fetch.fetch_targets(PAH, 25)
+        clock.hours_later(25)
+        second = fetch.fetch_targets(PAH, 25)
+    assert second == first
+    assert len(fake.data_calls) == 2  # asked for fresh
+
+
+def test_63_example_1_is_the_same_for_a_new_run_reading_the_disk(clock):
+    fake = FakeOpenTargets()
+    with use(fake):
+        fetch.fetch_targets(PAH, 25)
+
+        clock.hours_later(23)
+        new_program()
+        fetch.fetch_targets(PAH, 25)
+        assert len(fake.data_calls) == 1  # 23 hours old: used
+
+        clock.hours_later(2)
+        new_program()
+        fetch.fetch_targets(PAH, 25)
+        assert len(fake.data_calls) == 2  # 25 hours old: asked for fresh
+
+
+def test_63_an_answer_exactly_24_hours_old_is_still_used(clock):
+    fake = FakeOpenTargets()
+    with use(fake):
+        fetch.fetch_targets(PAH, 25)
+        clock.hours_later(24)
+        fetch.fetch_targets(PAH, 25)
+        assert len(fake.data_calls) == 1
+        clock.now += 1  # one second older than 24 hours
+        fetch.fetch_targets(PAH, 25)
+        assert len(fake.data_calls) == 2
+
+
+def test_63_the_use_by_date_is_one_day():
+    assert fetch.USE_BY_SECONDS == 24 * HOUR
+
+
+def test_63_the_fresh_answer_gets_a_new_use_by_date(clock, tmp_path):
+    fake = FakeOpenTargets()
+    with use(fake):
+        fetch.fetch_targets(PAH, 25)
+        clock.hours_later(25)
+        fetch.fetch_targets(PAH, 25)  # asked for fresh, saved again
+        clock.hours_later(23)
+        new_program()
+        fetch.fetch_targets(PAH, 25)  # the fresh one is 23 hours old: used
+    assert len(fake.data_calls) == 2
+    assert [entry["saved_at"] for entry in saved_files(tmp_path)] == [clock.now - 23 * HOUR]
+
+
+def test_63_a_short_answer_saved_by_mistake_only_stays_for_a_day(clock):
+    # Two short answers the same are kept (ticket 6.1 cannot tell). A day
+    # later the question is asked again, twice, and the full answer replaces it.
+    fake = FakeOpenTargets()
+    fake.thin_asks[PDE5A.id] = (1, 2)
+    full = saved_target_drugs(PDE5A.id)
+    with use(fake):
+        assert fetch._post_json(body_for(PDE5A.id)) == without_reports(full)
+        clock.hours_later(23)
+        assert fetch._post_json(body_for(PDE5A.id)) == without_reports(full)
+        assert fake.calls_for(PDE5A.id) == 2
+        clock.hours_later(2)
+        assert fetch._post_json(body_for(PDE5A.id)) == full
+        assert fake.calls_for(PDE5A.id) == 4
+        assert fetch._post_json(body_for(PDE5A.id)) == full  # and that one is saved
+        assert fake.calls_for(PDE5A.id) == 4
+
+
+def test_63_a_file_saved_before_there_were_dates_is_asked_for_fresh(clock, tmp_path):
+    fake = FakeOpenTargets()
+    with use(fake):
+        fetch.fetch_targets(PAH, 25)
+        for file in (tmp_path / "saved").rglob("*.json"):
+            entry = load(file)
+            del entry["saved_at"]  # how ticket 6.1 wrote its files
+            file.write_text(json.dumps(entry), encoding="utf-8")
+        new_program()
+        fetch.fetch_targets(PAH, 25)
+    assert len(fake.data_calls) == 2
+
+
+def test_63_a_date_from_the_future_is_not_trusted(clock):
+    fake = FakeOpenTargets()
+    with use(fake):
+        fetch.fetch_targets(PAH, 25)
+        clock.hours_later(-48)  # the computer's clock was wrong when it was saved
+        fetch.fetch_targets(PAH, 25)
+    assert len(fake.data_calls) == 2
+
+
+def test_63_the_cache_only_checks_the_date_when_it_is_asked_to(clock):
+    cache.save("thing", "26.09", "key", "kept")
+    clock.hours_later(24 * 365)
+    assert cache.load("thing", "26.09", "key") == "kept"  # no use-by date asked for
+    assert cache.load("thing", "26.09", "key", max_age_seconds=24 * HOUR) is None
+    cache.forget_memory()  # and the same from the disk
+    assert cache.load("thing", "26.09", "key", max_age_seconds=24 * HOUR) is None
+    assert cache.load("thing", "26.09", "key") == "kept"
